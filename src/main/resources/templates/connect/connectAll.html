@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<title>Lots Candy</title>
+	</head>
+	<body>
+		<#if connections??>
+			${providerId} bind success!!
+		<#else>
+			${providerId} bind failed!!
+		</#if>
+		
+		<script type="text/javascript">
+		window.setTimeout(function(){
+			window.location = "/";
+		}, 5000);
+		</script>
+		
+	</body>
+</html>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.TwitterProfile;
@@ -16,14 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class IndexController {
+	
 	@Autowired
 	private ConnectionRepository connectionRepository;
-	
-	
-//	public UserController(Twitter twitter,ConnectionRepository connectionRepository) {
-//		this.twitter = twitter;
-//		this.connectionRepository = connectionRepository;
-//	}
 	
 	
 	@RequestMapping(value="/{providerId}", method=RequestMethod.GET)
@@ -33,19 +29,20 @@ public class IndexController {
 			Connection<Twitter> connection = connectionRepository.findPrimaryConnection(Twitter.class);
 			if(connection != null){
 				Twitter twitter = connection.getApi();
-				System.out.println(twitter.userOperations().getProfileId());
 				System.out.println(twitter.userOperations().getUserProfile().getId());
 				System.out.println(twitter.userOperations().getUserProfile().getName());
 				System.out.println(twitter.userOperations().getUserProfile().getScreenName());
 				model.addAttribute("bindmsg", "Twitter Bind Success");
 			}
+		}else if ("facebook".equals(providerId)){
+			Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
+			if(connection != null){
+				Facebook facebook = connection.getApi();
+				System.out.println(facebook.userOperations().getUserProfile().getId());
+				System.out.println(facebook.userOperations().getUserProfile().getName());
+				model.addAttribute("bindmsg", "FaceBook Bind Success");
+			}
 		}
-		
-
-//	        model.addAttribute("name",twitter.userOperations().getUserProfile().getName());
-//	        model.addAttribute("id", twitter.userOperations().getUserProfile().getId());
-//	        CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriends();
-//	        model.addAttribute("friends", friends.size());
 	        
 		return "index";
 	}
