@@ -30,3 +30,46 @@ create table user_connection (
 
 ALTER TABLE user_connection add primary key (userId, providerId, providerUserId);
 
+drop table user;
+
+create table user (
+	userId varchar(100) not null,
+	password varchar(100) not null,
+	wallet varchar(1000),
+	email varchar(100),
+	twitterAccount varchar(100),
+	facebookAccount varchar(100),
+	inviteCode varchar(512),
+	superInviteCode varchar(512)
+) ENGINE=MYISAM;
+
+ALTER TABLE user add primary key (userId);
+
+drop table task;
+
+create table task (
+	taskId varchar(100) not null,
+	eachPoint int not null,
+	pointLimit int not null,
+	dailyPointLimit  int not null,
+	describe varchar(2000),
+	if_closed varchar(2),
+	if_effective varchar(2),
+	check_method varchar(32),
+	start_date date，
+	end_date date
+) ENGINE=MYISAM;
+ALTER TABLE task add primary key (taskId);
+
+drop table action;
+create table action (
+	userId varchar(100) not null,
+	taskId varchar(100) not null,
+	earned_point int not null,
+	submitUrl varchar(512),
+	submitTime date,
+	if_effective varchar(2),
+	if_handled varchar(2)
+) ENGINE-MYISAM;
+ALTER TABLE task add primary key (userId, taskId);
+
