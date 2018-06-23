@@ -6,7 +6,13 @@ drop user 'candy'@'%';
 
 CREATE USER 'candy'@'%' IDENTIFIED BY 'candy';
 
+drop user 'candy'@'localhost';
+
+CREATE USER 'candy'@'localhost' IDENTIFIED BY 'candy';
+
 GRANT ALL PRIVILEGES ON candy.* TO 'candy'@'%';
+
+GRANT ALL PRIVILEGES ON candy.* TO 'candy'@'localhost';
 
 FLUSH PRIVILEGES;
 
@@ -54,15 +60,15 @@ create table task (
 	pointLimit int not null,
 	dailyPointLimit  int not null,
 	instruction varchar(2000),
-	if_closed varchar(2),
-	if_effective varchar(2),
-	check_method varchar(32),
-	start_date date,
-	end_date date
+	ifClosed varchar(2),
+	ifEffective varchar(2),
+	checkMethod varchar(32),
+	startDate date,
+	endDate date
 ) ENGINE=MYISAM;
 ALTER TABLE task add primary key (taskId);
 
-INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `if_closed`, `if_effective`, `check_method`)
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`)
  VALUES ('1', 'Please bind Twitter', '5', '5', '5', 'You didn\'t bind Twitter yet, please click the menubar icon of Twitter to bind.', 'N', 'Y', '1');
  
  commit;
