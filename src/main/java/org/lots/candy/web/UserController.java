@@ -1,6 +1,5 @@
 package org.lots.candy.web;
 
-import javax.inject.Inject;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,27 +1,64 @@
+[#ftl]
 <html>
 	<head>
 		<title>Hello Twitter</title>
+		<style type="text/css">
+			#taskTable{
+				margin-top:50px;
+			}
+			
+			table, th, td { border: 1px solid black; }
+		
+		</style>
 	</head>
 	<body>
+		<!--social menu bar -->
 		<div id="social">
-			<input id="socialmsg" value="${bindmsg}" type="hidden"/>
 			<form action="/connect/twitter" method="POST">
 				<input type="submit" value="twitter"/>
 			</form>
 			<form action="/connect/facebook" method="POST">
 				<input type="submit" value="facebook"/>
 			</form>
+		</div>
+		
+		
+		<div id="taskTable" >
+			<table>
+				<thead>
+					<th>Task Information</th>
+					<th>Points</th>
+					<th>Daily Point Limit</th>
+					<th>Total Point Limit</th>
+					<th>Earned Point</th>
+					<th>Instruction</th>
+				</thead>
+				<tbody>
+					[#if taskList?? ]
+						[#list taskList as task]
+							<tr>
+								<td>${task.name}</td>
+								<td>${task.eachPoint}</td>
+								<td>${task.dailyPointLimit}</td>
+								<td>${task.pointLimit}</td>
+								<td>${task.earnedPoint}</td>
+								<td>${task.instruction}</td>
+							</tr>
+						[/#list]
+					[/#if]
+				</tbody>
+			</table>
 		
 		</div>
+		
+		
+		
 		
 		
 		<script type="text/javascript"  src="js/jquery.min.js"></script>
 		<script type="text/javascript">
 			$( document ).ready(function() {
-				var socialmsg = $("#socialmsg").val();
-				if (socialmsg){
-					alert(socialmsg);
-				}
+				
 			});
 			
 		</script>

@@ -1,13 +1,14 @@
+[#ftl]
 <html>
 	<head>
 		<title>Lots Candy</title>
 	</head>
 	<body>
-		<#if connections??>
+		[#if connections??]
 			${providerId} bind success!!
-		<#else>
+		[#else]
 			${providerId} bind failed!!
-		</#if>
+		[/#if]
 		
 		<script type="text/javascript">
 		window.setTimeout(function(){

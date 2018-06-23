@@ -55,6 +55,9 @@ public class MyConnectController extends ConnectController {
 		setNoCache(request);
 		model.addAttribute("providerId", providerId);
 		model.addAttribute("connections", connections);
+		
+		
+		
 		return getViewPath()+ "connectAll";			
 	}
 	

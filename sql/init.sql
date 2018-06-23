@@ -49,17 +49,34 @@ drop table task;
 
 create table task (
 	taskId varchar(100) not null,
+    `name` varchar(100) not null, 
 	eachPoint int not null,
 	pointLimit int not null,
 	dailyPointLimit  int not null,
-	describe varchar(2000),
+	instruction varchar(2000),
 	if_closed varchar(2),
 	if_effective varchar(2),
 	check_method varchar(32),
-	start_date date，
+	start_date date,
 	end_date date
 ) ENGINE=MYISAM;
 ALTER TABLE task add primary key (taskId);
+
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `if_closed`, `if_effective`, `check_method`)
+ VALUES ('1', 'Please bind Twitter', '5', '5', '5', 'You didn\'t bind Twitter yet, please click the menubar icon of Twitter to bind.', 'N', 'Y', '1');
+ 
+ commit;
+ 
+drop table user_task;
+
+create table user_task (
+	userId varchar(100) not null,
+	taskId varchar(100) not null,
+    earnedPoint int DEFAULT 0
+) ENGINE=MYISAM;
+ 
+ALTER TABLE user_task add primary key (userId, taskId); 
+ 
 
 drop table action;
 create table action (
@@ -70,6 +87,8 @@ create table action (
 	submitTime date,
 	if_effective varchar(2),
 	if_handled varchar(2)
-) ENGINE-MYISAM;
-ALTER TABLE task add primary key (userId, taskId);
+) ENGINE=MYISAM;
+ALTER TABLE action add primary key (userId, taskId);
+
+
 
