@@ -4,11 +4,7 @@
 		<title>Lots Candy</title>
 	</head>
 	<body>
-		[#if connections??]
-			${providerId} bind success!!
-		[#else]
-			${providerId} bind failed!!
-		[/#if]
+		${bindmsg}
 		
 		<script type="text/javascript">
 		window.setTimeout(function(){

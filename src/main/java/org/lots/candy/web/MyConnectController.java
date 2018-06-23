@@ -5,6 +5,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.lots.candy.config.Constant;
+import org.lots.candy.domain.TaskMapper;
+import org.lots.candy.domain.UserMapper;
+import org.lots.candy.entity.TaskEnum;
+import org.lots.candy.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -21,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UrlPathHelper;
@@ -35,10 +41,15 @@ public class MyConnectController extends ConnectController {
 	
 	private String viewPath = "connect/";
 	
-	
 	private ConnectionRepository connectionRepository;
 	
 	private ConnectionFactoryLocator connectionFactoryLocator;
+	
+	@Autowired
+	private UserMapper userMapper;
+	
+	@Autowired
+	private TaskMapper taskMapper;
 
 	public MyConnectController(ConnectionFactoryLocator connectionFactoryLocator, ConnectionRepository connectionRepository) {
 		super(connectionFactoryLocator, connectionRepository);
@@ -51,15 +62,46 @@ public class MyConnectController extends ConnectController {
 	public String connectionStatus(@PathVariable  String providerId, NativeWebRequest request, Model model) {
 		setNoCache(request);
 		processFlash(request, model);
-		List<Connection<?>> connections = connectionRepository.findConnections(providerId);
+		boolean flag = false;
+		User user = (User) request.getAttribute(Constant.USER_SESSION_NAME,	RequestAttributes.SCOPE_SESSION);
+		String userId = user.getUserId();
+		
+		
+		if("twitter".equals(providerId)){
+			Connection<Twitter> connection = connectionRepository.findPrimaryConnection(Twitter.class);
+			if(connection != null){
+				Twitter twitter = connection.getApi();
+				saveTwitterUser(userId, twitter);
+				flag = true;
+			}
+		}else if ("facebook".equals(providerId)){
+			Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
+			if(connection != null){
+				Facebook facebook = connection.getApi();
+				System.out.println(facebook.userOperations().getUserProfile().getId());
+				System.out.println(facebook.userOperations().getUserProfile().getName());
+				flag = true;
+			}
+		}
 		setNoCache(request);
 		model.addAttribute("providerId", providerId);
-		model.addAttribute("connections", connections);
-		
-		
+		model.addAttribute("bindmsg", (flag)? providerId +" Bind Success" :  providerId +" Bind Failed");
 		
 		return getViewPath()+ "connectAll";			
 	}
+	
+	private  void saveTwitterUser(String userId , Twitter twitter){
+		String userProviderId = String.valueOf(twitter.userOperations().getUserProfile().getId());
+		userMapper.updateAccount(userId, "twitter", userProviderId);
+		taskMapper.insertOnceTask(userId, TaskEnum.BINDTWITTER.toString());
+		
+		System.out.println(twitter.userOperations().getUserProfile().getName());
+		System.out.println(twitter.userOperations().getUserProfile().getScreenName());
+		
+	}
+	
+	
+	
 	
 	public void setViewPath(String viewPath) {
 		this.viewPath = viewPath;

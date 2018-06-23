@@ -18,9 +18,9 @@ FLUSH PRIVILEGES;
 
 use candy;
 
-drop table user_connection;
+drop table userconnection;
 
-create table user_connection (
+create table userconnection (
 	userId varchar(100) not null,
 	providerId varchar(50) not null,
 	providerUserId varchar(100) not null,
@@ -34,7 +34,7 @@ create table user_connection (
 	expireTime bigint
 ) ENGINE=MYISAM;
 
-ALTER TABLE user_connection add primary key (userId, providerId, providerUserId);
+ALTER TABLE userconnection add primary key (userId, providerId, providerUserId);
 
 drop table user;
 
