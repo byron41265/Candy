@@ -62,14 +62,30 @@ create table task (
 	instruction varchar(2000),
 	ifClosed varchar(2),
 	ifEffective varchar(2),
-	checkMethod varchar(32),
+	checkMethod varchar(32) COMMENT '1 自动校验  2 手工校验 ',
 	startDate date,
-	endDate date
+	endDate date,
+    rank int
 ) ENGINE=MYISAM;
 ALTER TABLE task add primary key (taskId);
 
-INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`)
- VALUES ('1', 'Please bind Twitter', '5', '5', '5', 'You didn\'t bind Twitter yet, please click the menubar icon of Twitter to bind.', 'N', 'Y', '1');
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
+ VALUES ('1', 'Please bind Twitter', '5', '5', '5', 'You didn\'t bind Twitter yet, please click the menubar icon of Twitter to bind.', 'N', 'Y', '1', 0);
+ 
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
+ VALUES ('2', 'Please follow Official Twitter', '5', '5', '5', '', 'N', 'Y', '1', 1);
+ 
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
+ VALUES ('3', 'Please retweet Official Tweet', '5', '50', '50', '', 'N', 'Y', '1', 2);
+  
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
+ VALUES ('4', 'Please like Official Tweet', '1', '20', '20', '', 'N', 'Y', '2', 3); 
+ 
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
+ VALUES ('5', 'Write Blogs/Articles/Reviews for us', '200', '2000', '200', '', 'N', 'Y', '2', 4);  
+
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
+ VALUES ('6', 'Make Youtube video for us', '200', '2000', '200', '', 'N', 'Y', '2', 5);  
  
  commit;
  
@@ -95,6 +111,55 @@ create table action (
 	if_handled varchar(2)
 ) ENGINE=MYISAM;
 ALTER TABLE action add primary key (userId, taskId);
+
+drop table dic_item;
+
+create table dic_item (
+	dicId varchar(100) not null,
+    dicTypeId varchar(100) default 'common',
+    `value` varchar(512),
+    `desc` varchar(512)
+) ENGINE=MYISAM;
+
+ALTER TABLE dic_item add primary key (dicId);
+
+INSERT INTO `dic_item` (`dicId`, `dicTypeId`, `value`) VALUES ('social.twitter.tweets.01', 'social.twitter.tweets', '1010371676561858561');
+INSERT INTO `dic_item` (`dicId`, `dicTypeId`, `value`) VALUES ('social.twitter.tweets.02', 'social.twitter.tweets', '1010371101090693120');
+
+
+
+drop table twitter_profile;
+
+create table twitter_profile(
+	userId varchar(100) not null,
+	providerUserId varchar(100) not null,
+    `name` varchar(100),
+    screenName varchar(100),
+    friendCount int,
+    followerCount int
+) ENGINE=MYISAM;
+
+ALTER TABLE twitter_profile add primary key (userId, providerUserId);
+
+drop table twitter_follower;
+
+create table twitter_follower(
+	providerUserId varchar(100) not null
+) ENGINE=MYISAM;
+
+ALTER TABLE twitter_follower add primary key (providerUserId);
+
+drop table twitter_retweet;
+
+create table twitter_retweet(
+	tweetId varchar(100) not null,
+    providerUserId varchar(100) not null
+) ENGINE=MYISAM;
+
+ALTER TABLE twitter_retweet add primary key (tweetId, providerUserId);
+
+
+
 
 
 

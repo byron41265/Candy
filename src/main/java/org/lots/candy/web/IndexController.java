@@ -31,30 +31,7 @@ public class IndexController {
 	private TaskMapper taskMapper;
 	
 	
-	@RequestMapping(value="/{providerId}", method=RequestMethod.GET)
-	public String bindcallback(@PathVariable String providerId, Model model){
-		
-		if("twitter".equals(providerId)){
-			Connection<Twitter> connection = connectionRepository.findPrimaryConnection(Twitter.class);
-			if(connection != null){
-				Twitter twitter = connection.getApi();
-				System.out.println(twitter.userOperations().getUserProfile().getId());
-				System.out.println(twitter.userOperations().getUserProfile().getName());
-				System.out.println(twitter.userOperations().getUserProfile().getScreenName());
-				model.addAttribute("bindmsg", "Twitter Bind Success");
-			}
-		}else if ("facebook".equals(providerId)){
-			Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
-			if(connection != null){
-				Facebook facebook = connection.getApi();
-				System.out.println(facebook.userOperations().getUserProfile().getId());
-				System.out.println(facebook.userOperations().getUserProfile().getName());
-				model.addAttribute("bindmsg", "FaceBook Bind Success");
-			}
-		}
-	        
-		return "index";
-	}
+	
 	@RequestMapping("/")
 	public String init(Model model, HttpSession session){
 		
@@ -66,8 +43,11 @@ public class IndexController {
 		// 正文开始
 		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
 		
+		// 获取列表
 		List<Task> taskList = taskMapper.queryUserTask(user.getUserId());
 		model.addAttribute("taskList", taskList);
+		
+		// 尚未转发的Tweet
 		
 		
 		return "index";

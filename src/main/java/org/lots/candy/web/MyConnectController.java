@@ -10,6 +10,7 @@ import org.lots.candy.domain.TaskMapper;
 import org.lots.candy.domain.UserMapper;
 import org.lots.candy.entity.TaskEnum;
 import org.lots.candy.entity.User;
+import org.lots.candy.utils.TwitterHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -46,10 +47,9 @@ public class MyConnectController extends ConnectController {
 	private ConnectionFactoryLocator connectionFactoryLocator;
 	
 	@Autowired
-	private UserMapper userMapper;
+	private TwitterHelper twitterHelper;
 	
-	@Autowired
-	private TaskMapper taskMapper;
+	
 
 	public MyConnectController(ConnectionFactoryLocator connectionFactoryLocator, ConnectionRepository connectionRepository) {
 		super(connectionFactoryLocator, connectionRepository);
@@ -71,7 +71,7 @@ public class MyConnectController extends ConnectController {
 			Connection<Twitter> connection = connectionRepository.findPrimaryConnection(Twitter.class);
 			if(connection != null){
 				Twitter twitter = connection.getApi();
-				saveTwitterUser(userId, twitter);
+				twitterHelper.saveTwitterUser(userId, twitter);
 				flag = true;
 			}
 		}else if ("facebook".equals(providerId)){
@@ -90,15 +90,7 @@ public class MyConnectController extends ConnectController {
 		return getViewPath()+ "connectAll";			
 	}
 	
-	private  void saveTwitterUser(String userId , Twitter twitter){
-		String userProviderId = String.valueOf(twitter.userOperations().getUserProfile().getId());
-		userMapper.updateAccount(userId, "twitter", userProviderId);
-		taskMapper.insertOnceTask(userId, TaskEnum.BINDTWITTER.toString());
-		
-		System.out.println(twitter.userOperations().getUserProfile().getName());
-		System.out.println(twitter.userOperations().getUserProfile().getScreenName());
-		
-	}
+	
 	
 	
 	

@@ -3,12 +3,7 @@
 	<head>
 		<title>Hello Twitter</title>
 		<style type="text/css">
-			#taskTable{
-				margin-top:50px;
-			}
-			
-			table, th, td { border: 1px solid black; }
-		
+
 		</style>
 	</head>
 	<body>
@@ -53,10 +48,8 @@
 										${task.instruction}
 									[#elseif task.taskId == '2']	
 										Got to <a href="https://twitter.com/LotsOrg"  target="_blank">Follow us</a>. We will check it later.
-									[#elseif task.taskId == '3']
-										We have new tweet. Please <a href="https://twitter.com/intent/retweet?tweet_id=463440424141459456"  target="_blank">Retweet</a>. We will check it later.		
 									[/#if]
-										
+								
 								[/#if]
 								</td>
 							</tr>
