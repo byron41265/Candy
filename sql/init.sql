@@ -87,6 +87,9 @@ INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimi
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
  VALUES ('6', 'Make Youtube video for us', '200', '2000', '200', '', 'N', 'Y', '2', 5);  
  
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
+ VALUES ('7', 'Please bind Facebook', '5', '5', '5', '', 'N', 'Y', '1', 6);   
+ 
  commit;
  
 drop table user_task;
