@@ -1,21 +1,25 @@
 .container {
     height: 100%;
-    min-height: 960px;
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flex;
 }
 
 .left-container {
-    float: left;
-    width: 724px;
     height: 100%;
-    background-image: url('../img/login-banner.png');
-    background-size: 100%;
-    background-repeat: no-repeat;
+}
+
+.left-container .pc-logo {
+    height: 100%;
+    display: block;
+}
+
+.left-container .mobile-logo {
+    display: none;
 }
 
 .right-container {
-    margin-left: 724px;
-    padding: 125px 0 0 10%;
-    min-width: 400px;
+    flex: 1 1;
 }
 
 .right-container .txt-1 {
@@ -37,10 +41,12 @@
     color: #A4ADB7;
     line-height: 25px;
     margin-top: 24px;
+    margin-bottom: 50px;
 }
-    .right-container .txt-3.mobile-show {
-        display: none;
-    }
+
+.right-container .txt-3.mobile-show {
+    display: none;
+}
 
 .right-container .txt-3 .btn-signup {
     font-size: 20px;
@@ -50,10 +56,10 @@
 }
 
 .login-section {
-    margin-top: 50px;
     font-size: 14px;
     line-height: 20px;
-    width: 364px;
+    width: 390px;
+    margin: 0 auto;
 }
 
 .login-section .wrap .title {
@@ -175,17 +181,67 @@
     margin-left: 4px;
 }
 
+.overlay-mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.modal-mask {
+    z-index: 99;
+}
+
+.modal {
+    width: 550px;
+    margin: 150px auto 0 auto;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 45px 80px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
+    display: none;
+}
+
+.modal .modal-desc {
+    color: #172333;
+    font-size: 28px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.modal .icon-success {
+    background-image: url('../img/icon-success.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 28px auto;
+}
+
 @media screen and (max-width:767px) {
     .container {
-        min-height: 0;
+        display: block;
     }
     .left-container {
-        float: none;
         width: 100%;
         height: 132px;
-        background-image: url('../img/mobile-banner.png');
-        background-size: 100%;
-        background-repeat: no-repeat;
+    }
+    .left-container .mobile-logo {
+        width: 100%;
+        height: 132px;
+        display: block;
+    }
+    .left-container .pc-logo {
+        display: none;
     }
     .right-container {
         margin-left: 0;
@@ -200,25 +256,24 @@
         font-size: 18px;
         line-height: 25px;
         margin-top: 6px;
+        margin-bottom: 23px;
     }
     .right-container .txt-3 {
         display: none;
         font-size: 16px;
-    line-height: 22px;
-    margin-top: 12px;
+        line-height: 22px;
+        margin-top: 12px;
     }
     .right-container .txt-3.mobile-show {
         display: block;
     }
-
     .right-container .txt-3 .btn-signup {
-    font-size: 18px;
-    line-height: 25px;
-    margin-left: 15px;
-}
-    
+        font-size: 18px;
+        line-height: 25px;
+        margin-left: 15px;
+    }
     .login-section {
-        margin-top: 23px;
+        margin-top: 0;
         width: 100%;
     }
     .login-section .wrap .input-wrap .input {
@@ -244,5 +299,18 @@
     }
     .login-section .forget-section .remember {
         font-size: 12px;
+    }
+    .modal {
+        width: auto;
+        margin: 100px 34px 0 34px;
+        padding: 30px;
+    }
+    .modal .modal-desc {
+        font-size: 18px;
+    }
+    .modal .icon-success {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 20px auto;
     }
 }

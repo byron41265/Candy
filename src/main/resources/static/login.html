@@ -17,13 +17,16 @@
 <body>
     <div class="container">
         <div class="left-container">
+            <img class="pc-logo" src="img/login-banner.png">
+            <img class="mobile-logo" src="img/mobile-banner.png">
         </div>
         <!-- ========================= login begin ======================= -->
         <div class="right-container js_loginPage">
+        <div class="login-section">
             <h1 class="txt-1">Hello！</h1>
             <h1 class="txt-2">Login to your account</h1>
             <div class="txt-3">Don’t have an account ?<a class="btn-signup js_goRegister" href="javascript:">Sign up</a></div>
-            <div class="login-section">
+            
                 <div class="wrap">
                     <p class="title">Email Address</p>
                     <div class="input-wrap icon-right">
@@ -39,7 +42,7 @@
                 <div class="forget-section">
                     <!-- 不选中去掉checked，选中加上checked样式 -->
                     <div class="remember"><span class="icon-check js_checkRem"></span><span>Remember me</span></div>
-                    <a class="forgot-pwd" href="javascript:">Forgot password?</a>
+                    <a class="forgot-pwd js_goReset" href="javascript:">Forgot password?</a>
                 </div>
                 <div class="btn-submit">Sign In<span class="arrow-right"></span></div>
             </div>
@@ -48,10 +51,10 @@
         <!-- ========================= login end ======================= -->
         <!-- ========================= register begin ======================= -->
         <div class="right-container hide js_registerPage">
+        <div class="login-section">
             <h1 class="txt-1">Hello！</h1>
             <h1 class="txt-2">Open an account</h1>
             <div class="txt-3">Already have an account？<a class="btn-signup js_goLogin" href="javascript:">Sign In</a></div>
-            <div class="login-section">
                 <div class="wrap">
                     <p class="title">User name</p>
                     <!-- 加上icon-right显示绿色正确icon -->
@@ -81,24 +84,76 @@
             <div class="txt-3 mobile-show">Already have an account？<a class="btn-signup js_goLogin " href="javascript:">Sign In</a></div>
         </div>
         <!-- ========================= register end ======================= -->
+        <!-- ========================= fill email begin ======================= -->
+        <div class="right-container hide  ">
+        <div class="login-section">
+            <h1 class="txt-1">Hello！</h1>
+            <h1 class="txt-2">Fill registered email</h1>
+            <div class="txt-3"></div>
+                <div class="wrap">
+                    <p class="title">Email Address</p>
+                    <!-- 加上icon-right显示绿色正确icon -->
+                    <div class="input-wrap icon-right">
+                        <input class="input" type="text" name="" value="" maxlength="50" />
+                    </div>
+                </div>
+                <div class="btn-submit">Submit<span class="arrow-right"></span></div>
+            </div>
+        </div>
+        <!-- ========================= fill email end ======================= -->
+         <!-- ========================= reset password begin ======================= -->
+        <div class="right-container hide js_resetPage">
+        <div class="login-section">
+            <h1 class="txt-1">Hello！</h1>
+            <h1 class="txt-2">reset Password</h1>
+            <div class="txt-3"></div>
+                <div class="wrap">
+                    <p class="title">New password</p>
+                    <!-- 加上icon-right显示绿色正确icon -->
+                    <div class="input-wrap icon-right">
+                        <input class="input" type="password" name="" value="" maxlength="50" />
+                    </div>
+                </div>
+                <div class="wrap">
+                    <p class="title">Again password</p>
+                    <!-- 加上icon-right显示绿色正确icon -->
+                    <div class="input-wrap icon-right">
+                        <input class="input" type="password" name="" value="" maxlength="50" />
+                    </div>
+                </div>
+                <div class="btn-submit">Submit<span class="arrow-right"></span></div>
+            </div>
+        </div>
+        <!-- ========================= reset password end ======================= -->
     </div>
+    <!-- modal successful -->
+        <div class="modal js_modal_success">
+            <div class="icon-success"></div>
+            <p class="modal-desc">Submitted successfully</p>
+        </div>
+         <div class="overlay-mask modal-mask js_modal_mask"></div>
 </body>
 <script src="js/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
     $(".js_goRegister").click(function() {
-        $('.js_loginPage').addClass('hide');
         $('.js_registerPage').removeClass('hide');
+        $('.js_resetPage').addClass('hide');
+        $('.js_loginPage').addClass('hide');
     })
      $(".js_goLogin").click(function() {
+        $('.js_resetPage').addClass('hide');
         $('.js_loginPage').removeClass('hide');
+        $('.js_registerPage').addClass('hide');
+    })
+     $(".js_goReset").click(function() {
+        $('.js_resetPage').removeClass('hide');
+        $('.js_loginPage').addClass('hide');
         $('.js_registerPage').addClass('hide');
     })
      $(".js_checkRem").click(function() {
         $(this).toggleClass('checked');
     })
-
-    
 })
 </script>
 

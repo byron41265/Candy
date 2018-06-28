@@ -40,11 +40,12 @@ drop table user;
 
 create table user (
 	userId varchar(100) not null,
-	password varchar(100) not null,
+	`password` varchar(100) not null,
 	wallet varchar(1000),
 	email varchar(100),
 	twitterAccount varchar(100),
 	facebookAccount varchar(100),
+    telegramAccount varchar(100),
 	inviteCode varchar(512),
 	superInviteCode varchar(512)
 ) ENGINE=MYISAM;
@@ -89,6 +90,12 @@ INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimi
  
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
  VALUES ('7', 'Please bind Facebook', '5', '5', '5', '', 'N', 'Y', '1', 6);   
+ 
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
+ VALUES ('8', 'Please bind Telegram', '5', '5', '5', '', 'N', 'Y', '1', 7);    
+ 
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
+ VALUES ('9', 'Please invite you friends to Telegram group', '5', '5', '5', '', 'N', 'Y', '1', 8);     
  
  commit;
  
@@ -160,6 +167,17 @@ create table twitter_retweet(
 ) ENGINE=MYISAM;
 
 ALTER TABLE twitter_retweet add primary key (tweetId, providerUserId);
+
+drop table telegram_invite;
+
+create table telegram_invite(
+	fromUserId  varchar(100) not null,
+    invitedUserId   varchar(100) not null,
+    invitedate datetime default NOW()
+) ENGINE=MYISAM;
+
+ALTER TABLE telegram_invite add primary key (fromUserId, invitedUserId);
+
 
 
 

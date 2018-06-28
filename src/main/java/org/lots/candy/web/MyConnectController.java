@@ -10,6 +10,7 @@ import org.lots.candy.domain.TaskMapper;
 import org.lots.candy.domain.UserMapper;
 import org.lots.candy.entity.TaskEnum;
 import org.lots.candy.entity.User;
+import org.lots.candy.utils.FacebookHelper;
 import org.lots.candy.utils.TwitterHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
@@ -49,6 +50,9 @@ public class MyConnectController extends ConnectController {
 	@Autowired
 	private TwitterHelper twitterHelper;
 	
+	@Autowired
+	private FacebookHelper facebookHelper;
+	
 	
 
 	public MyConnectController(ConnectionFactoryLocator connectionFactoryLocator, ConnectionRepository connectionRepository) {
@@ -78,8 +82,7 @@ public class MyConnectController extends ConnectController {
 			Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
 			if(connection != null){
 				Facebook facebook = connection.getApi();
-				System.out.println(facebook.userOperations().getUserProfile().getId());
-				System.out.println(facebook.userOperations().getUserProfile().getName());
+				facebookHelper.saveFacebookUser(userId, facebook);
 				flag = true;
 			}
 		}
