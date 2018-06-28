@@ -1,86 +1,312 @@
 [#ftl]
-<html>
-	<head>
-		<title>Hello Twitter</title>
-		<style type="text/css">
-			#taskTable{
-				margin-top:50px;
-			}
-			
-			table, th, td { border: 1px solid black; }
-		
-		</style>
-	</head>
-	<body>
-		<!--social menu bar -->
-		<div id="social">
-			<form action="/connect/twitter" method="POST">
-				<input type="submit" value="twitter"/>
-			</form>
-			<form action="/connect/facebook" method="POST">
-				<input type="submit" value="facebook"/>
-			</form>
-			<script async src="https://telegram.org/js/telegram-widget.js?4" data-telegram-login="lotsglobal_bot" data-size="large" data-auth-url="/tgauth" data-request-access="write"></script>
-			
-		</div>
-		
-		
-		<div id="taskTable" >
-			<table>
-				<thead>
-					<th>Task Information</th>
-					<th>Points</th>
-					<th>Daily Point Limit</th>
-					<th>Total Point Limit</th>
-					<th>Earned Point</th>
-					<th>Instruction</th>
-				</thead>
-				<tbody>
-					[#if taskList?? ]
-						[#list taskList as task]
-							<tr>
-								<td>${task.name}</td>
-								<td>${task.eachPoint}</td>
-								<td>${task.dailyPointLimit}</td>
-								<td>${task.pointLimit}</td>
-								<td>${task.earnedPoint}</td>
-								<td>
-								[#if task.ifClosed == 'Y']
-									Task is closed.
-								[#elseif  task.earnedPoint == task.pointLimit]
-									Task is finished.
-								[#else]
-									[#-- Bind Twitter --]
-									[#if task.taskId == '1' ]
-										${task.instruction}
-									[#elseif task.taskId == '2']	
-										Got to <a href="https://twitter.com/LotsOrg"  target="_blank">Follow us</a>. We will check it later.
-									[#elseif task.taskId == '3']
-										We have new tweet. Please <a href="https://twitter.com/intent/retweet?tweet_id=463440424141459456"  target="_blank">Retweet</a>. We will check it later.		
-									[/#if]
-										
-								[/#if]
-								</td>
-							</tr>
-						[/#list]
-					[/#if]
-				</tbody>
-			</table>
-		
-		</div>
-		
-		
-		
-		
-		
-		<script type="text/javascript"  src="js/jquery.min.js"></script>
-		<script  type="text/javascript"  src="js/twitter.js"></script>
-		
-		<script type="text/javascript">
-			$( document ).ready(function() {
-				
-			});
-			
-		</script>
-	</body>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="icon" href="img/favicon.ico">
+    <title>LOTS</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-mobile-nav js_showNav"></div>
+            <div class="navbar-logo"></div>
+            <div class="navbar-link">
+                <ul>
+                    <li class="link-item">
+                    	<form action="/connect/facebook" method="POST">
+                        	<button type="submit"  class="icon icon-facebook"></button>
+                        </form>
+                    </li>
+                    <li class="link-item">
+                    	<form action="/connect/twitter" method="POST">
+                        	<button type="submit"  class="icon icon-twitter"></button>
+                        </form>
+                    </li>
+                    <!-- 
+                    <li class="link-item">
+                        <a href="javascript:;" onclick="return TWidgetLogin.auth();" class="icon icon-tme"></a>
+                    </li> -->
+                    <li class="link-item">
+                        <script async src="https://telegram.org/js/telegram-widget.js?4" data-telegram-login="lotsglobal_bot" data-auth-url="/tgauth" data-userpic="false"  data-request-access="write"></script>
+                    </li>
+                    <li class="link-item">
+                        <a href="javascript:;" class="icon icon-link"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-user js_showUserFloat">
+                <span class="name">zona.zp0602@gmail.com</span>
+                <img class="logo" src="img/test-user-logo.png" alt="" />
+                <span class="arrow-down"></span>
+                <div class="user-float js_userFloat">
+                    <p class="icon-change js_showChangePwd">change Password</p>
+                    <p class="icon-bind js_showBindWallet">Bind wallet</p>
+                </div>
+            </div>
+        </div>
+        <!-- PC -->
+        <div class="left-sidebar">
+            <ul>
+                <li class="sidebar-item active">
+                    <div class="home">Lots Credit</div>
+                </li>
+                <li class="sidebar-item">
+                    <div class="gift">Influence reward</div>
+                </li>
+            </ul>
+        </div>
+        <!-- mobile -->
+        <div class="left-sidebar mobile js_mobile_nav js_modal">
+            <div class="navbar-link">
+                <ul>
+                    <li class="link-item">
+                        <a href="javascript:;" class="icon icon-facebook"></a>
+                    </li>
+                    <li class="link-item">
+                        <a href="javascript:;" class="icon icon-twitter"></a>
+                    </li>
+                    <li class="link-item">
+                        <a href="javascript:;" class="icon icon-tme"></a>
+                    </li>
+                    <li class="link-item">
+                        <a href="javascript:;" class="icon icon-reddit"></a>
+                    </li>
+                    <li class="link-item">
+                        <a href="javascript:;" class="icon icon-link"></a>
+                    </li>
+                </ul>
+            </div>
+            <ul>
+                <li class="sidebar-item active">
+                    <div class="home">Lots Credit</div>
+                </li>
+                <li class="sidebar-item">
+                    <div class="gift">Influence reward</div>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="point-container">
+                <div class="point-item bg1">
+                    <p class="point-txt1">0</p>
+                    <p class="point-txt2">Eamed point</p>
+                </div>
+                <div class="point-item bg2">
+                    <p class="point-txt1">No. 1</p>
+                    <p class="point-txt2">Point ranks</p>
+                </div>
+                <div class="point-item bg3">
+                    <p class="point-txt1">0</p>
+                    <p class="point-txt2">Expected reward</p>
+                </div>
+                <div class="point-item bg4">
+                    <p class="point-txt1">&<span class="point-sub-txt">=$0.00 USD</span></p>
+                    <p class="point-txt2">Reward history LBA</p>
+                </div>
+            </div>
+            <div class="middle-container">
+                <div class="left-section">
+                    <p class="title">Reward amount</p>
+                    <div class="bg">
+                        <p class="t1">Total task amout of program</p>
+                        <p class="t2">3,000,000LOTS</p>
+                        <div class="t3">
+                            <span class="t">Event count down</span>
+                            <span class="box">27</span>
+                            <span class="box sel">02</span>
+                            <span class="box sel">29</span>
+                            <span class="box">37</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-section">
+                    <p class="title">Rules</p>
+                    <ul class="bg">
+                        <li>1. Participants can gain scores by completing following tasks Participants can gain scores</li>
+                        <li>7. Participants can gain scores by completing</li>
+                        <li>1. Participants can gain scores by completing following tasks Participants can gain scores</li>
+                        <li>7. Participants can gain scores by completing</li>
+                        <li>1. Participants can gain scores by completing following tasks Participants can gain scores</li>
+                        <li>7. Participants can gain scores by completing</li>
+                        <li>1. Participants can gain scores by completing following tasks Participants can gain scores</li>
+                        <li>7. Participants can gain scores by completing</li>
+                        <li>1. Participants can gain scores by completing following tasks Participants can gain scores</li>
+                        <li>7. Participants can gain scores by completing</li>
+                        <li>1. Participants can gain scores by completing following tasks Participants can gain scores</li>
+                        <li>7. Participants can gain scores by completing</li>
+                </div>
+            </div>
+            <div class="detail-container">
+                <p class="title">Point details</p>
+                <div class="table-scroll">
+                    <table class="detail-table">
+                        <colgroup width="20%"></colgroup>
+                        <colgroup width="12%"></colgroup>
+                        <colgroup width="12%"></colgroup>
+                        <colgroup width="12%"></colgroup>
+                        <colgroup width="12%"></colgroup>
+                        <colgroup width="32%"></colgroup>
+                        <thead>
+                            <tr>
+                                <th>
+                                    Task information
+                                </th>
+                                <th>
+                                    Points
+                                </th>
+                                <th>
+                                    Daily point limit
+                                </th>
+                                <th>
+                                    Total point limit
+                                </th>
+                                <th>
+                                    Earned point
+                                </th>
+                                <th>
+                                    Instruction
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+							[#if taskList?? ]
+								[#list taskList as task]
+			                        <tr>
+										<td>${task.name}</td>
+										<td>${task.eachPoint}</td>
+										<td>${task.dailyPointLimit}</td>
+										<td>${task.pointLimit}</td>
+										<td>${task.earnedPoint}</td>
+										<td>
+										[#if task.ifClosed == 'Y']
+											Task is closed.
+										[#elseif  task.earnedPoint == task.pointLimit]
+											Task is finished.
+										[#else]
+											[#-- Bind Twitter --]
+											[#if task.taskId == '1' ]
+												${task.instruction}
+											[#elseif task.taskId == '2']	
+												Got to <a href="https://twitter.com/LotsOrg"  target="_blank">Follow us</a>. We will check it later.
+											[#elseif task.taskId == '3']
+												We have new tweet. Please <a href="https://twitter.com/intent/retweet?tweet_id=463440424141459456"  target="_blank">Retweet</a>. We will check it later.		
+											[/#if]
+												
+										[/#if]
+										</td>
+									</tr>
+								[/#list]
+							[/#if]
+	                        <tr>
+	                            <td>
+	                                Please bind Telegram
+	                            </td>
+	                            <td>
+	                                +5
+	                            </td>
+	                            <td>
+	                                +5
+	                            </td>
+	                            <td>
+	                                5
+	                            </td>
+	                            <td class="red">
+	                                0
+	                            </td>
+	                            <td>
+	                            <span class="btn-complete js_showCmpleteTask">Compele the task</span>@lots
+	                            </td>
+	                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal 绑定钱包 -->
+        <div class="modal js_modal_bindWallet">
+            <p class="modal-title">Bind wallet</p>
+            <div class="modal-row">
+                <p class="modal-row-title">Wallet address</p>
+                <input class="modal-row-input" type="text" name=""/>
+            </div>
+            <div class="btn-submit">Submit<span class="arrow-right"></span></div>
+        </div>
+    <!-- modal 修改密码 -->
+        <div class="modal js_modal_changePwd">
+            <p class="modal-title">Reset Password</p>
+            <div class="modal-row">
+                <p class="modal-row-title">Old password</p>
+                <input class="modal-row-input" type="password" name=""/>
+            </div>
+            <div class="modal-row">
+                <p class="modal-row-title">New password</p>
+                <input class="modal-row-input" type="password" name=""/>
+            </div>
+            <div class="modal-row">
+                <p class="modal-row-title">Again password</p>
+                <input class="modal-row-input" type="password" name=""/>
+            </div>
+            <div class="btn-submit">Submit<span class="arrow-right"></span></div>
+        </div>
+    <!-- modal complete task -->
+        <div class="modal js_modal_completeTask">
+            <p class="modal-title">Compele the task</p>
+            <div class="modal-row">
+                <p class="modal-row-title">Link</p>
+                <input class="modal-row-input" type="text" name=""/>
+            </div>
+            <div class="btn-submit">Submit<span class="arrow-right"></span></div>
+        </div>
+    <div class="overlay-mask js_mask"></div>
+    <div class="overlay-mask modal-mask js_modal_mask"></div>
+</body>
+<script src="js/jquery.min.js"></script>
+<!-- 
+<script src="js/widget-frame.js?17"></script>
+<script type="text/javascript">
+TWidgetLogin.init('widget_login', 573152760, {"origin":"https:\/\/candy.lots.org","request_access":"write"}, false); 
+</script>-->
+<script>
+$(document).ready(function() {
+    $(".js_showNav").click(function() {
+        $('.js_mobile_nav').toggle();
+        $('.js_mask').toggle();
+    })
+    $(".js_mask").click(function() {
+        $(this).hide();
+        $('.js_modal').hide();
+    })
+    $(".js_showUserFloat").click(function() {
+        $('.js_userFloat').toggle();
+    })
+    $(".js_showBindWallet").click(function() {
+        $('.js_modal_bindWallet').toggle();
+        $('.js_modal_mask').toggle();
+    })
+    $(".js_showChangePwd").click(function() {
+        $('.js_modal_changePwd').toggle();
+        $('.js_modal_mask').toggle();
+    })
+    $(".js_showCmpleteTask").click(function() {
+        $('.js_modal_completeTask').toggle();
+        $('.js_modal_mask').toggle();
+    })
+    $(".js_modal_mask").click(function() {
+        $('.js_modal_changePwd').hide();
+        $('.js_modal_bindWallet').hide();
+        $('.js_modal_completeTask').hide();
+        $(this).hide();
+    })
+})
+</script>
+
 </html>
