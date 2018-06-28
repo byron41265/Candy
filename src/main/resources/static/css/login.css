@@ -3,6 +3,7 @@
     display: flex;
     display: -webkit-flex;
     display: -ms-flex;
+    align-items: center;
 }
 
 .left-container {
@@ -198,17 +199,18 @@
 
 .modal {
     width: 550px;
-    margin: 150px auto 0 auto;
+    margin: 0 auto;
     background-color: #fff;
     border-radius: 20px;
     padding: 45px 80px;
     box-sizing: border-box;
     position: fixed;
-    top: 0;
+    top: 50%;
     right: 0;
     left: 0;
     z-index: 100;
     display: none;
+    transform: translateY(-50%);
 }
 
 .modal .modal-desc {
@@ -302,7 +304,7 @@
     }
     .modal {
         width: auto;
-        margin: 100px 34px 0 34px;
+        margin: 0 34px;
         padding: 30px;
     }
     .modal .modal-desc {
