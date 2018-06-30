@@ -80,8 +80,6 @@ $.widget( "ui.form", {
 		//initial url and type and
 		var action=this.options.action;
 
-
-
 		$("a.form-submit", form).bind("click.form",function(e){
 			//stop default submit action
 			e.preventDefault();
@@ -707,7 +705,7 @@ $.widget( "ui.validate", {
 				return false;
 			}
 		}
-		self._hideError(element);
+		self._showCorrect(element);
 		return true;
 	},
 	caculateEle : function(){
@@ -738,20 +736,32 @@ $.widget( "ui.validate", {
 			}
 		}
 	},
+	_showCorrect : function(element ){
+		//对于checkbox,radiobox作特殊处理
+		if (/radio|checkbox/i.test(element.type)){
+			element = element.parentNode.parentNode;
+		}
+
+		$(element).closest(".input-wrap").removeClass("icon-right icon-error").addClass("icon-right");
+
+		var $span = $(element).nextAll("div.error-msg");
+		$span.removeClass("show").addClass("hide");
+		$span.html("");
+	}, 
 	_showError : function (element , message) {
 		//对于checkbox,radiobox作特殊处理
 		if (/radio|checkbox/i.test(element.type)){
 			element = element.parentNode.parentNode;
 		}
 
-		$(element).closest(".form-group").addClass("has-error has-feedback");
+		$(element).closest(".input-wrap").addClass("icon-error");
 
-		var $span = $(element).nextAll("span.ui-validate-error");
+		var $span = $(element).nextAll("div.error-msg");
 		if($span.length > 0) {
 			$span.removeClass("hide").addClass("show");
 			$span.html(message);
 		}else {
-			$("<span class='ui-validate-error help-block show'>"+message+"</span>").insertAfter(element);
+			$("<div class='error-msg ui-validate-error help-block show'>"+message+"</div>").insertAfter(element);
 		}
 	},
 	_hideError : function (element) {
@@ -760,9 +770,9 @@ $.widget( "ui.validate", {
 			element = element.parentNode.parentNode;
 		}
 
-		$(element).closest(".form-group").removeClass("has-error has-feedback");
+		$(element).closest(".input-wrap").removeClass("icon-right icon-error");
 
-		var $span = $(element).nextAll("span.ui-validate-error");
+		var $span = $(element).nextAll("div.error-msg");
 		$span.removeClass("show").addClass("hide");
 		$span.html("");
 	},
@@ -778,8 +788,8 @@ $.widget( "ui.validate", {
 					return false;
 				}
 			}
-
-
+			$(".icon-right", form).removeClass("icon-right");
+			
 			return true;
 		}
 		return false;
