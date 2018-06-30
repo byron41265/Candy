@@ -66,6 +66,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/uregister", method=RequestMethod.POST)
+	@ResponseBody
 	public String register(HttpServletRequest request){
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");

@@ -23,13 +23,13 @@ public interface UserMapper {
 //	@Select("select * from user where email = #{email}")
 //	public User findUserByEmail(@Param("email") String email);
 //	
-	@Select("select * from user where ${} = #{}")
+	@Select("select * from user where ${column} = #{value}")
 	public User findUserByElement(@Param("column") String column, @Param("value") String value);
 	
 	@Select("select count(*) from user where inviteCode=#{inviteCode}")
 	public int findInviteCode(@Param("inviteCode") String inviteCode);
 	
-	@Insert("insert into user(userId,username,password,wallet,email,inviteCode,status) values(#{userId},#{username},md5(#{password}),#{email},#{inviteCode},#{status})")
+	@Insert("insert into user(userId,username,password,email,inviteCode,status) values(#{userId},#{username},md5(#{password}),#{email},#{inviteCode},#{status})")
 	public void save(@Param("userId") String userId, @Param("username") String username, @Param("password") 
 	String password, @Param("email") String email, @Param("inviteCode") String inviteCode, @Param("status") String status);
 	
