@@ -63,7 +63,6 @@ $.widget( "ui.form", {
 	options : {
 		action: {},
 		type : "POST",
-		contentType : "application/x-www-form-urlencodeed",
 		data : null,
 		layover : "body",//body
 		validate : false
@@ -79,6 +78,7 @@ $.widget( "ui.form", {
 
 		//initial url and type and
 		var action=this.options.action;
+		action.url =$(form).attr("action");
 
 		$("a.form-submit", form).bind("click.form",function(e){
 			//stop default submit action
@@ -96,17 +96,9 @@ $.widget( "ui.form", {
 			layoverEle.layover();
 
 			//set data
-			var q = null;
-			if(options.contentType == "application/json"){
-				q = {}
-				$.each(form.serializeArray(), function(index, kv){
-					q[kv.name] = kv.value;
-				});
-				q = JSON.stringify(q);
-			}else{
-				q = form.serializeTrim();
-			}
-
+			var q = form.serializeTrim();
+			
+			
 
 			if(options.type.toUpperCase() == "GET"){
 				action.url += (action.url.indexOf('?') >= 0 ? '&' : '?') + q;
@@ -118,9 +110,6 @@ $.widget( "ui.form", {
 				action.type = "POST";
 			}
 
-			if(options.contentType && options.contentType.length > 0){
-				action.contentType = options.contentType;
-			}
 
 			//set success callback function
 			action.success = function (result, textStatus, jqXHR){
@@ -259,7 +248,7 @@ $.widget( "ui.validate", {
 
 			// http://docs.jquery.com/Plugins/Validation/Methods/url
 			url: {
-				message : "请输入有效的URL!",
+				message : "Please input a valid url!",
 				validate : function(value, element) {
 					// contributed by Scott Gonzalez: http://projects.scottsplayground.com/iri/
 					if(value == null || value.length == 0)
