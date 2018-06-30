@@ -18,8 +18,6 @@ public class App
 		ApplicationContext ctx = SpringApplication.run(App.class, args);
 		LotsBot bot = ctx.getBean(LotsBot.class);
 		
-		
-		
 		try {
 			botsApi.registerBot(bot);
 		} catch (TelegramApiRequestException e) {

@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
   // 模块代码
-	var $ = require("jquery")
+	var $ = require("jquery");
 	
 	module.exports= {
 		init: function(){

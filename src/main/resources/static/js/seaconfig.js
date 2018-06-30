@@ -10,7 +10,8 @@ seajs.config({
 		'jquery-form': 'lib/jquery.ui.form.js',
 		
 		'index': 'bus/index',
-		
+		'login':  'bus/login',
+
 	},
 	preload:[
 	    'jquery'

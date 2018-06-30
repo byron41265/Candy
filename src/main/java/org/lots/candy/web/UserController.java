@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.UUID;
 
@@ -25,7 +26,6 @@ import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.TwitterProfile;
 
 @Controller
-
 public class UserController {
 	
 	@Autowired
@@ -34,9 +34,28 @@ public class UserController {
 	@Autowired
 	private SendEmailUtils sendEmailUtils;
 	
-	@RequestMapping("/login")
-	public String login(){
+	@RequestMapping(value="/login" , method=RequestMethod.GET)
+	public String initlogin(HttpSession session){
+		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
+		if (user != null){
+			return "redirect:/index";
+		}
 		return "login";
+	}
+	
+	@RequestMapping(value="/login" , method=RequestMethod.POST)
+	@ResponseBody
+	public String login(HttpServletRequest request, HttpSession session){
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		User user = userMapper.findUserByEmailAndPwd(email, password);
+	
+		if(user!=null){			
+			session.setAttribute(Constant.USER_SESSION_NAME, user);
+			return "success";
+		}else{
+			return  "error";
+		}
 	}
 	
 	@RequestMapping("/register")
@@ -84,7 +103,7 @@ public class UserController {
 	
 	@RequestMapping(value="/logincheck", produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String login(Model model,HttpServletRequest request, HttpSession session) throws JSONException{
+	public String logincheck(Model model,HttpServletRequest request, HttpSession session) throws JSONException{
 		JSONObject obj = new JSONObject();
 		String errInfo = "";
 		String email = request.getParameter("email");
