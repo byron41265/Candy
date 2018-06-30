@@ -47,7 +47,8 @@ create table user (
 	facebookAccount varchar(100),
     telegramAccount varchar(100),
 	inviteCode varchar(512),
-	superInviteCode varchar(512)
+	superInviteCode varchar(512),
+	status varchar(2)
 ) ENGINE=MYISAM;
 
 ALTER TABLE user add primary key (userId);
