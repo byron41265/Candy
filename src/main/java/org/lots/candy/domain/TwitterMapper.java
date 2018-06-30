@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.lots.candy.entity.TwitterProfile;
 
@@ -22,7 +23,10 @@ public interface TwitterMapper {
 	@Insert("<script>insert into twitter_follower values <foreach item='item' collection='list'  separator=',' > (#{item}) </foreach></script>")
 	public void insertOfficialFollowerId(List<Long> ids);
 	
-	@Insert("replace into twitter_retweet(tweetId, providerUserId) values(#{tweetId},#{providerUserId})")
+	@Insert("replace into twitter_retweet(tweetId, providerUserId, retweetdate) values(#{tweetId},#{providerUserId}, now())")
 	public void updateRetweet(@Param("tweetId")String tweetId, @Param("providerUserId")String providerUserId);
+	
+	@Select("select value from dic_item d where d.dicTypeId ='social.twitter.tweets' order by dicId desc limit 1 ")
+	public String getLatestUnRetweet();
 
 }

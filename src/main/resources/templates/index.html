@@ -193,12 +193,18 @@
 											Task is finished.
 										[#else]
 											[#-- Bind Twitter --]
-											[#if task.taskId == '1' ]
+											[#if task.taskId == '1' ||  task.taskId == '7' || task.taskId == '8']
 												${task.instruction}
 											[#elseif task.taskId == '2']	
-												Got to <a href="https://twitter.com/LotsOrg"  target="_blank">Follow us</a>. We will check it later.
+												Go to <a href="https://twitter.com/LotsOrg"  target="_blank"  style="color:#0E5ACE;">Follow us</a>. We will confirm it later.
 											[#elseif task.taskId == '3']
-												We have new tweet. Please <a href="https://twitter.com/intent/retweet?tweet_id=463440424141459456"  target="_blank">Retweet</a>. We will check it later.		
+												[#if retweetId??]
+													We have new tweet. Please <a href="https://twitter.com/intent/retweet?tweet_id=${retweetId}"  target="_blank" style="color:#0E5ACE;">Retweet</a>. We will confirm it later.
+												[#else]
+													You have already updated to our newest tweet. 
+												[/#if]
+											[#elseif task.taskId == '5']
+												<span class="btn-complete js_showCmpleteTask" data-task="5">Submit Link</span>. We will confirm it later.
 											[/#if]
 												
 										[/#if]
@@ -259,54 +265,32 @@
         </div>
     <!-- modal complete task -->
         <div class="modal js_modal_completeTask">
-            <p class="modal-title">Compele the task</p>
-            <div class="modal-row">
-                <p class="modal-row-title">Link</p>
-                <input class="modal-row-input" type="text" name=""/>
-            </div>
-            <div class="btn-submit">Submit<span class="arrow-right"></span></div>
+        	<form action="submit">
+	            <p class="modal-title">Submit you link.</p>
+	            <div class="modal-row">
+	                <p class="modal-row-title">Link</p>
+	                <input class="modal-row-input" type="text" name=""/>
+	            </div>
+	            <div class="btn-submit">Submit<span class="arrow-right"></span></div>
+            </form>
         </div>
     <div class="overlay-mask js_mask"></div>
     <div class="overlay-mask modal-mask js_modal_mask"></div>
 </body>
-<script src="js/jquery.min.js"></script>
+<script src="js/sea.js"></script>
+<script src="js/seaconfig.js"></script>
+
 <!-- 
 <script src="js/widget-frame.js?17"></script>
 <script type="text/javascript">
 TWidgetLogin.init('widget_login', 573152760, {"origin":"https:\/\/candy.lots.org","request_access":"write"}, false); 
 </script>-->
-<script>
-$(document).ready(function() {
-    $(".js_showNav").click(function() {
-        $('.js_mobile_nav').toggle();
-        $('.js_mask').toggle();
-    })
-    $(".js_mask").click(function() {
-        $(this).hide();
-        $('.js_modal').hide();
-    })
-    $(".js_showUserFloat").click(function() {
-        $('.js_userFloat').toggle();
-    })
-    $(".js_showBindWallet").click(function() {
-        $('.js_modal_bindWallet').toggle();
-        $('.js_modal_mask').toggle();
-    })
-    $(".js_showChangePwd").click(function() {
-        $('.js_modal_changePwd').toggle();
-        $('.js_modal_mask').toggle();
-    })
-    $(".js_showCmpleteTask").click(function() {
-        $('.js_modal_completeTask').toggle();
-        $('.js_modal_mask').toggle();
-    })
-    $(".js_modal_mask").click(function() {
-        $('.js_modal_changePwd').hide();
-        $('.js_modal_bindWallet').hide();
-        $('.js_modal_completeTask').hide();
-        $(this).hide();
-    })
-})
+<script type="text/javascript">
+	seajs.use(['jquery', 'index'], function($, index){
+		$(document).ready(function() {
+			index.init();
+		  });
+	});
 </script>
 
 </html>

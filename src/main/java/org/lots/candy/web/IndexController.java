@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.lots.candy.config.Constant;
 import org.lots.candy.domain.TaskMapper;
+import org.lots.candy.domain.TwitterMapper;
 import org.lots.candy.entity.Task;
 import org.lots.candy.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class IndexController {
 	@Autowired
 	private TaskMapper taskMapper;
 	
+	@Autowired
+	private TwitterMapper twitterMapper;
+	
 	
 	
 	@RequestMapping("/")
@@ -48,6 +52,8 @@ public class IndexController {
 		model.addAttribute("taskList", taskList);
 		
 		// 尚未转发的Tweet
+		String retweetId = twitterMapper.getLatestUnRetweet();
+		model.addAttribute("retweetId", retweetId);
 		
 		
 		return "index";
