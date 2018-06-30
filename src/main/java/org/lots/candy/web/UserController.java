@@ -63,6 +63,24 @@ public class UserController {
 		return "login";
 	}
 	
+	@RequestMapping("/resetPwd")
+	public void resetPwd(HttpServletRequest request, HttpSession session){
+		String old_pwd = request.getParameter("old_pwd");
+		String new_pwd = request.getParameter("new+pwd");
+		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
+		String userId = user.getUserId();
+		if(userMapper.findUserByEmailAndPwd(user.getEmail(), old_pwd)!=null){
+			userMapper.resetPassword(userId, new_pwd);
+		}
+	}
+	
+	@RequestMapping("/addWallet")
+	public void addWallet(HttpServletRequest request, HttpSession session){
+		String wallet = request.getParameter("wallet");
+		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
+		String userId = user.getUserId();
+		userMapper.addWallet(wallet, userId);
+	}
 	
 	@RequestMapping(value="/logincheck", produces="application/json;charset=UTF-8")
 	@ResponseBody
@@ -81,5 +99,11 @@ public class UserController {
 		obj.put("result", errInfo);
 //		obj.put("user", user);
 		return obj.toString();
+	}
+	
+	@RequestMapping("/getInfluenceReward")
+	public void getInfluenceReward(HttpSession session){
+		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
+		
 	}
 }

@@ -29,5 +29,10 @@ public interface UserMapper {
 	
 	@Update("update user set status = '1' where userId = #{userId}")
 	public void updateUserStatus(@Param("userId") String userId);
-
+	
+	@Update("update user set password = md5(#{password}) where userId=#{userId}")
+	public void resetPassword(@Param("userId") String userId, @Param("password") String password);
+	
+	@Update("update user set wallet = #{wallet} where userId=#{userId}")
+	public void addWallet(@Param("wallet") String wallet, @Param("userId") String userId);
 }
