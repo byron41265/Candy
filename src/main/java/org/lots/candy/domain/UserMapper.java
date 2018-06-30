@@ -17,15 +17,21 @@ public interface UserMapper {
 	@Update("update user set ${provider}Account = #{userProviderId} where userId =#{userId}")
 	public void updateAccount(@Param("userId")String userId, @Param("provider")String provider, @Param("userProviderId")String userProviderId);
 	
-	@Select("select * from user s where s.email = #{email} and s.password = md5(#{password}) and s.status='1'")
+	@Select("select * from user s where s.email = #{email} and s.password = md5(#{password})")
 	public User findUserByEmailAndPwd(@Param("email") String email, @Param("password") String password);
 	
-	@Select("select * from user s where s.email = #{email}")
-	public User findUserByEmail(@Param("email") String email);
+//	@Select("select * from user where email = #{email}")
+//	public User findUserByEmail(@Param("email") String email);
+//	
+	@Select("select * from user where ${} = #{}")
+	public User findUserByElement(@Param("column") String column, @Param("value") String value);
 	
-	@Insert("insert into user(userId,username,password,wallet,email,status) values(#{userId},#{username},md5(#{password}),#{email},#{status})")
+	@Select("select count(*) from user where inviteCode=#{inviteCode}")
+	public int findInviteCode(@Param("inviteCode") String inviteCode);
+	
+	@Insert("insert into user(userId,username,password,wallet,email,inviteCode,status) values(#{userId},#{username},md5(#{password}),#{email},#{inviteCode},#{status})")
 	public void save(@Param("userId") String userId, @Param("username") String username, @Param("password") 
-	String password, @Param("email") String email, @Param("status") String status);
+	String password, @Param("email") String email, @Param("inviteCode") String inviteCode, @Param("status") String status);
 	
 	@Update("update user set status = '1' where userId = #{userId}")
 	public void updateUserStatus(@Param("userId") String userId);

@@ -19,7 +19,7 @@ define(function(require, exports, module) {
 						if("success" == result){
 							window.location ="/";
 						}else{
-							alert("aaaa");
+							alert("email or password is wrong");
 						}
 						
 					}

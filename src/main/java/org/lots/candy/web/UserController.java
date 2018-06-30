@@ -49,10 +49,12 @@ public class UserController {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		User user = userMapper.findUserByEmailAndPwd(email, password);
-	
-		if(user!=null){			
+		
+		if(user!=null&&user.getStatus().equals("1")){
 			session.setAttribute(Constant.USER_SESSION_NAME, user);
 			return "success";
+		}else if(user!=null&&user.getStatus().equals("0")){
+			return "inactive";
 		}else{
 			return  "error";
 		}
@@ -63,16 +65,24 @@ public class UserController {
 		return "register";
 	}
 	
-	@RequestMapping("/uregister")
+	@RequestMapping(value="/uregister", method=RequestMethod.POST)
 	public String register(HttpServletRequest request){
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
+		String inviteCode = request.getParameter("inviteCode");
 		String userId = UUID.randomUUID().toString().replace("-", "");
 		String status = "0";
-		userMapper.save(userId, username, password, email, status);
+		if(userMapper.findUserByElement("username", username)!=null){
+			return "nameError";
+		}else if(userMapper.findUserByElement("email", email)!=null){
+			return "emailError";
+		}else if(inviteCode!=null&&!inviteCode.equals("")&&userMapper.findInviteCode(inviteCode)==0){
+			return "inviteCodeError";
+		}
+		userMapper.save(userId, username, password, email, inviteCode, status);
 		sendEmailUtils.sendRegisterUrl(email, "http://localhost:8080/activeUser?userId={userId}");
-		return "login"; 
+		return "success";
 	}
 	
 	@RequestMapping("/activeUser")
