@@ -40,6 +40,7 @@ drop table user;
 
 create table user (
 	userId varchar(100) not null,
+    userName varchar(100) not null,
 	`password` varchar(100) not null,
 	wallet varchar(1000),
 	email varchar(100),
@@ -96,7 +97,7 @@ INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimi
  VALUES ('8', 'Please bind Telegram', '5', '5', '5', 'You didn\'t bind Telegram yet, please click the menubar icon of Telegram to bind.', 'N', 'Y', '1', 7);    
  
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
- VALUES ('9', 'Please invite you friends to Telegram group', '5', '5', '5', '', 'N', 'Y', '1', 8);     
+ VALUES ('9', 'Please invite you friends to Telegram group', '5', '500', '50', '', 'N', 'Y', '1', 8);     
  
  commit;
  
@@ -115,13 +116,14 @@ drop table action;
 create table action (
 	userId varchar(100) not null,
 	taskId varchar(100) not null,
-	earned_point int not null,
+	earned_point int DEFAULT 0,
 	submitUrl varchar(512),
-	submitTime date,
+	submitTime datetime default NOW(),
 	if_effective varchar(2),
 	if_handled varchar(2)
 ) ENGINE=MYISAM;
-ALTER TABLE action add primary key (userId, taskId);
+
+ALTER TABLE action add primary key (userId, taskId, submitTime); 
 
 drop table dic_item;
 
@@ -134,9 +136,12 @@ create table dic_item (
 
 ALTER TABLE dic_item add primary key (dicId);
 
+-- twitter Id
 INSERT INTO `dic_item` (`dicId`, `dicTypeId`, `value`) VALUES ('social.twitter.tweets.01', 'social.twitter.tweets', '990911032292884480');
 INSERT INTO `dic_item` (`dicId`, `dicTypeId`, `value`) VALUES ('social.twitter.tweets.02', 'social.twitter.tweets', '1012824857992679424');
 
+-- Telegram group 
+INSERT INTO `dic_item` (`dicId`, `dicTypeId`, `value`, `desc`) VALUES ('social.telegram.group.01', 'social.telegram.group', 'https://t.me/joinchat/IOi2LREmcW8xzJgwO5hceg', 'test group');
 
 
 drop table twitter_profile;

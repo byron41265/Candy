@@ -2,11 +2,20 @@ package org.lots.candy.web;
 
 import java.util.List;
 
+
+
+
+
+
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.lots.candy.config.Constant;
+import org.lots.candy.domain.DictMapper;
 import org.lots.candy.domain.TaskMapper;
 import org.lots.candy.domain.TwitterMapper;
+import org.lots.candy.entity.Dict;
 import org.lots.candy.entity.Task;
 import org.lots.candy.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +30,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.NativeWebRequest;
 
 @Controller
 public class IndexController {
@@ -34,7 +45,8 @@ public class IndexController {
 	@Autowired
 	private TwitterMapper twitterMapper;
 	
-	
+	@Autowired
+	private DictMapper dictMapper;
 	
 	@RequestMapping("/")
 	public String init(Model model, HttpSession session){
@@ -55,8 +67,27 @@ public class IndexController {
 		String retweetId = twitterMapper.getLatestUnRetweet();
 		model.addAttribute("retweetId", retweetId);
 		
+		// 获取telegram 组链接
+		List<Dict> groups = dictMapper.queryByType(Constant.SOCIAL_TELEGRAM_GROUPS);
+		model.addAttribute("groups", groups);
 		
 		return "index";
 	}
+	
+	@RequestMapping(value="/link",  method=RequestMethod.POST)
+	@ResponseBody
+	public String submitLink(HttpServletRequest request,HttpSession session){
+		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
+		
+		String userId = user.getUserId();
+		request.getParameterMap();
+		String link = request.getParameter("link");
+		String taskId = request.getParameter("taskId");
+		
+		taskMapper.insertLinkAction(userId, link, taskId);
+		
+		return "success";
+	}
+	
 
 }

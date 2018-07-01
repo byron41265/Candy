@@ -2,6 +2,7 @@ package org.lots.candy.domain;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -17,5 +18,8 @@ public interface TaskMapper {
 	
 	@Update("replace into user_task (userId, taskId, earnedPoint) select #{userId},  taskId, eachPoint from task where taskId = #{taskId}")
 	public void insertOnceTask(@Param("userId")String userId, @Param("taskId")String taskId);
+	
+	@Insert("INSERT INTO `action`(`userId`,`taskId`,`submitUrl`,`if_effective`,`if_handled`) VALUES(#{userId},  #{taskId} , #{link} , 'N' , 'N')")
+	public void insertLinkAction(@Param("userId")String userId, @Param("link")String link,@Param("taskId")String taskId);
 
 }

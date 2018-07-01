@@ -639,6 +639,49 @@
     box-sizing: border-box;
 }
 
+/* modified by xsm5202  增加校验错误提示信息,与login 重用*/
+.input-wrap {
+    position: relative;
+}
+
+.input-wrap.icon-right:after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    top: 14px;
+    background-image: url('../img/icon-right.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+.input-wrap.icon-error .input {
+    border: 1px solid #EA5454;
+}
+
+.input-wrap.icon-right:after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    top: 14px;
+    background-image: url('../img/icon-right.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+ .input-wrap.icon-error .error-msg {
+    color: #EA5454;
+    margin-top: 9px;
+    margin-left: 20px;
+}
+
+
+
 .modal .btn-submit {
     font-size: 16px;
     color: #FBFCFF;
@@ -649,6 +692,7 @@
     line-height: 47px;
     border-radius: 3px;
     margin: 45px auto 0 auto;
+    display:block;
 }
 
 .modal .btn-submit .arrow-right {

@@ -193,7 +193,7 @@
 											Task is finished.
 										[#else]
 											[#-- Bind Twitter --]
-											[#if task.taskId == '1' ||  task.taskId == '7' || task.taskId == '8']
+											[#if task.taskId == '1' ||  task.taskId == '7' || task.taskId == '8' ]
 												${task.instruction}
 											[#elseif task.taskId == '2']	
 												Go to <a href="https://twitter.com/LotsOrg"  target="_blank"  style="color:#0E5ACE;">Follow us</a>. We will confirm it later.
@@ -203,8 +203,16 @@
 												[#else]
 													You have already updated to our newest tweet. 
 												[/#if]
-											[#elseif task.taskId == '5']
-												<span class="btn-complete js_showCmpleteTask" data-task="5">Submit Link</span>. We will confirm it later.
+											[#elseif task.taskId == '5' || task.taskId == '6']
+												<span class="btn-complete js_showCmpleteTask" data-task="${task.taskId}">Submit Link</span>. We will confirm it later.
+											[#elseif task.taskId == '9']
+												Invite you friend to
+												[#if groups?? ]
+													[#list groups as group]
+												 		<a href="${group.value}"  target="_blank"  style="color:#0E5ACE;">${group.desc}</a>
+												 	[/#list]
+												 [/#if]
+												 . We will confirm it later.
 											[/#if]
 												
 										[/#if]
@@ -212,26 +220,6 @@
 									</tr>
 								[/#list]
 							[/#if]
-	                        <tr>
-	                            <td>
-	                                Please bind Telegram
-	                            </td>
-	                            <td>
-	                                +5
-	                            </td>
-	                            <td>
-	                                +5
-	                            </td>
-	                            <td>
-	                                5
-	                            </td>
-	                            <td class="red">
-	                                0
-	                            </td>
-	                            <td>
-	                            <span class="btn-complete js_showCmpleteTask">Compele the task</span>@lots
-	                            </td>
-	                        </tr>
                     </table>
                 </div>
             </div>
@@ -265,13 +253,16 @@
         </div>
     <!-- modal complete task -->
         <div class="modal js_modal_completeTask">
-        	<form action="submit">
+        	<form action="/link">
 	            <p class="modal-title">Submit you link.</p>
 	            <div class="modal-row">
 	                <p class="modal-row-title">Link</p>
-	                <input class="modal-row-input" type="text" name=""/>
+	                <div class="input-wrap">
+	                	<input class="modal-row-input required url" type="text" name="link"/>
+	                </div>
+	                <input type="hidden" name="taskId"/>
 	            </div>
-	            <div class="btn-submit">Submit<span class="arrow-right"></span></div>
+	            <a class="btn-submit  form-submit" >Submit<span class="arrow-right"></span></a>
             </form>
         </div>
     <div class="overlay-mask js_mask"></div>
