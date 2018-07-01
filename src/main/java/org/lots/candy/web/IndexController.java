@@ -52,9 +52,7 @@ public class IndexController {
 	public String init(Model model, HttpSession session){
 		
 		// TO XUYUAN : 请将这段代码写入login 成功那段代码，这里仅做测试用，之后请帮忙删除
-		User usertt = new User();
-		usertt.setUserId("xsm");
-		session.setAttribute(Constant.USER_SESSION_NAME, usertt);
+
 		
 		// 正文开始
 		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
@@ -70,7 +68,7 @@ public class IndexController {
 		// 获取telegram 组链接
 		List<Dict> groups = dictMapper.queryByType(Constant.SOCIAL_TELEGRAM_GROUPS);
 		model.addAttribute("groups", groups);
-		
+		model.addAttribute("user", user);
 		return "index";
 	}
 	

@@ -44,7 +44,7 @@
                 </ul>
             </div>
             <div class="navbar-user js_showUserFloat">
-                <span class="name">zona.zp0602@gmail.com</span>
+                <span class="name">${user.email}</span>
                 <img class="logo" src="img/test-user-logo.png" alt="" />
                 <span class="arrow-down"></span>
                 <div class="user-float js_userFloat">
@@ -227,29 +227,33 @@
     </div>
     <!-- modal 绑定钱包 -->
         <div class="modal js_modal_bindWallet">
+          <form action="/addWallet">
             <p class="modal-title">Bind wallet</p>
             <div class="modal-row">
                 <p class="modal-row-title">Wallet address</p>
-                <input class="modal-row-input" type="text" name=""/>
+                <input class="modal-row-input required" type="text" name="wallet"/>
             </div>
-            <div class="btn-submit">Submit<span class="arrow-right"></span></div>
+            <a class="btn-submit form_submit">Submit<span class="arrow-right"></span></a>
+          </form>
         </div>
     <!-- modal 修改密码 -->
         <div class="modal js_modal_changePwd">
+          <form action="/resetPwd">
             <p class="modal-title">Reset Password</p>
             <div class="modal-row">
                 <p class="modal-row-title">Old password</p>
-                <input class="modal-row-input" type="password" name=""/>
+                <input class="modal-row-input required" type="password" name="old_pwd"/>
             </div>
             <div class="modal-row">
                 <p class="modal-row-title">New password</p>
-                <input class="modal-row-input" type="password" name=""/>
+                <input class="modal-row-input required" type="password" name="new_pwd"/>
             </div>
             <div class="modal-row">
                 <p class="modal-row-title">Again password</p>
-                <input class="modal-row-input" type="password" name=""/>
+                <input class="modal-row-input required" type="password" name="new_pwd_again"/>
             </div>
-            <div class="btn-submit">Submit<span class="arrow-right"></span></div>
+            <a class="btn-submit form_submit">Submit<span class="arrow-right"></span></a>
+          </form>
         </div>
     <!-- modal complete task -->
         <div class="modal js_modal_completeTask">
