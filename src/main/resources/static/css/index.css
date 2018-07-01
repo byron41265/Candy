@@ -86,18 +86,19 @@
     background-repeat: no-repeat;
 }
 
-/* added by xsm */
-.link-item button{
-	border:none;
-	outline:none;
-	background:none;
-	cursor:pointer;
-	padding:0;
-	text-decoration:underline;
-	font-family:inherit;
-	font-size:inherit;
-}
 
+/* added by xsm */
+
+.link-item button {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+}
 
 .navbar .navbar-user {
     height: 100%;
@@ -479,23 +480,35 @@
     margin-left: 12px;
 }
 
-.middle-container .right-section .bg {
+.middle-container .right-section .content {
     width: 450px;
     height: 227px;
     background-color: #FFFFFF;
     overflow-y: scroll;
     box-sizing: border-box;
-    padding: 16px 18px 16px 35px;
+    padding: 16px 18px;
     border-radius: 5px;
-}
-
-.middle-container .right-section .bg>li {
     font-size: 14px;
     color: #4A4A4A;
-    list-style: initial;
     line-height: 20px;
-    padding: 8px 0;
+}
+
+.middle-container .right-section .content .content-head {
     border-bottom: 1px solid #E9E9E9;
+}
+
+.middle-container .right-section .content .content-head p {
+    margin-bottom: 5px;
+}
+
+.middle-container .right-section .content .content-body {
+    padding-left: 15px;
+}
+
+.middle-container .right-section .content .content-body li {
+    list-style: initial;
+    padding: 8px 0;
+    border-bottom: 1px solid #e9e9e9;
 }
 
 .detail-container {
@@ -594,14 +607,14 @@
     z-index: 99;
 }
 
-.modal{
+.modal {
     width: 550px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 20px;
     padding: 45px 80px;
     box-sizing: border-box;
-     position: fixed;
+    position: fixed;
     top: 50%;
     right: 0;
     left: 0;
@@ -639,7 +652,9 @@
     box-sizing: border-box;
 }
 
+
 /* modified by xsm5202  增加校验错误提示信息,与login 重用*/
+
 .input-wrap {
     position: relative;
 }
@@ -674,13 +689,11 @@
     height: 20px;
 }
 
- .input-wrap.icon-error .error-msg {
+.input-wrap.icon-error .error-msg {
     color: #EA5454;
     margin-top: 9px;
     margin-left: 20px;
 }
-
-
 
 .modal .btn-submit {
     font-size: 16px;
@@ -692,7 +705,7 @@
     line-height: 47px;
     border-radius: 3px;
     margin: 45px auto 0 auto;
-    display:block;
+    display: block;
 }
 
 .modal .btn-submit .arrow-right {
@@ -872,16 +885,25 @@
         margin-left: 0;
         margin-top: 50px;
     }
-    .middle-container .right-section .bg {
-        width: 100%;
-        height: auto;
-        max-height: 404px;
-    }
-    .middle-container .right-section .bg>li {
-        font-size: 12px;
-        line-height: 17px;
-        padding: 20px 0;
-    }
+    .middle-container .right-section .content {
+    width: 100%;
+    height: auto;
+    font-size: 12px;
+    line-height: 17px;
+    max-height: 404px;
+}
+
+.middle-container .right-section .content .content-head p {
+    margin-bottom: 10px;
+}
+
+.middle-container .right-section .content .content-body {
+    padding-left: 15px;
+}
+
+.middle-container .right-section .content .content-body li {
+    padding: 20px 0;
+}
     .detail-container {
         margin-top: 50px;
     }
