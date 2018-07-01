@@ -230,7 +230,7 @@
     margin: 0 auto 28px auto;
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width:768px) {
     .container {
         display: block;
     }
