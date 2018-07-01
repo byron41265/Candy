@@ -52,6 +52,15 @@ public class IndexController {
 	public String init(Model model, HttpSession session){
 		
 		// TO XUYUAN : 请将这段代码写入login 成功那段代码，这里仅做测试用，之后请帮忙删除
+		/*User user = new User();
+		user.setUserId("xsm");
+		user.setUsername("xsmxsm");
+		user.setEmail("binggouxsm@hotmail.com");
+		session.setAttribute(Constant.USER_SESSION_NAME, user);
+		*/
+		
+		
+		
 
 		
 		// 正文开始

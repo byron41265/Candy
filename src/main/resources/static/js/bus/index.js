@@ -74,7 +74,7 @@ define(function(require, exports, module) {
 			$(".js_modal_changePwd form").form({
 				validate: true,
 				action: {
-					ProcessResult: function(result){
+					processResult: function(result){
 						if("success" == result){
 							self._closeModal();
 						}else if("againError" == result){
@@ -88,13 +88,12 @@ define(function(require, exports, module) {
 				}
 			});
 		},
-		
 		_initWallet: function(){
 			var self = this;
 			$(".js_modal_bindWallet form").form({
 				validate: true,
 				action: {
-					ProcessResult: function(result){
+					processResult: function(result){
 						if("success" == result){
 							self._closeModal();
 						}

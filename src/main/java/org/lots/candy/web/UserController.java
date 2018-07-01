@@ -94,6 +94,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("/resetPwd")
+	@ResponseBody
 	public String resetPwd(HttpServletRequest request, HttpSession session){
 		String old_pwd = request.getParameter("old_pwd");
 		String new_pwd = request.getParameter("new_pwd");
@@ -113,6 +114,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/addWallet", method=RequestMethod.POST)
+	@ResponseBody
 	public String addWallet(HttpServletRequest request, HttpSession session){
 		String wallet = request.getParameter("wallet");
 		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
