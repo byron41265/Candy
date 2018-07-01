@@ -71,17 +71,17 @@ public class UserController {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
-		String inviteCode = request.getParameter("inviteCode");
+		String superInviteCode = request.getParameter("inviteCode");
 		String userId = UUID.randomUUID().toString().replace("-", "");
 		String status = "0";
 		if(userMapper.findUserByElement("username", username)!=null){
 			return "nameError";
 		}else if(userMapper.findUserByElement("email", email)!=null){
 			return "emailError";
-		}else if(inviteCode!=null&&!inviteCode.equals("")&&userMapper.findInviteCode(inviteCode)==0){
+		}else if(superInviteCode!=null&&!superInviteCode.equals("")&&userMapper.findInviteCode(superInviteCode)==0){
 			return "inviteCodeError";
 		}
-		userMapper.save(userId, username, password, email, inviteCode, status);
+		userMapper.save(userId, username, password, email, superInviteCode, status);
 		sendEmailUtils.sendRegisterUrl(email, "http://localhost:8080/activeUser?userId={userId}");
 		return "success";
 	}
@@ -94,22 +94,31 @@ public class UserController {
 	}
 	
 	@RequestMapping("/resetPwd")
-	public void resetPwd(HttpServletRequest request, HttpSession session){
+	public String resetPwd(HttpServletRequest request, HttpSession session){
 		String old_pwd = request.getParameter("old_pwd");
-		String new_pwd = request.getParameter("new+pwd");
+		String new_pwd = request.getParameter("new_pwd");
+		String new_pwd_again = request.getParameter("new_pwd_again");
 		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
 		String userId = user.getUserId();
-		if(userMapper.findUserByEmailAndPwd(user.getEmail(), old_pwd)!=null){
-			userMapper.resetPassword(userId, new_pwd);
+		if(!new_pwd.equals(new_pwd_again)){
+			return "againError";
+		}else if(new_pwd.equals(old_pwd)){
+			return "sameError";
+		}else if(userMapper.findUserByEmailAndPwd(user.getEmail(), old_pwd) == null){
+			return "pwdError";
+		}else{
+			userMapper.resetPassword(userId, old_pwd);
+			return "success";
 		}
 	}
 	
-	@RequestMapping("/addWallet")
-	public void addWallet(HttpServletRequest request, HttpSession session){
+	@RequestMapping(value="/addWallet", method=RequestMethod.POST)
+	public String addWallet(HttpServletRequest request, HttpSession session){
 		String wallet = request.getParameter("wallet");
 		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
 		String userId = user.getUserId();
 		userMapper.addWallet(wallet, userId);
+		return "success";
 	}
 	
 	@RequestMapping(value="/logincheck", produces="application/json;charset=UTF-8")

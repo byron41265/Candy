@@ -33,6 +33,8 @@ define(function(require, exports, module) {
 		    });
 		    
 		    self._initTask();
+		    self._initPwd();
+		    self._initWallet();
 		},
 		_closeModal: function(){
 			$(".modal").hide();
@@ -65,6 +67,40 @@ define(function(require, exports, module) {
 				}
 			});
 			
+		},
+		
+		_initPwd: function(){
+			var self = this;
+			$(".js_modal_changePwd form").form({
+				validate: true,
+				action: {
+					ProcessResult: function(result){
+						if("success" == result){
+							self._closeModal();
+						}else if("againError" == result){
+							alert("Inconsistent input of new password twice");
+						}else if("sameError" == result){
+							alert("The new password is the same as the old password");
+						}else{
+							alert("The original password was entered incorrectly");
+						}
+					}
+				}
+			});
+		},
+		
+		_initWallet: function(){
+			var self = this;
+			$(".js_modal_bindWallet form").form({
+				validate: true,
+				action: {
+					ProcessResult: function(result){
+						if("success" == result){
+							self._closeModal();
+						}
+					}
+				}
+			});
 		}
 	}
 
