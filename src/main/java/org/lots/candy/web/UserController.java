@@ -60,8 +60,13 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping("/register")
-	public String register(){
+	@RequestMapping(value="/register", method=RequestMethod.GET)
+	
+	public String register(HttpServletRequest request, Model model){
+		String inviteCode = request.getParameter("inviteCode");
+		if(inviteCode!=null){
+			model.addAttribute("inviteCode");
+		}
 		return "register";
 	}
 	
@@ -72,7 +77,11 @@ public class UserController {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		String superInviteCode = request.getParameter("inviteCode");
+		if(superInviteCode==null){
+			superInviteCode="";
+		}
 		String userId = UUID.randomUUID().toString().replace("-", "");
+		String inviteCode = UUID.randomUUID().toString().replace("-", "").toUpperCase();
 		String status = "0";
 		if(userMapper.findUserByElement("username", username)!=null){
 			return "nameError";
@@ -81,8 +90,8 @@ public class UserController {
 		}else if(superInviteCode!=null&&!superInviteCode.equals("")&&userMapper.findInviteCode(superInviteCode)==0){
 			return "inviteCodeError";
 		}
-		userMapper.save(userId, username, password, email, superInviteCode, status);
-		sendEmailUtils.sendRegisterUrl(email, "http://localhost:8080/activeUser?userId={userId}");
+		userMapper.save(userId, username, password, email, inviteCode, superInviteCode, status);
+		sendEmailUtils.sendRegisterUrl(email, "http://localhost:8080/activeUser?userId="+userId);
 		return "success";
 	}
 	
@@ -108,7 +117,7 @@ public class UserController {
 		}else if(userMapper.findUserByEmailAndPwd(user.getEmail(), old_pwd) == null){
 			return "pwdError";
 		}else{
-			userMapper.resetPassword(userId, old_pwd);
+			userMapper.resetPassword(userId, new_pwd);
 			return "success";
 		}
 	}

@@ -29,9 +29,9 @@ public interface UserMapper {
 	@Select("select count(*) from user where inviteCode=#{superInviteCode}")
 	public int findInviteCode(@Param("superInviteCode") String superInviteCode);
 	
-	@Insert("insert into user(userId,username,password,email,superInviteCode,status) values(#{userId},#{username},md5(#{password}),#{email},#{superInviteCode},#{status})")
+	@Insert("insert into user(userId,username,password,email,inviteCode,superInviteCode,status) values(#{userId},#{username},md5(#{password}),#{email},#{inviteCode},#{superInviteCode},#{status})")
 	public void save(@Param("userId") String userId, @Param("username") String username, @Param("password") 
-	String password, @Param("email") String email, @Param("superInviteCode") String superInviteCode, @Param("status") String status);
+	String password, @Param("email") String email, @Param("inviteCode")String inviteCode, @Param("superInviteCode") String superInviteCode, @Param("status") String status);
 	
 	@Update("update user set status = '1' where userId = #{userId}")
 	public void updateUserStatus(@Param("userId") String userId);
@@ -42,5 +42,9 @@ public interface UserMapper {
 	@Update("update user set wallet = #{wallet} where userId=#{userId}")
 	public void addWallet(@Param("wallet") String wallet, @Param("userId") String userId);
 	
-
+	@Select("select * from user where superInviteCode=#{inviteCode}")
+	public List<User> findUserBySuperInviteCode(@Param("inviteCode") String inviteCode);
+	
+//	@Select("select ")
+	
 }

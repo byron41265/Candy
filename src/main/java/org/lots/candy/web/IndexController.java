@@ -15,6 +15,7 @@ import org.lots.candy.config.Constant;
 import org.lots.candy.domain.DictMapper;
 import org.lots.candy.domain.TaskMapper;
 import org.lots.candy.domain.TwitterMapper;
+import org.lots.candy.domain.UserMapper;
 import org.lots.candy.entity.Dict;
 import org.lots.candy.entity.Task;
 import org.lots.candy.entity.User;
@@ -48,6 +49,8 @@ public class IndexController {
 	@Autowired
 	private DictMapper dictMapper;
 	
+	@Autowired
+	private UserMapper userMapper;
 	@RequestMapping("/")
 	public String init(Model model, HttpSession session){
 		
@@ -65,6 +68,10 @@ public class IndexController {
 		
 		// 正文开始
 		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
+//		if(userMapper.findUserBySuperInviteCode(user.getInviteCode())!=null){
+//			
+//		}
+		
 		
 		// 获取列表
 		List<Task> taskList = taskMapper.queryUserTask(user.getUserId());
@@ -80,6 +87,16 @@ public class IndexController {
 		model.addAttribute("user", user);
 		return "index";
 	}
+	
+//	public int getNextUserCount(User user){
+//		List<User> userList = userMapper.findUserBySuperInviteCode(user.getInviteCode());
+//		int count = userList.size();
+//		int count1 = 0;
+//		for(User users: userList){
+//			getNextUserCount(users);
+//		}
+//		return 0;
+//	}
 	
 	@RequestMapping(value="/link",  method=RequestMethod.POST)
 	@ResponseBody

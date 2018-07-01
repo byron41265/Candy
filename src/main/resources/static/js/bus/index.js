@@ -28,9 +28,14 @@ define(function(require, exports, module) {
 		        $('.js_modal_mask').toggle();
 		    });
 		    
+		    $(".icon-link").click(function(){
+		    	$('.js_modal_link').toggle();
+		    	$('.js_modal_mask').toggle();
+		    });
+		    
 		    $(".js_modal_mask").click(function() {
 		        self._closeModal();
-		    });
+		    });		    
 		    
 		    self._initTask();
 		    self._initPwd();
