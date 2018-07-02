@@ -20,6 +20,7 @@ import org.lots.candy.config.Constant;
 import org.lots.candy.domain.UserMapper;
 import org.lots.candy.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Twitter;
@@ -33,6 +34,9 @@ public class UserController {
 	
 	@Autowired
 	private SendEmailUtils sendEmailUtils;
+	
+	@Value("${spring.mail.url}")
+	private String emailUrl;
 	
 	@RequestMapping(value="/login" , method=RequestMethod.GET)
 	public String initlogin(HttpSession session){
@@ -90,7 +94,7 @@ public class UserController {
 			return "inviteCodeError";
 		}
 		userMapper.save(userId, username, password, email, inviteCode, superInviteCode, status);
-		sendEmailUtils.sendRegisterUrl(email, "http://localhost:8080/activeUser?userId="+userId);
+		sendEmailUtils.sendRegisterUrl(email, emailUrl+userId);
 		return "success";
 	}
 	
