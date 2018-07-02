@@ -194,4 +194,10 @@ public class UserController {
 			return "success";
 		}
 	}
+	
+	@RequestMapping(value="/logout",method=RequestMethod.GET)
+	public String logout(HttpSession session){
+		session.removeAttribute(Constant.USER_SESSION_NAME);
+		return "redirect:/login";
+	}
 }

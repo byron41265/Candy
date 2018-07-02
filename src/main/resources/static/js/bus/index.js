@@ -27,6 +27,9 @@ define(function(require, exports, module) {
 		        $('.js_modal_changePwd').toggle();
 		        $('.js_modal_mask').toggle();
 		    });
+		    $(".js_logout").click(function() {
+		    	window.location="/logout";
+		    });
 		    
 		    $(".icon-link").click(function(){
 		    	$('.js_modal_link').toggle();
