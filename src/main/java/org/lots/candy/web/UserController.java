@@ -76,7 +76,7 @@ public class UserController {
 		return "register";
 	}
 	
-	@RequestMapping(value="/uregister", method=RequestMethod.POST)
+	@RequestMapping(value="/register", method=RequestMethod.POST)
 	@ResponseBody
 	public String register(HttpServletRequest request){
 		String username = request.getParameter("username");
@@ -102,10 +102,11 @@ public class UserController {
 	}
 	
 	@RequestMapping("/activeUser")
-	public String updateUserStatus(HttpServletRequest request){
+	public String updateUserStatus(HttpServletRequest request, Model model){
 		String userId = request.getParameter("userId");
 		userMapper.updateUserStatus(userId);
-		return "login";
+		model.addAttribute("msg", "You complete email verification.");
+		return "msg";
 	}
 	
 	@RequestMapping("/resetPwd")
