@@ -1,5 +1,6 @@
 package org.lots.candy;
 import org.lots.candy.utils.LotsBot;
+import org.lots.candy.web.SendEmailUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -21,7 +22,6 @@ public class App
 		try {
 			botsApi.registerBot(bot);
 		} catch (TelegramApiRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -26,7 +26,7 @@ public class SendEmailUtils {
         try {  
             mimeMessage= javaMailSender.createMimeMessage();
             MimeMessageHelper helper=new MimeMessageHelper(mimeMessage,true);  
-            helper.setFrom(new InternetAddress(username,dName,"UTF-8")); 
+//            helper.setFrom(new InternetAddress(username,dName,"UTF-8")); 
             helper.setTo(email);
             title= titleWithName?title +"-"+dName:title;
             helper.setSubject(title);
@@ -35,10 +35,11 @@ public class SendEmailUtils {
   
             }  
             helper.setText(content,true);
+            javaMailSender.send(mimeMessage);
         }catch (Exception e){  
             e.printStackTrace();  
         }  
-            javaMailSender.send(mimeMessage);  
+             
     }  
   
   

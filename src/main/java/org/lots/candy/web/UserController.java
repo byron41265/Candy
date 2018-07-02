@@ -38,7 +38,7 @@ public class UserController {
 	public String initlogin(HttpSession session){
 		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
 		if (user != null){
-			return "redirect:/index";
+			return "redirect:/";
 		}
 		return "login";
 	}
@@ -61,11 +61,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
-	
 	public String register(HttpServletRequest request, Model model){
 		String inviteCode = request.getParameter("inviteCode");
 		if(inviteCode!=null){
-			model.addAttribute("inviteCode");
+			model.addAttribute("inviteCode", inviteCode);
 		}
 		return "register";
 	}
