@@ -120,9 +120,9 @@ $.widget( "ui.form", {
 
 
 
-
+				var resetform;
 				if($.isFunction(action.processResult)){
-					action.processResult.call(this, result, textStatus, jqXHR);
+					resetform = action.processResult.call(this, result, textStatus, jqXHR);
 				}
 
 				if($.isFunction(action.afterProcessResult)) {
@@ -130,8 +130,9 @@ $.widget( "ui.form", {
 				}
 
 				// reset all the input
-
-				$("[type='text'], [type='password'], [type='file'], textarea", form).val("");
+				if(resetform ==null || resetform== false ){
+					$("[type='text'], [type='password'], [type='file'], textarea", form).val("");
+				}
 
 			};
 			action.error = function(jqXHR, textStatus, errorThrown){

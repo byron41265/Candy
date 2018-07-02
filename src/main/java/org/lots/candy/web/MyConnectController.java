@@ -88,7 +88,7 @@ public class MyConnectController extends ConnectController {
 		}
 		setNoCache(request);
 		model.addAttribute("providerId", providerId);
-		model.addAttribute("bindmsg", (flag)? providerId +" Bind Success" :  providerId +" Bind Failed");
+		model.addAttribute("flag", flag);
 		
 		return getViewPath()+ "connectAll";			
 	}

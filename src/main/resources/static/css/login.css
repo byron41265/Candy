@@ -145,11 +145,18 @@
     height: 20px;
 }
 
+.login-section .forget-section .remember .icon-check.needcheck {
+    background-image: url('../img/icon-error.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
 .login-section .forget-section .remember .icon-check.checked {
     background-image: url('../img/icon-right.png');
     background-size: 100%;
     background-repeat: no-repeat;
 }
+
 
 .login-section .forget-section .remember .read-link {
     color: #4575E6;
