@@ -38,6 +38,9 @@ public class UserController {
 	@Value("${spring.mail.url}")
 	private String emailUrl;
 	
+	@Value("${spring.mail.forget.url}")
+	private String forgetUrl;
+	
 	@RequestMapping(value="/login" , method=RequestMethod.GET)
 	public String initlogin(HttpSession session){
 		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
@@ -94,7 +97,7 @@ public class UserController {
 			return "inviteCodeError";
 		}
 		userMapper.save(userId, username, password, email, inviteCode, superInviteCode, status);
-		sendEmailUtils.sendRegisterUrl(email, emailUrl+userId);
+		sendEmailUtils.sendRegisterUrl(username, email, emailUrl+userId);
 		return "success";
 	}
 	
@@ -154,9 +157,40 @@ public class UserController {
 		return obj.toString();
 	}
 	
-	@RequestMapping("/getInfluenceReward")
-	public void getInfluenceReward(HttpSession session){
-		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
-		
+	@RequestMapping(value="/forgetPwd",method=RequestMethod.GET)
+	public String forgetPwd(){
+		return "forgetPwd";
+	}
+	
+	@RequestMapping(value="/sendForgetEmail", method=RequestMethod.POST)
+	@ResponseBody
+	public String sendForgetEmail(HttpServletRequest request){
+		String email = request.getParameter("email");
+		User user = userMapper.findUserByElement("email", email);
+		String username = user.getUsername();
+		String userId = user.getUserId();
+		sendEmailUtils.sendRestUrl(username, email, forgetUrl+userId);
+		return "success";
+	}
+	
+	@RequestMapping(value="/resetPage",method=RequestMethod.GET)
+	public String enterReset(Model model, HttpServletRequest request){
+		String userId = request.getParameter("userId");
+		model.addAttribute("userId", userId);
+		return "resetPwd";
+	}
+	
+	@RequestMapping(value="/resetPwd",method=RequestMethod.POST)
+	@ResponseBody
+	public String resetPwd(HttpServletRequest request){
+		String password = request.getParameter("password");
+		String pwdAgain = request.getParameter("pwdAgain");
+		String userId = request.getParameter("userId");
+		if(!password.equals(pwdAgain)){
+			return "equalError";
+		}else{
+			userMapper.resetPassword(userId, password);
+			return "success";
+		}
 	}
 }

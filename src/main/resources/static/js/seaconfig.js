@@ -12,6 +12,8 @@ seajs.config({
 		'index': 'bus/index',
 		'login':  'bus/login',
 		'register': 'bus/register',
+		'forgetPwd': 'bus/forgetPwd',
+		'resetPwd': 'bus/resetPwd',
 	},
 	preload:[
 	    'jquery'

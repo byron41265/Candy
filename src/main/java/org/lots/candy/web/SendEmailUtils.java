@@ -44,9 +44,9 @@ public class SendEmailUtils {
   
   
  
-    public  void  sendRegisterUrl(String email, String url){  
+    public  void  sendRegisterUrl(String username,String email, String url){  
           final StringBuffer sb= new StringBuffer();
-          sb.append("<h2>"+email+",Hello！<h2>")  
+          sb.append("<h2>"+username+",Hello！<h2>")  
                   .append("<p style='color:red'>Click on the link to activate the user：</p>")
                   	.append("<a href="+url+">Click here</a>")	;  
           new Thread(new Runnable(){
@@ -57,6 +57,20 @@ public class SendEmailUtils {
 			}
           }).start();;
     }  
+    
+    public void sendRestUrl(String username,String email, String url){
+    	final StringBuffer sb = new StringBuffer();
+    	sb.append("<h2>"+username+",Hello！<h2>")
+    		.append("<p style='color:red'>Click on the link to reset your password：</p>")
+    		.append("<a href="+url+">Click here</a>");
+    	new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				sendNormalEmail("resetPassword", true, sb.toString(), true, email);
+			}
+          }).start();;
+    }
   
 
 }  
