@@ -30,6 +30,18 @@ define(function(require, exports, module) {
 		    $(".js_logout").click(function() {
 		    	window.location="/logout";
 		    });
+		    $(".side_menu").children().each(function(){
+		    	$(this).click(function(){
+		    		$(this).addClass("active").siblings().removeClass("active");
+		    		if($.trim($(this).text())=="Lots Credit"){
+		    			$('.credit_table').show();
+		    			$('.reward_table').hide();
+		    		}else{
+		    			$('.credit_table').hide();
+		    			$('.reward_table').show();
+		    		}
+		    	});
+		    });
 		    
 		    $(".icon-link").click(function(){
 		    	$('.js_modal_link').toggle();
