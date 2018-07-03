@@ -185,9 +185,22 @@ create table telegram_invite(
 
 ALTER TABLE telegram_invite add primary key (fromUserId, invitedUserId);
 
+drop table influence_point;
+
+create table influence_point(
+	`level`	int,
+	`levelName` varchar(50),
+	`point`	int,
+	`rate`	float
+) ENGINE=MYISAM;
 
 
-
-
-
-
+insert into influence_point values('1','First dimension','5','0.85');
+insert into influence_point values('2','Second dimension','3','0.64');
+insert into influence_point values('3','Third dimension','1','0.51');
+insert into influence_point values('4','Fourth dimension','1','0.45');
+insert into influence_point values('5','Fifth dimension','1','0.32');
+insert into influence_point values('6','Sixth dimension','1','0.28');
+insert into influence_point values('7','Seventh dimension','1','0.20');
+insert into influence_point values('8','Eighth dimension','1','0.15');
+commit;

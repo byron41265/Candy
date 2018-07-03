@@ -248,126 +248,18 @@
                         	</tr>
                         </thead>
                         <tbody>
-                        	<tr>
-                        		<td>
-                        			First dimension
-                        		</td>
-                        		<td>
-                        		</td>
-                        		<td>
-                        			5
-                        		</td>
-                        		<td>
-                        			85%
-                        		</td>
-                        		<td>
-                        		</td>
-                        	</tr>
-                        	<tr>
-                        		<td>
-                        			Second dimension
-                        		</td>
-                        		<td>
-                        		</td>
-                        		<td>
-                        			3
-                        		</td>
-                        		<td>
-                        			64%
-                        		</td>
-                        		<td>
-                        		</td>
-                        	</tr>
-                        	<tr>
-                        		<td>
-                        			Third dimension
-                        		</td>
-                        		<td>
-                        		</td>
-                        		<td>
-                        			1
-                        		</td>
-                        		<td>
-                        			51%
-                        		</td>
-                        		<td>
-                        		</td>
-                        	</tr>
-                        	<tr>
-                        		<td>
-                        			Fourth dimension
-                        		</td>
-                        		<td>
-                        		</td>
-                        		<td>
-                        			1
-                        		</td>
-                        		<td>
-                        			45%
-                        		</td>
-                        		<td>
-                        		</td>
-                        	</tr>
-                        	<tr>
-                        		<td>
-                        			Fifth dimension
-                        		</td>
-                        		<td>
-                        		</td>
-                        		<td>
-                        			1
-                        		</td>
-                        		<td>
-                        			32%
-                        		</td>
-                        		<td>
-                        		</td>
-                        	</tr>
-                        	<tr>
-                        		<td>
-                        			Sixth dimension
-                        		</td>
-                        		<td>
-                        		</td>
-                        		<td>
-                        			1
-                        		</td>
-                        		<td>
-                        			28%
-                        		</td>
-                        		<td>
-                        		</td>
-                        	</tr>
-                        	<tr>
-                        		<td>
-                        			Seventh dimension
-                        		</td>
-                        		<td>
-                        		</td>
-                        		<td>
-                        			1
-                        		</td>
-                        		<td>
-                        			20%
-                        		</td>
-                        		<td>
-                        		</td>
-                        	</tr>
-                        	<tr>
-                        		<td>
-                        			Eighth dimension
-                        		</td>
-                        		<td>
-                        		</td>
-                        		<td>
-                        			1
-                        		</td>
-                        		<td>
-                        			15%
-                        		</td>
-                        		<td>
-                        		</td>
-                        	</tr>
+                        	[#if pointList??]
+                        		[#list pointList as map]
+                        			<tr>
+                        				<td>${map["levelName"]}</td>
+                        				<td>${map["people"]}</td>
+                        				<td>${map["point"]}</td>
+                        				<td>${map["rate"]}</td>
+                        				<td>${map["reward"]}</td>
+                        			</tr>
+                        		[/#list]
+                        	[/#if]
+                        	
                         </tbody>
                     </table>
                 </div>

@@ -83,6 +83,10 @@ public class UserController {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		String superInviteCode = request.getParameter("inviteCode");
+		int count = userMapper.findCodeTotalNum("superInviteCode");
+		if(count>=20){
+			return "outError";
+		}
 		if(superInviteCode==null){
 			superInviteCode="";
 		}
