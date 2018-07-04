@@ -4,10 +4,8 @@ seajs.config({
 		'bus': 'bus',
 	},
 	alias: {
-		'jquery': 'lib/jquery.min.js',
-		'jquery-core': 'lib/jquery.ui.core.js',
-		'jquery-widget': 'lib/jquery.ui.widget.js',
-		'jquery-form': 'lib/jquery.ui.form.js',
+		'jquery': 'lib/lib.min.js',
+		
 		
 		'index': 'bus/index',
 		'login':  'bus/login',

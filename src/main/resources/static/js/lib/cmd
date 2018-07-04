@@ -1,0 +1,1 @@
+uglifyjs jquery.min.js jquery.ui.core.js jquery.ui.widget.js jquery.ui.form.js -o lib.min.js --source-map "root='https://candy.lots.org/js/lib',url='lib.min.js.map'"   -m reserved=['$','require','exports'] --wrap --export-all

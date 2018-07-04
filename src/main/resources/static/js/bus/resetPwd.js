@@ -1,7 +1,6 @@
 define(function(require, exports, module) {
   // 模块代码
 	var $ = require("jquery");
-	require("jquery-form");
 	
 	module.exports= {
 		init: function(){
