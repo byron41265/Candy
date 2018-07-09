@@ -95,12 +95,8 @@ define(function(require, exports, module) {
 					processResult: function(result){
 						if("success" == result){
 							self._closeModal();
-						}else if("againError" == result){
-							alert("Inconsistent input of new password twice");
-						}else if("sameError" == result){
-							alert("The new password is the same as the old password");
 						}else{
-							alert("The original password was entered incorrectly");
+							$.message('danger',result);
 						}
 					}
 				}

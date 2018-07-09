@@ -2237,5 +2237,27 @@ $.widget( "ui.datagrid",{
 
 })(jQuery);
 
-
+(function( $ , undefined) {
+	$.extend({
+		message:function (type,text) {
+			var t="",i="";
+			switch(type){
+			case 'default' :t="notification"; i= 'info-circle'; break;
+			case 'warning' :t="warning"; i='exclamation-triangle'; break;
+			case 'danger'  :t="error"; i='times-circle'; break;
+			case 'success' :t="success"; i='check-circle'; break;
+			case 'info'    :t="information"; i='info-circle'; break;
+			}
+			return noty({
+				text	: '<i class="fa fa-'+i+'"></i>'+text,
+				type	: t,
+				dismissQueue: true,
+				killer	: true,
+				timeout : 3000,
+				layout	: 'center',
+				theme	: 'bootstrapTheme',
+			});
+		}
+	});
+})(jQuery);
 

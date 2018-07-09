@@ -61,9 +61,9 @@ public class UserController {
 			session.setAttribute(Constant.USER_SESSION_NAME, user);
 			return "success";
 		}else if(user!=null&&user.getStatus().equals("0")){
-			return "inactive";
+			return "This user has not activated";
 		}else{
-			return  "error";
+			return  "Email or password is error";
 		}
 	}
 	
@@ -84,8 +84,9 @@ public class UserController {
 		String email = request.getParameter("email");
 		String superInviteCode = request.getParameter("inviteCode");
 		int count = userMapper.findCodeTotalNum("superInviteCode");
+		String message = null;
 		if(count>=20){
-			return "outError";
+			message = "The invitation code has been used more than 20 times and can no longer be used";
 		}
 		if(superInviteCode==null){
 			superInviteCode="";
@@ -94,15 +95,17 @@ public class UserController {
 		String inviteCode = UUID.randomUUID().toString().replace("-", "").toUpperCase();
 		String status = "0";
 		if(userMapper.findUserByElement("username", username)!=null){
-			return "nameError";
+			message = "Username already exists";
 		}else if(userMapper.findUserByElement("email", email)!=null){
-			return "emailError";
+			message = "Email has been registered";
 		}else if(superInviteCode!=null&&!superInviteCode.equals("")&&userMapper.findInviteCode(superInviteCode)==0){
-			return "inviteCodeError";
+			message = "The invitation code does not exist";
+		}else{
+			userMapper.save(userId, username, password, email, inviteCode, superInviteCode, status);
+			sendEmailUtils.sendRegisterUrl(username, email, emailUrl+userId);
+			message = "success";
 		}
-		userMapper.save(userId, username, password, email, inviteCode, superInviteCode, status);
-		sendEmailUtils.sendRegisterUrl(username, email, emailUrl+userId);
-		return "success";
+		return message;
 	}
 	
 	@RequestMapping("/activeUser")
@@ -113,24 +116,26 @@ public class UserController {
 		return "msg";
 	}
 	
-	@RequestMapping("/resetPwd")
+	@RequestMapping("/resetPassword")
 	@ResponseBody
-	public String resetPwd(HttpServletRequest request, HttpSession session){
+	public String resetPassword(HttpServletRequest request, HttpSession session){
 		String old_pwd = request.getParameter("old_pwd");
 		String new_pwd = request.getParameter("new_pwd");
 		String new_pwd_again = request.getParameter("new_pwd_again");
 		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
 		String userId = user.getUserId();
+		String message = null;
 		if(!new_pwd.equals(new_pwd_again)){
-			return "againError";
+			message = "Inconsistent input of new password twice";
 		}else if(new_pwd.equals(old_pwd)){
-			return "sameError";
+			message = "The new password is the same as the old password";
 		}else if(userMapper.findUserByEmailAndPwd(user.getEmail(), old_pwd) == null){
-			return "pwdError";
+			message = "The original password was entered incorrectly";
 		}else{
 			userMapper.resetPassword(userId, new_pwd);
-			return "success";
+			message = "success";
 		}
+		return message;
 	}
 	
 	@RequestMapping(value="/addWallet", method=RequestMethod.POST)
@@ -143,24 +148,7 @@ public class UserController {
 		return "success";
 	}
 	
-	@RequestMapping(value="/logincheck", produces="application/json;charset=UTF-8")
-	@ResponseBody
-	public String logincheck(Model model,HttpServletRequest request, HttpSession session) throws JSONException{
-		JSONObject obj = new JSONObject();
-		String errInfo = "";
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		User user = userMapper.findUserByEmailAndPwd(email, password);
-		if(user!=null){			
-			session.setAttribute(Constant.USER_SESSION_NAME, user);
-			errInfo = "success";
-		}else{
-			errInfo = "uerror";
-		}
-		obj.put("result", errInfo);
-//		obj.put("user", user);
-		return obj.toString();
-	}
+
 	
 	@RequestMapping(value="/forgetPwd",method=RequestMethod.GET)
 	public String forgetPwd(){

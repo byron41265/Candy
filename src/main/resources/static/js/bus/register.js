@@ -26,14 +26,8 @@ define(function(require, exports, module) {
 						if("success" == result){
 							alert("Please finish check you email to finish registration.");
 							window.location ="/login";
-						}else if("nameError" == result){
-							alert("Username already exists.");
-						}else if("emailError" == result){
-							alert("Email has been registered.")
-						}else if("outError" == result){
-							alert("The invitation code has been used more than 20 times and can no longer be used");
 						}else{
-							alert("The invitation code does not exist")
+							$.message('danger',result);
 						}
 						return true;
 					}

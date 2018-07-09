@@ -17,7 +17,7 @@ define(function(require, exports, module) {
 						if("success" == result){
 							window.location ="/";
 						}else{
-							alert("email or password is wrong");
+							$.message('danger',result);
 							return true;
 						}
 						

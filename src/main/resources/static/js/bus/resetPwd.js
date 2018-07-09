@@ -13,7 +13,7 @@ define(function(require, exports, module) {
 						if("success" == result){
 							window.location ="/login";
 						}else{
-							alert("Inconsistent password entered twice");
+							$.message('danger',"Inconsistent password entered twice");
 						}
 						
 					}
