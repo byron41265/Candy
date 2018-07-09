@@ -60,7 +60,7 @@ public class SendEmailUtils {
     
     public void sendRestUrl(String username,String email, String url){
     	final StringBuffer sb = new StringBuffer();
-    	sb.append("<h2>"+username+",Hello！<h2>")
+    	sb.append("<h2> Hello @"+username+" ！<h2>")
     		.append("<p style='color:red'>Click on the link to reset your password：</p>")
     		.append("<a href="+url+">Click here</a>");
     	new Thread(new Runnable(){
