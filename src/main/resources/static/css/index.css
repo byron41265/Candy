@@ -218,6 +218,7 @@
 
 .sidebar-item {
     padding-left: 26px;
+    cursor: pointer;
 }
 
 .sidebar-item>div {
@@ -587,6 +588,7 @@
     border-radius: 3px;
     display: inline-block;
     margin-right: 13px;
+    cursor: pointer;
 }
 
 .detail-container .detail-table tbody td:last-child {
