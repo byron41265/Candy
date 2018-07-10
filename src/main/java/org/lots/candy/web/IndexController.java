@@ -65,6 +65,8 @@ public class IndexController {
 		List<HashMap> pointList = this.getNextUserCount(user);
 		model.addAttribute("pointList", pointList);
 		
+		int earned_point = userMapper.getPointByUserId(user.getUserId());
+		model.addAttribute("earned_point",earned_point);
 		// 获取列表
 		List<Task> taskList = taskMapper.queryUserTask(user.getUserId());
 		model.addAttribute("taskList", taskList);

@@ -53,4 +53,6 @@ public interface UserMapper {
 	@Select("select * from influence_point order by level")
 	public List<HashMap> findInfluencePoint();
 	
+	@Select("select sum(earned_point) from action where userId=#{userId}")
+	public int getPointByUserId(@Param("userId") String userId);
 }
