@@ -55,6 +55,9 @@ public class UserController {
 	public String login(HttpServletRequest request, HttpSession session){
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		if((email==null||email.isEmpty())||(password==null||password.isEmpty())){
+			return "Please enter your username and password";
+		}
 		User user = userMapper.findUserByEmailAndPwd(email, password);
 		
 		if(user!=null&&user.getStatus().equals("1")){
