@@ -22,9 +22,6 @@ public interface UserMapper {
 	@Select("select * from user s where s.email = #{email} and s.password = md5(#{password}) and status='1'")
 	public User findUserByEmailAndPwd(@Param("email") String email, @Param("password") String password);
 	
-//	@Select("select * from user where email = #{email}")
-//	public User findUserByEmail(@Param("email") String email);
-//	
 	@Select("select * from user where ${column} = #{value} and status='1'")
 	public User findUserByElement(@Param("column") String column, @Param("value") String value);
 	
@@ -53,4 +50,38 @@ public interface UserMapper {
 	@Select("select * from influence_point order by level")
 	public List<HashMap> findInfluencePoint();
 	
+	@Select("select ifnull(sum(earned_point),0) from action where userId=#{userId}")
+	public int getPointByUserId(@Param("userId") String userId);
+	
+	@Select("select count(distinct a.user1) as num1, count(distinct a.user2) as num2, "
+			+ " count(distinct a.user3) as num3, count(distinct a.user4) as num4,"
+			+ " count(distinct a.user5) as num5, count(distinct a.user6) as num6,"
+			+ " count(distinct a.user7) as num7, count(distinct a.user8) as num8 from"
+			+ " (select t1.userId as user1,"
+			+ "t2.userId as user2,"
+			+ "t3.userId as user3,"
+			+ "t4.userId as user4,"
+			+ "t5.userId as user5,"
+			+ "t6.userId as user6,"
+			+ "t7.userId as user7,"
+			+ "t8.userId as user8"
+			+ " from user as t"
+			+ " left join user as t1"
+			+ " on t.inviteCode = t1.superInviteCode and t1.status='1'"
+			+ " left join user as t2"
+			+ " on t1.inviteCode = t2.superInviteCode and t2.status='1'"
+			+ " left join user as t3"
+			+ " on t2.inviteCode = t3.superInviteCode and t3.status='1'"
+			+ " left join user as t4"
+			+ " on t3.inviteCode = t4.superInviteCode and t4.status='1'"
+			+ " left join user as t5"
+			+ " on t4.inviteCode = t5.superInviteCode and t5.status='1'"
+			+ " left join user as t6"
+			+ " on t5.inviteCode = t6.superInviteCode and t6.status='1'"
+			+ " left join user as t7"
+			+ " on t6.inviteCode = t7.superInviteCode and t7.status='1'"
+			+ " left join user as t8"
+			+ " on t7.inviteCode = t8.superInviteCode and t8.status='1'"
+			+ " where t.userId = #{userId}) a")
+	public HashMap findInfluencePeople(@Param("userId") String userId);
 }
