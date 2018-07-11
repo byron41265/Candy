@@ -183,7 +183,7 @@
 							[#if taskList?? ]
 								[#list taskList as task]
 			                        <tr>
-										<td>${task.name}</td>
+										<td><p>${task.name}</p><a class="row-rules js_showRules"  href="#"  data-id="${task.taskId}" data-name="${task.name}">Rules</a></td>
 										<td>${task.eachPoint}</td>
 										<td>${task.dailyPointLimit}</td>
 										<td>${task.pointLimit}</td>
@@ -195,7 +195,7 @@
 											Task is finished.
 										[#else]
 											[#-- Bind Twitter --]
-											[#if task.taskId == '1' ||  task.taskId == '7' || task.taskId == '8' ]
+											[#if task.taskId == '1' ||  task.taskId == '7' || task.taskId == '8' || task.taskId == '10' || task.taskId == '11']
 												${task.instruction}
 											[#elseif task.taskId == '2']	
 												Go to <a href="https://twitter.com/LotsOrg"  target="_blank"  style="color:#0E5ACE;">Follow us</a>. We will confirm it later.
@@ -325,8 +325,47 @@
         	</div>
         	<p class="modal-row-title">https://candy.lots.org/register?inviteCode=${user.inviteCode}</p>
         </div>
+        <div class="modal  modal-rules js_modal_rules">
+            <p class="modal-title">Rules</p>
+            <div class="modal-row">
+                <p class="modal-row-title">&nbsp;</p>
+                <div class="modal-row-content">&nbsp;</div>
+            </div>
+            <div class="btn-submit ">Close<span class="icon-close"></span></div>
+        </div>
     <div class="overlay-mask js_mask"></div>
     <div class="overlay-mask modal-mask js_modal_mask"></div>
+    <div id="js_hidden_rule" style="display:none;">
+    	<div class="task-1">Please bind two or more social media to gain your first points.</div>
+    	<div class="task-2">Please follow Official Twitter.</div>
+    	<div class="task-3">
+    		LOTS's team will raise a trendy topic in our official Twitter account on the same day as every bounty period begins . 
+    		To participate, you only need to retweet our original tweet and includes LotsPlatform, LOTS's name or logo.
+    		LOTS's team will review every participant's retweets to compute your points.
+    		Please ensure the link is submitted by the same Twitter account which was binded with us. If not, unfortunately , we may not able to compute your points
+    	</div>
+    	<div class="task-4"></div>
+    	<div class="task-5">
+    		Write an original post about LOTS and post it to the following social media platforms: Medium, FACEBOOK,weibo，Steemit，BitcoinTalk ，weixin moments or your own blog. 
+    		ALL posts must be current! Posting about past news will not be approved.
+    		Post must be at least 50 words,For a post to be counted, it needs to be tagged with relevant categories such as Blockchain, Ethereum, Technology, crypto, etc.
+    		Post with a link of LOTS official website, or a current picture from LOTS official social media platforms , or with a picture with LOTS logo and “LOTS PLATFORM” will gain a big plus for you.
+    		Please submit the valid link of your content. We'll allocate rewards to you proportionally based on the content's quality, page views, comments, and influence, to name just a few. 
+    	</div>
+    	<div class="task-6">
+    		Write an original post about LOTS and post it to the following social media platforms: Medium, FACEBOOK,weibo，Steemit，BitcoinTalk ，weixin moments or your own blog. 
+    		ALL posts must be current! Posting about past news will not be approved.
+    		Post must be at least 50 words,For a post to be counted, it needs to be tagged with relevant categories such as Blockchain, Ethereum, Technology, crypto, etc.
+    		Post with a link of LOTS official website, or a current picture from LOTS official social media platforms , or with a picture with LOTS logo and “LOTS PLATFORM” will gain a big plus for you.
+    		Please submit the valid link of your content. We'll allocate rewards to you proportionally based on the content's quality, page views, comments, and influence, to name just a few.
+    	</div>
+    	<div class="task-7">Please bind two or more social media to gain your first points.</div>
+    	<div class="task-8">Please bind two or more social media to gain your first points.</div>
+    	<div class="task-9">Please invite you friends to Telegram group. We will annouce different types of events and news in our telegram group.</div>
+    	<div class="task-10">We will held quiz event in our telegram group. You can participate our event.</div>
+    	<div class="task-11">Please submit bug report to support@lots.org.Please infer you username , register email.  </div>
+    </div>
+    
 </body>
 <script src="js/sea.js"></script>
 <script src="js/seaconfig.js"></script>

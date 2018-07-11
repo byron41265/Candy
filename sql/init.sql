@@ -99,6 +99,12 @@ INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimi
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
  VALUES ('9', 'Please invite you friends to Telegram group', '5', '500', '50', '', 'N', 'Y', '1', 8);     
  
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
+ VALUES ('10', 'Please answer quiz in Telegram group', '50', '500', '500', 'Please follow our official telegram group, we will held quiz events periodically.', 'N', 'Y', '1', 9);      
+ 
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`)
+ VALUES ('11', 'Please find bug for our product', '100', '1000', '500', 'Please submit bug report to support@lots.org.', 'N', 'Y', '1', 10);     
+ 
  commit;
  
 drop table user_task;
@@ -204,3 +210,14 @@ insert into influence_point values('6','Sixth dimension','1','0.28');
 insert into influence_point values('7','Seventh dimension','1','0.20');
 insert into influence_point values('8','Eighth dimension','1','0.15');
 commit;
+
+drop table user_ip;
+
+create table user_ip(
+	userId varchar(100),
+    ip varchar(100),
+    `port` int,
+    `host`  varchar(100),
+    op varchar(100),
+    opdate datetime default NOW()
+);

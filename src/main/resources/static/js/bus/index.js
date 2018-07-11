@@ -16,18 +16,27 @@ define(function(require, exports, module) {
 		    $(".js_showUserFloat").click(function() {
 		        $('.js_userFloat').toggle();
 		    });
-		    $(".js_showBindWallet").click(function() {
-		        $('.js_modal_bindWallet').toggle();
-		        $('.js_modal_mask').toggle();
-		    });
-		    $(".js_showChangePwd").click(function() {
-		        $('.js_modal_changePwd').toggle();
-		        $('.js_modal_mask').toggle();
-		    });
+		    
 		    $(".js_logout").click(function() {
 		    	window.location="/logout";
 		    });
-		    $(".side_menu").children().each(function(){
+		    
+		    $(".icon-link").click(function(){
+		    	$('.js_modal_link').toggle();
+		    	$('.js_modal_mask').toggle();
+		    });
+		    
+		    $(".js_modal_mask").click(function() {
+		        self._closeModal();
+		    });		    
+		    self._initSwitch();
+		    self._initTask();
+		    self._initPwd();
+		    self._initWallet();
+		    self._initRule();
+		},
+		_initSwitch: function(){
+			$(".side_menu").children().each(function(){
 		    	$(this).click(function(){
 		    		$(this).addClass("active").siblings().removeClass("active");
 		    		if($.trim($(this).text())=="Lots Credit"){
@@ -39,19 +48,6 @@ define(function(require, exports, module) {
 		    		}
 		    	});
 		    });
-		    
-		    $(".icon-link").click(function(){
-		    	$('.js_modal_link').toggle();
-		    	$('.js_modal_mask').toggle();
-		    });
-		    
-		    $(".js_modal_mask").click(function() {
-		        self._closeModal();
-		    });		    
-		    
-		    self._initTask();
-		    self._initPwd();
-		    self._initWallet();
 		},
 		_closeModal: function(){
 			$(".modal").hide();
@@ -85,9 +81,29 @@ define(function(require, exports, module) {
 			});
 			
 		},
-		
+		_initRule: function(){
+			var self = this;
+			$(".js_showRules").click(function() {
+				var id = $(this).attr("data-id");
+				var name = $(this).attr("data-name");
+				$('.js_modal_rules .modal-row-title').html(name);
+				$('.js_modal_rules .modal-row-content').html($("#js_hidden_rule .task-"+id).html());
+				
+		        $('.js_modal_rules').toggle();
+		        $('.js_modal_mask').toggle();
+		    });
+		    $(".js_modal_rules .btn-submit ").click(function(){
+		    	self._closeModal();
+		    });
+		    
+		},
 		_initPwd: function(){
 			var self = this;
+			$(".js_showBindWallet").click(function() {
+		        $('.js_modal_bindWallet').toggle();
+		        $('.js_modal_mask').toggle();
+		    });
+			
 			$(".js_modal_changePwd form").form({
 				validate: true,
 				action: {
@@ -103,6 +119,11 @@ define(function(require, exports, module) {
 		},
 		_initWallet: function(){
 			var self = this;
+			$(".js_showChangePwd").click(function() {
+		        $('.js_modal_changePwd').toggle();
+		        $('.js_modal_mask').toggle();
+		    });
+			
 			$(".js_modal_bindWallet form").form({
 				validate: true,
 				action: {

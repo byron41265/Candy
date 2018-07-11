@@ -62,12 +62,36 @@ public class UserController {
 		
 		if(user!=null&&user.getStatus().equals("1")){
 			session.setAttribute(Constant.USER_SESSION_NAME, user);
+			
+			logUserIpInfo(user.getUserId(), "login", request);
 			return "success";
 		}else if(user!=null&&user.getStatus().equals("0")){
 			return "This user has not activated";
 		}else{
 			return  "Email or password is error";
 		}
+	}
+	
+	private void logUserIpInfo(String userId, String op , HttpServletRequest request) {
+		String ip = request.getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0
+				|| "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0
+				|| "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0
+				|| "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		ip = ip.equals("0:0:0:0:0:0:0:1")?"127.0.0.1":ip;
+		String host = request.getRemoteHost();
+	      int port = request.getRemotePort();
+	      
+	      userMapper.logUserIp(userId,ip,port,host,op);
+	      
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
@@ -106,6 +130,7 @@ public class UserController {
 		}else{
 			userMapper.save(userId, username, password, email, inviteCode, superInviteCode, status);
 			sendEmailUtils.sendRegisterUrl(username, email, emailUrl+userId);
+			logUserIpInfo(userId, "register", request);
 			message = "success";
 		}
 		return message;

@@ -84,4 +84,8 @@ public interface UserMapper {
 			+ " on t7.inviteCode = t8.superInviteCode and t8.status='1'"
 			+ " where t.userId = #{userId}) a")
 	public HashMap findInfluencePeople(@Param("userId") String userId);
+	
+	@Insert("INSERT INTO `user_ip`(`userId`,`ip`,`port`,`host`,`op`) VALUES(#{userId},#{ip},#{port},#{host},#{op})")
+	public void logUserIp(@Param("userId")String userid , @Param("ip")String ip, @Param("port")int port , @Param("host")String host, @Param("op")String op);
+	
 }
