@@ -202,7 +202,8 @@
                         </thead>
                         <tr>
                             <td>
-                                Please bind Telegram
+                                <p>Please bind Telegram</p>
+                                <a  class="row-rules js_showRules" href="#">Rules</a>
                             </td>
                             <td>
                                 +5
@@ -222,7 +223,8 @@
                         </tr>
                         <tr>
                             <td>
-                                Please bind Telegram
+                                <p>Please bind Telegram</p>
+                                <a  class="row-rules js_showRules" href="#">Rules</a>
                             </td>
                             <td>
                                 +5
@@ -280,6 +282,16 @@
             </div>
             <div class="btn-submit">Submit<span class="arrow-right"></span></div>
         </div>
+        <!-- modal rules -->
+        <div class="modal  modal-rules js_modal_rules">
+            <p class="modal-title">rules</p>
+            <div class="modal-row">
+                <p class="modal-row-title">Please bind Telegram</p>
+                <div class="modal-row-content">LOTS's team will raise a trendy topic in our official Twitter account on the same day as every bounty period begins . To participate, you only need to publish an original tweet and includes LotsPlatform, LOTS's name or logo. You can create and manage content accordingly.
+LOTS's team will raise a trendy topic in our official Twitter account on the same day as every bounty period begins . To participate, you only need to publish an original tweet andLOTS's team will raise a trendy topic in our official Twitter account on the same day as every bounty period begins . To participate, you only need to publish an original tweet and includes LotsPlatform</div>
+            </div>
+            <div class="btn-submit ">Close<span class="icon-close"></span></div>
+        </div>
     <div class="overlay-mask js_mask"></div>
     <div class="overlay-mask modal-mask js_modal_mask"></div>
 </body>
@@ -309,12 +321,19 @@ $(document).ready(function() {
         $('.js_modal_completeTask').toggle();
         $('.js_modal_mask').toggle();
     })
+    $(".js_showRules").click(function() {
+        $('.js_modal_rules').toggle();
+        $('.js_modal_mask').toggle();
+    })
     $(".js_modal_mask").click(function() {
         $('.js_modal_changePwd').hide();
         $('.js_modal_bindWallet').hide();
         $('.js_modal_completeTask').hide();
+        $('.js_modal_rules').hide();
         $(this).hide();
     })
+
+    
 })
 </script>
 
