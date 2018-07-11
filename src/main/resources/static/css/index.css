@@ -158,9 +158,9 @@
 
 .navbar .navbar-user .user-float .icon-logout:before {
     content: '';
-    width: 30px;
-    height: 25px;
-    background-image: url('../img/icon-j.png');
+    width: 21px;
+    height: 15px;
+    background-image: url('../img/logout.png');
     background-size: 100%;
     background-repeat: no-repeat;
     display: inline-block;
