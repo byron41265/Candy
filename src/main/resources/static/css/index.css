@@ -675,6 +675,17 @@
     margin-bottom: 10px;
 }
 
+.modal .modal-row .modal-row-input {
+    font-size: 14px;
+    color: #525A71;
+    height: 48px;
+    background-color: #F8F9FC;
+    width: 100%;
+    border: 1px solid #ECEEF3;
+    padding: 0 18px;
+    box-sizing: border-box;
+}
+
 .modal.modal-rules {
     padding: 22px 80px 35px 80px;
     width: 636px;
@@ -701,7 +712,8 @@
     box-sizing: border-box;
     padding: 18px;
 }
- .modal .icon-close {
+
+.modal .icon-close {
     background-image: url('../img/icon-close.png');
     background-size: 100%;
     background-repeat: no-repeat;
@@ -712,6 +724,7 @@
     top: 2px;
     margin-left: 3px;
 }
+
 .modal.modal-rules .btn-submit {
     margin: 32px auto 0 auto;
 }
@@ -1002,7 +1015,7 @@
         width: auto;
         margin: 0 34px;
         padding: 30px;
-         }
+    }
     .modal.modal-rules .modal-title {
         margin-bottom: 24px;
     }
@@ -1016,6 +1029,6 @@
         padding: 10px;
     }
     .modal.modal-rules .btn-submit {
-    margin: 24px auto 0 auto;
-}
+        margin: 24px auto 0 auto;
+    }
 }
