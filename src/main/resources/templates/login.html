@@ -40,7 +40,9 @@
 	                        <input class="input required" type="password" id="password" name="password" maxlength="30" />
 	                    </div>
 	                </div>
-	              
+	                <div class="wrap">
+	                	<div class="g-recaptcha" data-sitekey="6Lf5aWQUAAAAAIRrpVuxU0Ecc6l7zJe7tYWcZVdE"></div>
+	                </div>
 	                <div class="forget-section">
 	                    <!-- 不选中去掉checked，选中加上checked样式 -->
 	                    <div class="remember"><span class="icon-check js_checkRem"></span><span>Remember me</span></div>
@@ -63,6 +65,7 @@
 </body>
 <script src="js/sea.js"></script>
 <script src="js/seaconfig.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <script type="text/javascript">
 	seajs.use(['jquery', 'login'], function($, main){
 		$(document).ready(function() {

@@ -54,9 +54,11 @@ public class UserController {
 	
 	@RequestMapping(value="/login" , method=RequestMethod.POST)
 	@ResponseBody
-	public String login(HttpServletRequest request, HttpSession session){
+	public String login(HttpServletRequest request, HttpSession session) throws IOException{
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 		if((email==null||email.isEmpty())||(password==null||password.isEmpty())){
 			return "Please enter your username and password";
 		}
@@ -69,6 +71,8 @@ public class UserController {
 			return "success";
 		}else if(user!=null&&user.getStatus().equals("0")){
 			return "This user has not activated";
+		}else if(!verify){
+			return "Verification code error";
 		}else{
 			return  "Email or password is error";
 		}
