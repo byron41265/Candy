@@ -11,6 +11,7 @@ import org.lots.candy.domain.UserMapper;
 import org.lots.candy.entity.TaskEnum;
 import org.lots.candy.entity.User;
 import org.lots.candy.utils.FacebookHelper;
+import org.lots.candy.utils.LinkedinHelper;
 import org.lots.candy.utils.TwitterHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
@@ -20,6 +21,7 @@ import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,6 +55,9 @@ public class MyConnectController extends ConnectController {
 	@Autowired
 	private FacebookHelper facebookHelper;
 	
+	@Autowired
+	private LinkedinHelper linkedinHelper;
+	
 	
 
 	public MyConnectController(ConnectionFactoryLocator connectionFactoryLocator, ConnectionRepository connectionRepository) {
@@ -83,6 +88,13 @@ public class MyConnectController extends ConnectController {
 			if(connection != null){
 				Facebook facebook = connection.getApi();
 				facebookHelper.saveFacebookUser(userId, facebook);
+				flag = true;
+			}
+		}else if ("linkedin".equals(providerId)){
+			Connection<LinkedIn> connection = connectionRepository.findPrimaryConnection(LinkedIn.class);
+			if(connection != null){
+				LinkedIn linkedin = connection.getApi();
+				linkedinHelper.saveLinkedinUser(userId, linkedin);
 				flag = true;
 			}
 		}
