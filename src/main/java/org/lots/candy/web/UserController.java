@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.IOException;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import org.json.JSONObject;
 import org.lots.candy.config.Constant;
 import org.lots.candy.domain.UserMapper;
 import org.lots.candy.entity.User;
+import org.lots.candy.utils.VerifyRecaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.connect.ConnectionRepository;
@@ -81,9 +83,11 @@ public class UserController {
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	@ResponseBody
-	public String register(HttpServletRequest request){
+	public String register(HttpServletRequest request) throws IOException{
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 		String email = request.getParameter("email");
 		String superInviteCode = request.getParameter("inviteCode");
 		int count = userMapper.findCodeTotalNum("superInviteCode");
@@ -103,6 +107,8 @@ public class UserController {
 			message = "Email has been registered";
 		}else if(superInviteCode!=null&&!superInviteCode.equals("")&&userMapper.findInviteCode(superInviteCode)==0){
 			message = "The invitation code does not exist";
+		}else if(!verify){
+			message = "Verification code error";
 		}else{
 			userMapper.save(userId, username, password, email, inviteCode, superInviteCode, status);
 			sendEmailUtils.sendRegisterUrl(username, email, emailUrl+userId);
