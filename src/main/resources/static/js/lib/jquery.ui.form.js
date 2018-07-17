@@ -273,7 +273,7 @@ $.widget( "ui.validate", {
 					}
 					
 				}
-			}
+			},
 
 			// http://docs.jquery.com/Plugins/Validation/Methods/url
 			url: {
