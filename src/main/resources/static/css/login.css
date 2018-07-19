@@ -42,8 +42,8 @@
     font-size: 17px;
     color: #A4ADB7;
     line-height: 25px;
-    margin-top: 24px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .right-container .txt-3.mobile-show {
@@ -120,11 +120,11 @@
 }
 
 .login-section .wrap + .wrap {
-    margin-top: 35px;
+    margin-top: 20px;
 }
 
 .login-section .forget-section {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .login-section .forget-section .remember {
@@ -177,7 +177,7 @@
     height: 47px;
     line-height: 47px;
     border-radius: 3px;
-    margin-top: 45px;
+    margin-top: 35px;
     display:block;
 }
 
