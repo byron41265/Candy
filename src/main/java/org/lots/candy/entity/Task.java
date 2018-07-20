@@ -19,6 +19,8 @@ public class Task {
 	private String ifClosed;
 	
 	private String checkMethod;
+	
+	private String typeId;
 
 	public String getTaskId() {
 		return taskId;
@@ -92,7 +94,13 @@ public class Task {
 	public void setCheckMethod(String checkMethod) {
 		this.checkMethod = checkMethod;
 	}
-	
-	
+
+	public String getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
+	}
 
 }

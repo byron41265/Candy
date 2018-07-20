@@ -9,6 +9,7 @@ public class User {
 	private String email;
 	private String twitterAccount;
 	private String facebookAccount;
+	private String telegramAccount;
 	private String inviteCode;
 	private String superInviteCode;
 	private String status;
@@ -69,6 +70,14 @@ public class User {
 		this.facebookAccount = facebookAccount;
 	}
 	
+	public String getTelegramAccount() {
+		return telegramAccount;
+	}
+
+	public void setTelegramAccount(String telegramAccount) {
+		this.telegramAccount = telegramAccount;
+	}
+
 	public String getInviteCode(){
 		return inviteCode;
 	}

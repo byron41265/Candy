@@ -16,6 +16,7 @@ import org.lots.candy.domain.TwitterMapper;
 import org.lots.candy.domain.UserMapper;
 import org.lots.candy.entity.Dict;
 import org.lots.candy.entity.Task;
+import org.lots.candy.entity.TaskType;
 import org.lots.candy.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
@@ -66,12 +67,17 @@ public class IndexController {
 		List<HashMap> pointList = this.getNextUserCount(user);
 		model.addAttribute("pointList", pointList);
 		
+		// TO XUYUAN : 请加一块根据userid 再查一次用户信息，我需要取到当前用户最新的bindaccount的情况，用于逻辑判断
+		
 		int earned_point = userMapper.getPointByUserId(user.getUserId());
 		model.addAttribute("earned_point",earned_point);
 		// 获取列表
 		List<Task> taskList = taskMapper.queryUserTask(user.getUserId());
 		model.addAttribute("taskList", taskList);
 		
+		List<TaskType> taskTypeList = taskMapper.queryUserTaskType();
+		model.addAttribute("taskTypeList", taskTypeList);
+			
 		// 尚未转发的Tweet
 		String retweetId = twitterMapper.getLatestUnRetweet();
 		model.addAttribute("retweetId", retweetId);

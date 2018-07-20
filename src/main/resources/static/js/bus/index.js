@@ -29,26 +29,13 @@ define(function(require, exports, module) {
 		    $(".js_modal_mask").click(function() {
 		        self._closeModal();
 		    });		    
-		    self._initSwitch();
+		    
 		    self._initTask();
 		    self._initPwd();
 		    self._initWallet();
 		    self._initRule();
-		},
-		_initSwitch: function(){
-			$(".side_menu").children().each(function(){
-		    	$(this).click(function(){
-		    		$(this).addClass("active").siblings().removeClass("active");
-		    		if($.trim($(this).text())=="Lots Credit"){
-		    			$('.credit_table').show();
-		    			$('.reward_table').hide();
-		    		}else{
-		    			$('.credit_table').hide();
-		    			$('.reward_table').show();
-		    		}
-		    	});
-		    });
-		},
+		    self._initHighLight();
+		},		
 		_closeModal: function(){
 			$(".modal").hide();
 			$(".js_modal_mask").hide();
@@ -134,6 +121,27 @@ define(function(require, exports, module) {
 					}
 				}
 			});
+		},
+		_initHighLight: function(){
+			var self = this;
+			$(".sidebar-section .sidebar-item, .game-container .game-item").click(function(e){
+				var classes = $(this).attr("class");
+				classes && $.each(classes.split(' '), function() {
+					if (this.startsWith("item-")){
+						var type = this.substring("item-".length);
+						self.highLight(type);
+					}
+				});
+			});
+		},
+		highLight: function(type){
+			//清理样式
+			$(".sidebar-section .sidebar-item").removeClass("active");
+			$(".sidebar-section .sidebar-item.item-"+type).addClass("active");
+			
+			$(".credit_table .taskitem").removeClass("highlight");
+			$(".credit_table .taskitem.taskType-"+type).addClass("highlight");
+			
 		}
 	}
 
