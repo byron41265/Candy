@@ -46,9 +46,11 @@ public class SendEmailUtils {
  
     public  void  sendRegisterUrl(String username,String email, String url){  
           final StringBuffer sb= new StringBuffer();
-          sb.append("<h2>"+username+",Hello！<h2>")  
-                  .append("<p style='color:red'>Click on the link to activate the user：</p>")
-                  	.append("<a href="+url+">Click here</a>")	;  
+          sb.append("<h2> Hello @"+username+" ！<h2>")  
+                  .append("<p style='font-size:80%'>Welcome to Lots, please click on the link to activate your account：</p>")
+                  	.append("<a href="+url+">Click here</a>")
+                  	.append("<hr style='height:1px;border:none;border-top:1px solid #555555;' />")
+                  	.append("<p style='font-size:80%'>You’re receiving this email because you recently created a new Lots account. If this wasn’t you, please ignore this email.</p>");  
           new Thread(new Runnable(){
 
 			@Override
@@ -61,8 +63,10 @@ public class SendEmailUtils {
     public void sendRestUrl(String username,String email, String url){
     	final StringBuffer sb = new StringBuffer();
     	sb.append("<h2> Hello @"+username+" ！<h2>")
-    		.append("<p style='color:red'>Click on the link to reset your password：</p>")
-    		.append("<a href="+url+">Click here</a>");
+    		.append("<p style='font-size:80%'>You are modifying your account password.If you are sure you want to modify,click on the link to reset your password：</p>")
+    		.append("<a href="+url+">Click here</a>")
+    		.append("<hr style='height:1px;border:none;border-top:1px solid #555555;' />")
+    		.append("<p style='font-size:80%'>You’re receiving this email because you recently reset your password. If this wasn’t you, please ignore this email.</p>");
     	new Thread(new Runnable(){
 
 			@Override
