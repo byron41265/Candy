@@ -65,7 +65,7 @@ public class UserController {
 		User user = userMapper.findUserByEmailAndPwd(email, password);
 		
 		if(user!=null&&user.getStatus().equals("1")){
-			session.setAttribute(Constant.USER_SESSION_NAME, user);
+			session.setAttribute(Constant.USER_SESSION_NAME, user.getUserId());
 			
 			logUserIpInfo(user.getUserId(), "login", request);
 			return "success";
@@ -160,8 +160,8 @@ public class UserController {
 		String old_pwd = request.getParameter("old_pwd");
 		String new_pwd = request.getParameter("new_pwd");
 		String new_pwd_again = request.getParameter("new_pwd_again");
-		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
-		String userId = user.getUserId();
+		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
+		User user = userMapper.findUserByElement("userId", userId);
 		String message = null;
 		if(!new_pwd.equals(new_pwd_again)){
 			message = "Inconsistent input of new password twice";

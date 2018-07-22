@@ -63,16 +63,17 @@ public class IndexController {
 		
 		
 		// 正文开始
-		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
+		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
+		User user = userMapper.findUserByElement("userId", userId);
 		List<HashMap> pointList = this.getNextUserCount(user);
 		model.addAttribute("pointList", pointList);
 		
 		// TO XUYUAN : 请加一块根据userid 再查一次用户信息，我需要取到当前用户最新的bindaccount的情况，用于逻辑判断
 		
-		int earned_point = userMapper.getPointByUserId(user.getUserId());
+		int earned_point = userMapper.getPointByUserId(userId);
 		model.addAttribute("earned_point",earned_point);
 		// 获取列表
-		List<Task> taskList = taskMapper.queryUserTask(user.getUserId());
+		List<Task> taskList = taskMapper.queryUserTask(userId);
 		model.addAttribute("taskList", taskList);
 		
 		List<TaskType> taskTypeList = taskMapper.queryUserTaskType();
