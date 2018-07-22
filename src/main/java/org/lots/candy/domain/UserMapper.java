@@ -44,7 +44,7 @@ public interface UserMapper {
 	@Select("select * from user where superInviteCode=#{inviteCode} and status='1'")
 	public List<User> findUserBySuperInviteCode(@Param("inviteCode") String inviteCode);
 	
-	@Select("select count(*) from user where superInviteCode=#{superInviteCode}")
+	@Select("select count(*) from user where superInviteCode=#{superInviteCode} and status='1'")
 	public int findCodeTotalNum(@Param("superInviteCode") String superInviteCode);
 	
 	@Select("select * from influence_point order by level")

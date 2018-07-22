@@ -65,8 +65,12 @@ public class IndexController {
 		// 正文开始
 		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
 		User user = userMapper.findUserByElement("userId", userId);
-		List<HashMap> pointList = this.getNextUserCount(user);
-		model.addAttribute("pointList", pointList);
+		// 获取邀请得分
+		int influencedPeople = userMapper.findCodeTotalNum(user.getInviteCode());
+		int influencedPoint = 5*influencedPeople;
+		taskMapper.insertTask(userId, "15", influencedPoint);
+//		List<HashMap> pointList = this.getNextUserCount(user);
+//		model.addAttribute("pointList", pointList);
 		
 		// TO XUYUAN : 请加一块根据userid 再查一次用户信息，我需要取到当前用户最新的bindaccount的情况，用于逻辑判断
 		// 获取个人得分
