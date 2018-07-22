@@ -27,4 +27,7 @@ from action a where a.if_effective ='Y' group by a.userId, a.taskId, DATE_FORMAT
 )  a join task t on a.taskId = t.taskId) f group by f.userId, f.taskId , f.pointLimit;
 
 
+-- 更新排名
+update user us,(select @rownum:=@rownum+1 rownum, ifnull(sum(t.earnedPoint),0) sumPoint, t.userId from (select @rownum:=0) r, user_task t group by t.userId order by sumPoint desc) tm
+	set us.rank=tm.rownum where us.userId=tm.userId;
 
