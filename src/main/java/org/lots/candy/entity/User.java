@@ -13,6 +13,7 @@ public class User {
 	private String inviteCode;
 	private String superInviteCode;
 	private String status;
+	private int rank;
 
 	public String getUserId() {
 		return userId;
@@ -102,6 +103,12 @@ public class User {
 		this.status = status;
 	}
 	 
+	public int getRank(){
+		return rank;
+	}
 	
+	public void setRank(int rank){
+		this.rank = rank;
+	}
 
 }

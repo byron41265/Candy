@@ -49,7 +49,8 @@ create table user (
     telegramAccount varchar(100),
 	inviteCode varchar(512),
 	superInviteCode varchar(512),
-	status varchar(2)
+	status varchar(2),
+	`rank` int
 ) ENGINE=MYISAM;
 
 ALTER TABLE user add primary key (userId);
@@ -256,3 +257,16 @@ create table user_ip(
     op varchar(100),
     opdate datetime default NOW()
 );
+
+drop table rankTokens;
+create table rankTokens(
+	scoreLevel	int,	
+	tokens  int
+) ENGINE=MYISAM;
+insert into rankTokens values(0,0);
+insert into rankTokens values(1,100000);
+insert into rankTokens values(2,40000);
+insert into rankTokens values(3,20000);
+insert into rankTokens values(4,10000);
+insert into rankTokens values(5,4000);
+insert into rankTokens values(6,2000);

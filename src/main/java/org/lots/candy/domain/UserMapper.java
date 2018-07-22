@@ -50,8 +50,11 @@ public interface UserMapper {
 	@Select("select * from influence_point order by level")
 	public List<HashMap> findInfluencePoint();
 	
-	@Select("select ifnull(sum(earned_point),0) from action where userId=#{userId}")
+	@Select("select ifnull(sum(earnedPoint),0) from user_task where userId=#{userId}")
 	public int getPointByUserId(@Param("userId") String userId);
+	
+	@Select("select tokens from rankTokens where scoreLevel=#{scoreLevel}")
+	public int getRankTokens(@Param("scoreLevel") int scoreLevel);
 	
 	@Select("select count(distinct a.user1) as num1, count(distinct a.user2) as num2, "
 			+ " count(distinct a.user3) as num3, count(distinct a.user4) as num4,"

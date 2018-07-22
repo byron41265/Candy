@@ -69,9 +69,27 @@ public class IndexController {
 		model.addAttribute("pointList", pointList);
 		
 		// TO XUYUAN : 请加一块根据userid 再查一次用户信息，我需要取到当前用户最新的bindaccount的情况，用于逻辑判断
-		
+		// 获取个人得分
 		int earned_point = userMapper.getPointByUserId(userId);
 		model.addAttribute("earned_point",earned_point);
+		// 获取个人期望得分
+		int rank = user.getRank();
+		int scoreLevel =0;
+		if(rank==1){
+			scoreLevel = 1;
+		}else if(rank>=2&&rank<=4){
+			scoreLevel = 2;
+		}else if(rank>=5&&rank<=10){
+			scoreLevel = 3;
+		}else if(rank>=11&&rank<=20){
+			scoreLevel = 4;
+		}else if(rank>=21&&rank<=40){
+			scoreLevel = 5;
+		}else if(rank>=41&&rank<=100){
+			scoreLevel = 6;
+		}
+		int expected_reward = userMapper.getRankTokens(scoreLevel);
+		model.addAttribute("expected_reward", expected_reward);
 		// 获取列表
 		List<Task> taskList = taskMapper.queryUserTask(userId);
 		model.addAttribute("taskList", taskList);
