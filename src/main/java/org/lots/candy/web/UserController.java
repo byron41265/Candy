@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +47,9 @@ public class UserController {
 	@Value("${spring.mail.forget.url}")
 	private String forgetUrl;
 	
+	@Value("${spring.date}")
+	private String dateLimit;
+	
 	@RequestMapping(value="/login" , method=RequestMethod.GET)
 	public String initlogin(HttpSession session){
 		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
@@ -54,9 +61,15 @@ public class UserController {
 	
 	@RequestMapping(value="/login" , method=RequestMethod.POST)
 	@ResponseBody
-	public String login(HttpServletRequest request, HttpSession session) throws IOException{
+	public String login(HttpServletRequest request, HttpSession session) throws IOException,ParseException{
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+//		Date now = new Date();
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		Date dt = sdf.parse(dateLimit);
+//		if(now.before(dt)){
+//			return "";
+//		}
 		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
 		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 		if((email==null||email.isEmpty())||(password==null||password.isEmpty())){
@@ -127,6 +140,9 @@ public class UserController {
 			superInviteCode="";
 		}
 		String userId = UUID.randomUUID().toString().replace("-", "");
+		Integer a = (int)((Math.random()*9+1)*1000);
+		String b = a.toString();
+		String parameter = userId+b;
 		String inviteCode = UUID.randomUUID().toString().replace("-", "").toUpperCase();
 		String status = "0";
 		if(userMapper.findUserByElement("username", username)!=null){
@@ -139,7 +155,7 @@ public class UserController {
 			message = "Verification code error";
 		}else{
 			userMapper.save(userId, username, password, email, inviteCode, superInviteCode, status);
-			sendEmailUtils.sendRegisterUrl(username, email, emailUrl+userId);
+			sendEmailUtils.sendRegisterUrl(username, email, emailUrl+parameter);
 			logUserIpInfo(userId, "register", request);
 			message = "success";
 		}
@@ -148,7 +164,8 @@ public class UserController {
 	
 	@RequestMapping("/activeUser")
 	public String updateUserStatus(HttpServletRequest request, Model model){
-		String userId = request.getParameter("userId");
+		String parameter = request.getParameter("parameter");
+		String userId = parameter.substring(0, parameter.length()-4);
 		userMapper.updateUserStatus(userId);
 		userMapper.initUserTask(userId);
 		model.addAttribute("msg", "You complete email verification.");
@@ -201,23 +218,27 @@ public class UserController {
 		User user = userMapper.findUserByElement("email", email);
 		String username = user.getUsername();
 		String userId = user.getUserId();
-		sendEmailUtils.sendRestUrl(username, email, forgetUrl+userId);
+		Integer a = (int)((Math.random()*9+1)*1000);
+		String b = a.toString();
+		String parameter = userId+b;
+		sendEmailUtils.sendRestUrl(username, email, forgetUrl+parameter);
 		return "success";
 	}
 	
 	@RequestMapping(value="/resetPage",method=RequestMethod.GET)
 	public String enterReset(Model model, HttpServletRequest request){
-		String userId = request.getParameter("userId");
+		String parameter = request.getParameter("parameter");
+		String userId = parameter.substring(0, parameter.length()-4);
 		model.addAttribute("userId", userId);
 		return "resetPwd";
 	}
 	
 	@RequestMapping(value="/resetPwd",method=RequestMethod.POST)
 	@ResponseBody
-	public String resetPwd(HttpServletRequest request){
+	public String resetPwd(HttpServletRequest request, HttpSession session){
 		String password = request.getParameter("password");
 		String pwdAgain = request.getParameter("pwdAgain");
-		String userId = request.getParameter("userId");
+		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
 		if(!password.equals(pwdAgain)){
 			return "equalError";
 		}else{
