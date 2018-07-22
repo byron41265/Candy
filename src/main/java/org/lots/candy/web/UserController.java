@@ -150,6 +150,7 @@ public class UserController {
 	public String updateUserStatus(HttpServletRequest request, Model model){
 		String userId = request.getParameter("userId");
 		userMapper.updateUserStatus(userId);
+		userMapper.initUserTask(userId);
 		model.addAttribute("msg", "You complete email verification.");
 		return "msg";
 	}

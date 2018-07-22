@@ -53,6 +53,9 @@ public interface UserMapper {
 	@Select("select ifnull(sum(earnedPoint),0) from user_task where userId=#{userId}")
 	public int getPointByUserId(@Param("userId") String userId);
 	
+	@Insert("insert into user_task(userId, taskId)  select t1.userId, t2.taskId from user t1, task t2 where userId=#{userId}")
+	public void initUserTask(@Param("userId") String userId);
+	
 	@Select("select tokens from rankTokens where scoreLevel=#{scoreLevel}")
 	public int getRankTokens(@Param("scoreLevel") int scoreLevel);
 	
