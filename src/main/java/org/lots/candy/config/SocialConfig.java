@@ -38,8 +38,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
 		@Override
 		public String getUserId() {
 			RequestAttributes request = RequestContextHolder.currentRequestAttributes();
-			User user = (User) request.getAttribute(Constant.USER_SESSION_NAME,	RequestAttributes.SCOPE_SESSION);
-			String userid = user.getUserId();
+			String userid = (String) request.getAttribute(Constant.USER_SESSION_NAME,	RequestAttributes.SCOPE_SESSION);
 			if (userid == null) {
 				userid = UUID.randomUUID().toString();
 				request.setAttribute(Constant.USER_SESSION_NAME,	userid, RequestAttributes.SCOPE_SESSION);

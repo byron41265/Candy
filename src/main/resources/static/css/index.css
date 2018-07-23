@@ -507,6 +507,7 @@
     padding-left: 13px;
     box-sizing: border-box;
     position: relative;
+    cursor: pointer;
 }
 
 .game-container .game-item:nth-child(3n) {
@@ -549,7 +550,7 @@
     border-image: -moz-linear-gradient(right, #5959FB, #2D9AFD) 0 0 0 30;
     /* Firefox 3.6 - 15 */
     border-image: linear-gradient(to right, #5959FB, #2D9AFD) 0 0 0 30;
-    /* 标准的语法 */
+    /* 鏍囧噯鐨勮娉� */
 }
 
 .game-container .game-item.item-b {
@@ -565,7 +566,7 @@
     border-image: -moz-linear-gradient(#FB83CB, #FE95AD) 0 0 0 30;
     /* Firefox 3.6 - 15 */
     border-image: linear-gradient(#FB83CB, #FE95AD) 0 0 0 30;
-    /* 标准的语法 */
+    /* 鏍囧噯鐨勮娉� */
 }
 
 .game-container .game-item.item-c {
@@ -581,7 +582,7 @@
     border-image: -moz-linear-gradient(#F6C59A, #F9968B) 0 0 0 30;
     /* Firefox 3.6 - 15 */
     border-image: linear-gradient(#F6C59A, #F9968B) 0 0 0 30;
-    /* 标准的语法 */
+    /* 鏍囧噯鐨勮娉� */
 }
 
 .game-container .game-item.item-d {
@@ -597,7 +598,7 @@
     border-image: -moz-linear-gradient(#7A74FF, #D7B4FE) 0 0 0 30;
     /* Firefox 3.6 - 15 */
     border-image: linear-gradient(#7A74FF, #D7B4FE) 0 0 0 30;
-    /* 标准的语法 */
+    /* 鏍囧噯鐨勮娉� */
 }
 
 .game-container .game-item.item-e {
@@ -897,7 +898,7 @@
 
 
 
-/* modified by xsm5202  Ôö¼ÓÐ£Ñé´íÎóÌáÊ¾ÐÅÏ¢,Óëlogin ÖØÓÃ*/
+/* modified by xsm5202  脭枚录脫脨拢脩茅麓铆脦贸脤谩脢戮脨脜脧垄,脫毛login 脰脴脫脙*/
 
 .input-wrap {
     position: relative;

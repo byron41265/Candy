@@ -47,13 +47,13 @@ public class UserController {
 	@Value("${spring.mail.forget.url}")
 	private String forgetUrl;
 	
-	@Value("${spring.date}")
-	private String dateLimit;
+//	@Value("${spring.date}")
+//	private String dateLimit;
 	
 	@RequestMapping(value="/login" , method=RequestMethod.GET)
 	public String initlogin(HttpSession session){
-		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
-		if (user != null){
+		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
+		if (userId != null && !"".equals(userId)){
 			return "redirect:/";
 		}
 		return "login";
@@ -198,8 +198,7 @@ public class UserController {
 	@ResponseBody
 	public String addWallet(HttpServletRequest request, HttpSession session){
 		String wallet = request.getParameter("wallet");
-		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
-		String userId = user.getUserId();
+		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
 		userMapper.addWallet(wallet, userId);
 		return "success";
 	}

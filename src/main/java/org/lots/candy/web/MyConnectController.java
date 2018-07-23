@@ -72,9 +72,7 @@ public class MyConnectController extends ConnectController {
 		setNoCache(request);
 		processFlash(request, model);
 		boolean flag = false;
-		User user = (User) request.getAttribute(Constant.USER_SESSION_NAME,	RequestAttributes.SCOPE_SESSION);
-		String userId = user.getUserId();
-		
+		String userId = (String) request.getAttribute(Constant.USER_SESSION_NAME,	RequestAttributes.SCOPE_SESSION);
 		
 		if("twitter".equals(providerId)){
 			Connection<Twitter> connection = connectionRepository.findPrimaryConnection(Twitter.class);

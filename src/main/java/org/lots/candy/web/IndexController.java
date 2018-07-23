@@ -53,15 +53,6 @@ public class IndexController {
 	@RequestMapping("/")
 	public String init(Model model, HttpSession session){
 		
-		// TO XUYUAN : 请将这段代码写入login 成功那段代码，这里仅做测试用，之后请帮忙删除
-		/*User user = new User();
-		user.setUserId("xsm");
-		user.setUsername("xsmxsm");
-		user.setEmail("binggouxsm@hotmail.com");
-		session.setAttribute(Constant.USER_SESSION_NAME, user);
-		*/
-		
-		
 		// 正文开始
 		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
 		User user = userMapper.findUserByElement("userId", userId);
@@ -131,9 +122,8 @@ public class IndexController {
 	@RequestMapping(value="/link",  method=RequestMethod.POST)
 	@ResponseBody
 	public String submitLink(HttpServletRequest request,HttpSession session){
-		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
-		
-		String userId = user.getUserId();
+		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
+
 		request.getParameterMap();
 		String link = request.getParameter("link");
 		String taskId = request.getParameter("taskId");
