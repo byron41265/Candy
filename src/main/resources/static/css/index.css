@@ -653,6 +653,8 @@
     width: 100%;
     background-color: #fff;
     text-align: left;
+    position: relative;
+    z-index: 5;
 }
 
 .detail-container .detail-table thead th {
@@ -708,17 +710,27 @@
 .detail-container .detail-table tbody td.red {
     color: #EA5454;
 }
-
-.detail-container .detail-table tbody tr.highlight {
+.detail-container .detail-table tr:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 87px;
+}
+.detail-container .detail-table tr.highlight {
     color: #FFFFFF !important;
+    position: relative;
+}
+
+.detail-container .detail-table tr.highlight:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 87px;
+    z-index: -1;
     background: -webkit-linear-gradient(left, rgba(89, 89, 251, 0.6), rgba(45, 154, 253, 0.6)) !important;
-    /* Safari 5.1 - 6.0 */
     background: -o-linear-gradient(right, rgba(89, 89, 251, 0.6), rgba(45, 154, 253, 0.6)) !important;
-    /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient(right, rgba(89, 89, 251, 0.6), rgba(45, 154, 253, 0.6)) !important;
-    /* Firefox 3.6 - 15 */
     background: linear-gradient(to right, rgba(89, 89, 251, 0.6), rgba(45, 154, 253, 0.6)) !important;
-    /* 标准的语法 */
 }
 
 .detail-container .detail-table tbody tr.highlight td .row-rules {
@@ -747,11 +759,11 @@
     margin-right: 5px;
 }
 
-.detail-container .detail-table tbody tr:nth-child(even) {
+.detail-container .detail-table tbody tr:nth-child(even):not(.highlight) {
     background: #fff;
 }
 
-.detail-container .detail-table tbody tr:nth-child(odd) {
+.detail-container .detail-table tbody tr:nth-child(odd):not(.highlight) {
     background: #F3F6F8;
 }
 
