@@ -131,9 +131,7 @@ public class IndexController {
 	@RequestMapping(value="/link",  method=RequestMethod.POST)
 	@ResponseBody
 	public String submitLink(HttpServletRequest request,HttpSession session){
-		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
-		
-		String userId = user.getUserId();
+		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
 		request.getParameterMap();
 		String link = request.getParameter("link");
 		String taskId = request.getParameter("taskId");

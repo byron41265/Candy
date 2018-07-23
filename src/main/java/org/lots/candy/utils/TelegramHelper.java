@@ -25,8 +25,7 @@ public class TelegramHelper {
 	
 	@RequestMapping("/tgauth")
 	public String auth(NativeWebRequest request, HttpSession session, Model model ){
-		User user= (User)session.getAttribute(Constant.USER_SESSION_NAME);
-		String userId = user.getUserId();
+		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
 		String tgId = request.getParameter("id");
 		String providerId = "telegram";
 		userMapper.updateAccount(userId, providerId, tgId);
