@@ -57,7 +57,7 @@ public class SendEmailUtils {
 			public void run() {
 				sendNormalEmail("Registration verification", true, sb.toString(), true, email);
 			}
-          }).start();;
+          }).start();
     }  
     
     public void sendRestUrl(String username,String email, String url){
@@ -73,7 +73,7 @@ public class SendEmailUtils {
 			public void run() {
 				sendNormalEmail("resetPassword", true, sb.toString(), true, email);
 			}
-          }).start();;
+          }).start();
     }
   
 
