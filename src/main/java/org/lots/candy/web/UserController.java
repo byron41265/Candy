@@ -47,8 +47,8 @@ public class UserController {
 	@Value("${spring.mail.forget.url}")
 	private String forgetUrl;
 	
-	@Value("${spring.date}")
-	private String dateLimit;
+//	@Value("${spring.date}")
+//	private String dateLimit;
 	
 	@RequestMapping(value="/login" , method=RequestMethod.GET)
 	public String initlogin(HttpSession session){
