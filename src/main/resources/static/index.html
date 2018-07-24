@@ -55,7 +55,7 @@
             <div class="sidebar-section active">
                 <p class="tl">Phase 1</p>
                 <ul>
-                    <li class="active">A.Binding</li>
+                    <li class="active" id="js_test">A.Binding</li>
                     <li class="active">B.Retweet</li>
                     <li class="active">C.Content</li>
                     <li class="active">D.Artistic</li>
@@ -211,7 +211,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tr class="highlight">
+                        <tr>
                             <td>
                                 <p>Please bind Telegram</p>
                                 <a  class="row-rules js_showRules" href="javascript:void(0);">Rules</a>
@@ -231,6 +231,132 @@
                             <td>
                                 We calculate the severity level according to theWe calculate the severity level according to the
                             </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Please bind Telegram</p>
+                                <a  class="row-rules js_showRules" href="javascript:void(0);">Rules</a>
+                            </td>
+                            <td>
+                                +5
+                            </td>
+                            <td>
+                                +5
+                            </td>
+                            <td>
+                                5
+                            </td>
+                            <td class="red">
+                                0
+                            </td>
+                            <td>
+                            <span class="btn-complete js_showCmpleteTask">Compele the task</span>@lots
+                            </td/>
+                        </tr>
+                        <tr class="highlight">
+                            <td>
+                                <p>Please bind Telegram</p>
+                                <a  class="row-rules js_showRules" href="javascript:void(0);">Rules</a>
+                            </td>
+                            <td>
+                                +5
+                            </td>
+                            <td>
+                                +5
+                            </td>
+                            <td>
+                                5
+                            </td>
+                            <td class="red">
+                                0
+                            </td>
+                            <td>
+                            <span class="btn-complete js_showCmpleteTask">Compele the task</span>@lots
+                            </td/>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Please bind Telegram</p>
+                                <a  class="row-rules js_showRules" href="javascript:void(0);">Rules</a>
+                            </td>
+                            <td>
+                                +5
+                            </td>
+                            <td>
+                                +5
+                            </td>
+                            <td>
+                                5
+                            </td>
+                            <td class="red">
+                                0
+                            </td>
+                            <td>
+                            <span class="btn-complete js_showCmpleteTask">Compele the task</span>@lots
+                            </td/>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Please bind Telegram</p>
+                                <a  class="row-rules js_showRules" href="javascript:void(0);">Rules</a>
+                            </td>
+                            <td>
+                                +5
+                            </td>
+                            <td>
+                                +5
+                            </td>
+                            <td>
+                                5
+                            </td>
+                            <td class="red">
+                                0
+                            </td>
+                            <td>
+                            <span class="btn-complete js_showCmpleteTask">Compele the task</span>@lots
+                            </td/>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Please bind Telegram</p>
+                                <a  class="row-rules js_showRules" href="javascript:void(0);">Rules</a>
+                            </td>
+                            <td>
+                                +5
+                            </td>
+                            <td>
+                                +5
+                            </td>
+                            <td>
+                                5
+                            </td>
+                            <td class="red">
+                                0
+                            </td>
+                            <td>
+                            <span class="btn-complete js_showCmpleteTask">Compele the task</span>@lots
+                            </td/>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Please bind Telegram</p>
+                                <a  class="row-rules js_showRules" href="javascript:void(0);">Rules</a>
+                            </td>
+                            <td>
+                                +5
+                            </td>
+                            <td>
+                                +5
+                            </td>
+                            <td>
+                                5
+                            </td>
+                            <td class="red">
+                                0
+                            </td>
+                            <td>
+                            <span class="btn-complete js_showCmpleteTask">Compele the task</span>@lots
+                            </td/>
                         </tr>
                         <tr>
                             <td>
@@ -430,6 +556,12 @@ $(document).ready(function() {
         $('.js_modal_completeTask').hide();
         $('.js_modal_rules').hide();
         $(this).hide();
+    })
+    $("#js_test").click(function() {
+        var top = $('.highlight:eq(0)').offset().top;
+        var clientHeight = $(window).height();
+        var halfClientHeight = (clientHeight / 2).toFixed(0);
+        window.scrollTo(0, top + 99 - halfClientHeight);
     })
 
     
