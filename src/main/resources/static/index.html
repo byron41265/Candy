@@ -558,10 +558,14 @@ $(document).ready(function() {
         $(this).hide();
     })
     $("#js_test").click(function() {
-        var top = $('.highlight:eq(0)').offset().top;
-        var clientHeight = $(window).height();
-        var halfClientHeight = (clientHeight / 2).toFixed(0);
-        window.scrollTo(0, top + 99 - halfClientHeight);
+        var dom = $('.highlight:eq(0)').offset();
+        if(dom) {
+            var top = dom.top;
+            var clientHeight = $(window).height();
+            var halfClientHeight = (clientHeight / 2).toFixed(0);
+            window.scrollTo(0, top + 99 - halfClientHeight);
+        }
+        
     })
 
     
