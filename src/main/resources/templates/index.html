@@ -132,18 +132,18 @@
             <div class="point-container">
                 <div class="point-item bg1">
                     <p class="point-txt1">${earned_point}</p>
-                    <p class="point-txt2">Earned point</p>
+                    <p class="point-txt2">Earned Point</p>
                 </div>
                 <div class="point-item bg2">
                     <p class="point-txt1">No. ${user.rank}</p>
-                    <p class="point-txt2">Point ranks</p>
+                    <p class="point-txt2">Point Ranking</p>
                 </div>
                 <div class="point-item bg3">
                     <p class="point-txt1">${expected_reward}</p>
-                    <p class="point-txt2">Expected reward</p>
+                    <p class="point-txt2">Expected Reward</p>
                 </div>
                 <div class="point-item bg4">
-                	<p class="point-item-rule">Ranking Reward Distribution rule</p>
+                	<!-- <p class="point-item-rule">Ranking Reward Distribution rule</p> -->
                     <p class="point-txt1">2,000,000 Lots</p>
                     <p class="point-txt2">Total Amout of Phase One</p>
                 </div>
@@ -210,7 +210,7 @@
 							[#if taskList?? ]
 								[#list taskList as task]
 			                        <tr class="taskitem taskType-${task.typeId?lower_case}">
-										<td><p>${task.name}</p><a class="row-rules js_showRules"  href="#"  data-id="${task.taskId}" data-name="${task.name}">Rules</a></td>
+										<td><p>${task.name}</p><a class="row-rules js_showRules"  href="javascript:;"  data-id="${task.taskId}" data-name="${task.name}">Rules</a></td>
 										<td>${task.eachPoint}</td>
 										<td>${task.dailyPointLimit}</td>
 										<td>${task.pointLimit}</td>

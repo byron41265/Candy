@@ -35,7 +35,7 @@ define(function(require, exports, module) {
 		    self._initWallet();
 		    self._initRule();
 		    self._initHighLight();
-		    self._initDisRule();
+		    //self._initDisRule();
 		    
 //		    setInterval(self, "_leftTimer", 20000,2018,8,14,0,0,0); 
 		    var sto = setInterval;
