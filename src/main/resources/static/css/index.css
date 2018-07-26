@@ -271,6 +271,10 @@
     cursor: pointer;
 }
 
+.sidebar-section li.active{
+	color:#0E5ACE;
+}
+
 .left-sidebar.mobile {
     display: none;
 }
@@ -854,6 +858,18 @@
     max-height: 248px;
     box-sizing: border-box;
     padding: 18px;
+}
+
+.modal.modal-rules .modal-row .modal-row-content ul li {
+	list-style: disc inside none;
+}
+.modal.modal-rules .modal-row  .icon.icon-link {
+    background-image: url('../img/link.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 14px;
+	height: 14px;
+	display: inline-block;
 }
 
 .modal.modal-rules.modal-dis-rule .modal-row .modal-row-title {

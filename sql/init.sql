@@ -71,7 +71,7 @@ INSERT INTO `task_type`(`typeId`,`fullname`,`shortname`) VALUES('B','Retweet Bou
 INSERT INTO `task_type`(`typeId`,`fullname`,`shortname`) VALUES('C','Content Creation Bounty','Content');
 INSERT INTO `task_type`(`typeId`,`fullname`,`shortname`) VALUES('D','Artistic Design Bounty','Artistic');
 INSERT INTO `task_type`(`typeId`,`fullname`,`shortname`) VALUES('E','Telegram Master Bounty','Telegram');
-INSERT INTO `task_type`(`typeId`,`fullname`,`shortname`) VALUES('F','Invite Your Friends','Inviting');
+INSERT INTO `task_type`(`typeId`,`fullname`,`shortname`) VALUES('F','Invite Your Friends','Invitation');
 
 commit;
 
@@ -81,6 +81,7 @@ create table task (
 	taskId varchar(100) not null,
     `name` varchar(100) not null, 
 	eachPoint int not null,
+    eachPoint1 int,
 	pointLimit int not null,
 	dailyPointLimit  int not null,
 	instruction varchar(2000),
@@ -96,49 +97,52 @@ create table task (
 ALTER TABLE task add primary key (taskId);
 
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
- VALUES ('1', 'Bind Twitter', '150', '150', '150', 'You didn\'t bind Twitter yet, please click the menubar icon of Twitter to bind.', 'N', 'Y', '1', 2, '1' , 'A');
+ VALUES ('1', 'Bind Our Twitter', '50', '50', '50', 'You have not associated your Twitter username with us yet, please click the icon of Twitter on the menubar to associate with it.', 'N', 'Y', '1', 2, '1' , 'A');
  
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
  VALUES ('2', 'Follow our Twitter', '50', '50', '50', '', 'N', 'Y', '1', 4 , '1' , 'B');
  
-INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
- VALUES ('3', 'RETWEET', '100', '900', '300', '', 'N', 'Y', '1', 5 , '1' , 'B');
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `eachPoint1`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
+ VALUES ('3', 'Retweet Star', '200', '1000', '5000', '1000', '', 'N', 'Y', '2', 5 , '1' , 'B');
   
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
  VALUES ('4', 'Please like Official Tweet', '1', '20', '20', '', 'N', 'N', '2', 3 , '1' , ''); 
  
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
- VALUES ('5', 'Blogs articles', '200', '1600', '400', '', 'N', 'Y', '2', 6 , '1' , 'C');  
+ VALUES ('5', 'Content Creation', '1000', '5000', '2000', '', 'N', 'Y', '2', 6 , '1' , 'C');  
 
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
- VALUES ('6', 'Youtube video', '800', '1600', '800', '', 'N', 'Y', '2', 7 , '1' , 'C');  
+ VALUES ('6', 'Video Creation', '1000', '5000', '2000', '', 'N', 'Y', '2', 7 , '1' , 'C');  
  
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
- VALUES ('7', 'Bind Facebook', '50', '50', '50', 'You didn\'t bind Facebook yet, please click the menubar icon of Facebook to bind.', 'N', 'Y', '1', 3 , '1' , 'A');   
+ VALUES ('7', 'Bind Our Facebook', '50', '50', '50', 'You didn\'t bind Facebook yet, please click the menubar icon of Facebook to bind.', 'N', 'Y', '1', 3 , '1' , 'A');   
  
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
- VALUES ('8', 'Bind Telegram', '50', '50', '50', 'You didn\'t bind Telegram yet, please click the menubar icon of Telegram to bind.', 'N', 'Y', '1', 1 , '1' , 'A');    
+ VALUES ('8', 'Bind Our Telegram', '50', '50', '50', 'You have not associated your Telegram username with us yet, please click the icon of Telegram on the menubar to associate with it.', 'N', 'Y', '1', 1 , '1' , 'A');    
  
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
- VALUES ('9', 'Telegram inviting', '50', '1000', '200', '', 'N', 'Y', '1', 11 , '1' , 'E');     
+ VALUES ('9', 'Telegram inviting', '50', '1000', '200', '', 'N', 'N', '1', 11 , '1' , 'E');     
  
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
- VALUES ('10', 'Quiz in telegram', '100', '1000', '300', 'Please follow our official telegram group, we will held quiz events periodically.', 'N', 'Y', '1', 12 , '1' , 'E');      
+ VALUES ('10', 'Telegram Star', '100', '1000', '200', 'Please follow our official telegram group, we will held quiz events periodically.', 'N', 'Y', '1', 12 , '1' , 'E');      
  
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
  VALUES ('11', 'Please find bug for our product', '100', '1000', '500', 'Please submit bug report to support@lots.org.', 'N', 'Y', '1', 10 , '2' , '');     
  
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
- VALUES ('12', 'Meme & Emoji Design', '500', '1000', '500', '', 'N', 'Y', '2', 8 , '1' , 'D');   
+ VALUES ('12', 'Meme & Emoji Design', '600', '1800', '600', '', 'N', 'Y', '2', 8 , '1' , 'D');   
  
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
- VALUES ('13', 'LOGO Filter Design', '500', '1000', '500', '', 'N', 'Y', '2', 9 , '1' , 'D');   
+ VALUES ('13', 'LOGO Filter Design', '600', '1800', '600', '', 'N', 'Y', '2', 9 , '1' , 'D');   
  
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
- VALUES ('14', 'Chinese name design', '1000', '1000', '100', '', 'N', 'Y', '2', 10 , '1' , 'D');   
+ VALUES ('14', 'Chinese name design', '1000', '1000', '100', '', 'N', 'N', '2', 10 , '1' , '');   
  
 INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
- VALUES ('15', 'Invite your friend to BTY', '50', '1000', '300', 'Please click the menubar icon of Link. Copy the url and send to your friend.', 'N', 'Y', '1', 13 , '1' , 'F');    
+ VALUES ('15', 'Wild Invitation', '50', '1000', '1000', 'Please invite your friends to LOTS Bounty Program.', 'N', 'Y', '1', 13 , '1' , 'F');   
+ 
+INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimit`, `instruction`, `ifClosed`, `ifEffective`, `checkMethod`, `rank`, `phase`, `typeId`)
+ VALUES ('16', 'Follow Our Telegram', '150', '150', '150', '', 'N', 'Y', '1', 11 , '1' , 'E');   
  
  
  commit;
