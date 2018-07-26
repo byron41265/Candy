@@ -13,7 +13,7 @@ import org.lots.candy.entity.TaskType;
 @Mapper
 public interface TaskMapper {
 
-	@Select("select t.taskId, name , eachPoint, pointLimit, dailyPointLimit, earnedPoint, instruction, ifclosed, checkmethod, typeId "
+	@Select("select t.taskId, name , eachPoint, eachPoint1,  pointLimit, dailyPointLimit, earnedPoint, instruction, ifclosed, checkmethod, typeId "
 			+ "from task t left join user_task a on a.taskId = t.taskId and a.userId =#{userId} where ifEffective ='Y' and phase = 1 order by `rank`")
 	public List<Task> queryUserTask(String userId);
 	

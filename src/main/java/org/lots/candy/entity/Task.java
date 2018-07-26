@@ -6,7 +6,9 @@ public class Task {
 	
 	private String name;
 	
-	private int eachPoint;
+	private Integer eachPoint;
+	
+	private Integer eachPoint1;
 	
 	private int pointLimit;
 	
@@ -37,13 +39,21 @@ public class Task {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getEachPoint() {
+	
+	public Integer getEachPoint() {
 		return eachPoint;
 	}
 
-	public void setEachPoint(int eachPoint) {
+	public void setEachPoint(Integer eachPoint) {
 		this.eachPoint = eachPoint;
+	}
+
+	public Integer getEachPoint1() {
+		return eachPoint1;
+	}
+
+	public void setEachPoint1(Integer eachPoint1) {
+		this.eachPoint1 = eachPoint1;
 	}
 
 	public int getPointLimit() {

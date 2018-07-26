@@ -211,7 +211,7 @@
 								[#list taskList as task]
 			                        <tr class="taskitem taskType-${task.typeId?lower_case}">
 										<td><p>${task.name}</p><a class="row-rules js_showRules"  href="javascript:;"  data-id="${task.taskId}" data-name="${task.name}">Rules</a></td>
-										<td>${task.eachPoint}</td>
+										<td>${task.eachPoint} [#if task.eachPoint1??]- ${task.eachPoint1}[/#if]</td>
 										<td>${task.dailyPointLimit}</td>
 										<td>${task.pointLimit}</td>
 										<td>${task.earnedPoint}</td>
@@ -251,7 +251,7 @@
 													 		<a href="${group.value}"  target="_blank"  style="color:#0E5ACE;">${group.desc}</a>
 													 	[/#list]
 													 [/#if]
-													 . We will confirm it later.
+													 . We will check and review it later.
 												[#else]
 													You have not associated your Telegram username with us yet, please click the icon of Telegram on the menubar to associate with it.
 												[/#if]
@@ -268,7 +268,6 @@
 													You have not associated your Telegram username with us yet, please click the icon of Telegram on the menubar to associate with it.
 												[/#if]
 											[/#if]
-												
 										[/#if]
 										</td>
 									</tr>

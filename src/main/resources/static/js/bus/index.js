@@ -130,6 +130,7 @@ define(function(require, exports, module) {
 					processResult: function(result){
 						if("success" == result){
 							self._closeModal();
+							return true;
 						}
 					}
 				}
@@ -146,6 +147,16 @@ define(function(require, exports, module) {
 					}
 				});
 			});
+			$(".detail-table tbody tr").click(function(e){
+				var classes = $(this).attr("class");
+				classes && $.each(classes.split(' '), function() {
+					if (this.startsWith("taskType-")){
+						var type = this.substring("taskType-".length);
+						self.highLight(type);
+					}
+				});
+			});
+			
 		},
 		highLight: function(type){
 			//清理样式
