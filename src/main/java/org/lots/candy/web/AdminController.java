@@ -20,7 +20,7 @@ public class AdminController {
 		session.setAttribute(Constant.USER_SESSION_NAME, usertt);
 		
 		// 正文开始
-		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
+		User user = (User)session.getAttribute(Constant.USER_SESSION_NAME);
 		
 		return "admin/index";
 	}

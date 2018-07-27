@@ -1,9 +1,487 @@
-<html>
-	<head>
-		<title>Hello Twitter</title>
-	</head>
-	<body>
-		<h2>${name} : twitter logined</h2>
-		<h2>You have ${friends}</h2>
-	</body>
+[#ftl]
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="icon" href="img/favicon.ico">
+    <title>LOTS</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/noty.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-mobile-nav js_showNav"></div>
+            <div class="navbar-logo"></div>
+            <div class="navbar-link">
+                <ul>
+                    <li class="link-item">
+                    	<form action="/connect/facebook" method="POST">
+                        	<button type="submit"  class="icon icon-facebook"></button>
+                        </form>
+                    </li>
+                    <li class="link-item">
+                    	<form action="/connect/twitter" method="POST">
+                        	<button type="submit"  class="icon icon-twitter"></button>
+                        </form>
+                    </li>
+                    <!-- 
+                    <li class="link-item">
+                        <a href="javascript:;" onclick="return TWidgetLogin.auth();" class="icon icon-tme"></a>
+                    </li> -->
+                    <li class="link-item">
+                        <script async src="https://telegram.org/js/telegram-widget.js?4" data-telegram-login="lotsglobal_bot" data-auth-url="/tgauth" data-userpic="false"  data-request-access="write"></script>
+                    </li>
+                    <!-- 
+                    <li class="link-item">
+                        <form action="/connect/linkedin" method="POST">
+                        	<button type="submit"  class="icon icon-ins"></button>
+                        </form>
+                    </li> -->
+                    <li class="link-item">
+                        <a href="javascript:;" class="icon icon-link"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-user js_showUserFloat">
+                <span class="name">${user.email}</span>
+                <span class="arrow-down"></span>
+                <div class="user-float js_userFloat">
+                    <p class="icon-change js_showChangePwd">change Password</p>
+                    <p class="icon-bind js_showBindWallet">Bind wallet</p>
+                    <p class="icon-logout js_logout">Logout</p>
+                </div>
+            </div>
+        </div>
+        <!-- PC -->
+        <div class="left-sidebar">
+            <div class="sidebar-section active">
+                <p class="tl">Phase 1</p>
+                [#if taskTypeList?? ]
+                	<ul>
+                		[#list taskTypeList as taskType]
+		                    <li class="sidebar-item item-${taskType.typeId?lower_case}">${taskType.typeId}.${taskType.shortname}</li>
+                    	[/#list]
+                	</ul>
+                [/#if]
+            </div>
+            <div class="sidebar-section disabled">
+                <p class="tl">Phase 2 (coming soon)</p>
+            </div>
+            <div class="sidebar-section disabled">
+                <p class="tl">Phase 3 (coming soon)</p>
+            </div>
+        </div>
+        <!-- mobile -->
+        <div class="left-sidebar mobile js_mobile_nav js_modal">
+            <div class="navbar-link">
+                <ul>
+                    <li class="link-item">
+                    	<form action="/connect/facebook" method="POST">
+                        	<button type="submit"  class="icon icon-facebook"></button>
+                        </form>
+                    </li>
+                    <li class="link-item">
+                    	<form action="/connect/twitter" method="POST">
+                        	<button type="submit"  class="icon icon-twitter"></button>
+                        </form>
+                    </li>
+                    <!-- 
+                    <li class="link-item">
+                        <a href="javascript:;" onclick="return TWidgetLogin.auth();" class="icon icon-tme"></a>
+                    </li> -->
+                    <li class="link-item">
+                        <script async src="https://telegram.org/js/telegram-widget.js?4" data-telegram-login="lotsglobal_bot" data-auth-url="/tgauth" data-userpic="false"  data-request-access="write"></script>
+                    </li>
+                    <!-- 
+                    <li class="link-item">
+                        <form action="/connect/linkedin" method="POST">
+                        	<button type="submit"  class="icon icon-ins"></button>
+                        </form>
+                    </li> -->
+                    <li class="link-item">
+                        <a href="javascript:;" class="icon icon-link"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="sidebar-section active">
+                <p class="tl">Phase 1</p>
+                [#if taskTypeList?? ]
+                	<ul>
+                		[#list taskTypeList as taskType]
+		                    <li class="sidebar-item item-${taskType.typeId?lower_case}">${taskType.typeId}.${taskType.shortname}</li>
+                    	[/#list]
+                	</ul>
+                [/#if]
+            </div>
+            <div class="sidebar-section disabled">
+                <p class="tl">Phase 2 (coming soon)</p>
+            </div>
+            <div class="sidebar-section disabled">
+                <p class="tl">Phase 3 (coming soon)</p>
+            </div>
+        </div>
+        <div class="content">
+            <div class="point-container">
+                <div class="point-item bg1">
+                    <p class="point-txt1">${earned_point}</p>
+                    <p class="point-txt2">Earned point</p>
+                </div>
+                <div class="point-item bg2">
+                    <p class="point-txt1">No. ${user.rank}</p>
+                    <p class="point-txt2">Point ranks</p>
+                </div>
+                <div class="point-item bg3">
+                    <p class="point-txt1">${expected_reward}</p>
+                    <p class="point-txt2">Expected reward</p>
+                </div>
+                <div class="point-item bg4">
+                	<p class="point-item-rule">Ranking Reward Distribution rule</p>
+                    <p class="point-txt1">2,000,000 Lots</p>
+                    <p class="point-txt2">Total Amout of Phase One</p>
+                </div>
+            </div>
+            <div class="greeting-container">
+                <p class="greeting-tl">Greetings from Lots</p>
+                <p class="greeting-content">We would like to thank everyone for your unwavering support. We aim to fundamentally transform the blockchain industry on a global scale. To further our efforts in enhancing our  global presence and operations and express our appreciation for your support, our team has decided to initiate the Bounty program.</p>
+                <p class="greeting-tl">Phase one count down</p>
+                <div class="count">
+                    <span class="box js_days">00</span>
+                    <span class="box sel js_hours">00</span>
+                    <span class="box sel js_mins">00</span>
+                    <span class="box js_secs" >00</span>
+                </div>
+            </div>
+            <div class="game-container">
+                <p class="title">Game classification</p>
+                <div class="game-wrap">
+                	[#if taskTypeList?? ]
+	                	[#list taskTypeList as taskType]
+			                    <div class="game-item item-${taskType.typeId?lower_case}">
+			                        <p class="t1">PROGRAM ${taskType.typeId}</p>
+			                        <p class="t2">${taskType.fullname}</p>
+			                        <p class="t3">${taskType.earnedPoint}</p>
+			                    </div>
+	                    [/#list]
+                    [/#if]
+                </div>
+            </div>
+            <div class="detail-container">
+                <p class="title">Point details</p>
+                <div class="table-scroll">
+                    <table class="detail-table credit_table">
+                    	<colgroup width="0%"></colgroup>
+                        <colgroup width="20%"></colgroup>
+                        <colgroup width="12%"></colgroup>
+                        <colgroup width="12%"></colgroup>
+                        <colgroup width="12%"></colgroup>
+                        <colgroup width="12%"></colgroup>
+                        <colgroup width="32%"></colgroup>
+                        <thead>
+                            <tr>
+                                <th>
+                                    Task information
+                                </th>
+                                <th>
+                                    Points
+                                </th>
+                                <th>
+                                    Daily point limit
+                                </th>
+                                <th>
+                                    Total point limit
+                                </th>
+                                <th>
+                                    Earned point
+                                </th>
+                                <th>
+                                    Instruction
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+							[#if taskList?? ]
+								[#list taskList as task]
+			                        <tr class="taskitem taskType-${task.typeId?lower_case}">
+										<td><p>${task.name}</p><a class="row-rules js_showRules"  href="#"  data-id="${task.taskId}" data-name="${task.name}">Rules</a></td>
+										<td>${task.eachPoint}</td>
+										<td>${task.dailyPointLimit}</td>
+										<td>${task.pointLimit}</td>
+										<td>${task.earnedPoint}</td>
+										<td>
+										[#if task.ifClosed == 'Y']
+											Task is closed.
+										[#elseif  task.earnedPoint == task.pointLimit]
+											Well done，you have finish this part.
+										[#else]
+											[#-- Bind Twitter --]
+											[#if task.taskId == '1' ||  task.taskId == '7' || task.taskId == '8' || task.taskId == '11' || task.taskId == '15']
+												${task.instruction}
+											[#elseif task.taskId == '2']	
+												[#if user.twitterAccount??]
+													Go to <a href="https://twitter.com/LotsOrg"  target="_blank"  style="color:#0E5ACE;">Follow us</a>. We will confirm it later.
+												[#else]
+													Please bind twitter first.
+												[/#if]
+											[#elseif task.taskId == '3']
+												[#if user.twitterAccount??]
+													[#if retweetId??]
+														Please retweet <a href="https://twitter.com/intent/retweet?tweet_id=${retweetId}"  target="_blank" style="color:#0E5ACE;">LOTS tweet</a>. We will confirm it later.
+													[#else]
+														Well done，you have finish this part. 
+													[/#if]
+												[#else]
+													Please bind twitter first.
+												[/#if]
+											[#elseif task.taskId == '5' || task.taskId == '6' || task.taskId == '12' || task.taskId == '13' || task.taskId == '14']
+												<span class="btn-complete js_showCmpleteTask" data-task="${task.taskId}">Submit Link</span>. We will confirm it later.	
+											[#elseif task.taskId == '9']
+												[#if user.telegramAccount??]
+													Invite you friend to
+													[#if groups?? ]
+														[#list groups as group]
+													 		<a href="${group.value}"  target="_blank"  style="color:#0E5ACE;">${group.desc}</a>
+													 	[/#list]
+													 [/#if]
+													 . We will confirm it later.
+												[#else]
+													Please bind telegram first.
+												[/#if]
+											[#elseif task.taskId == '10']
+												[#if user.telegramAccount??]
+													${task.instruction}
+												[#else]
+													Please bind telegram first.
+												[/#if]
+											[/#if]
+												
+										[/#if]
+										</td>
+									</tr>
+								[/#list]
+							[/#if]
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal 绑定钱包 -->
+        <div class="modal js_modal_bindWallet">
+          <form action="/addWallet">
+            <p class="modal-title">Bind wallet</p>
+            <div class="modal-row">
+                <p class="modal-row-title">Wallet address</p>
+                <div class="input-wrap">
+                	<input class="modal-row-input required" type="text" name="wallet" value="${user.wallet}"/>
+                </div>
+            </div>
+            <a href="#" class="btn-submit form-submit">Submit<span class="arrow-right"></span></a>
+          </form>
+        </div>
+    <!-- modal 修改密码 -->
+        <div class="modal js_modal_changePwd">
+          <form action="/resetPassword">
+            <p class="modal-title">Reset Password</p>
+            <div class="modal-row">
+                <p class="modal-row-title">Old password</p>
+                <div class="input-wrap">
+                	<input class="modal-row-input required" type="password" name="old_pwd"/>
+                </div>
+            </div>
+            <div class="modal-row">
+                <p class="modal-row-title">New password</p>
+                <div class="input-wrap">
+                	<input class="modal-row-input required password" type="password" name="new_pwd"/>
+                </div>
+            </div>
+            <div class="modal-row">
+                <p class="modal-row-title">Again password</p>
+                <div class="input-wrap">
+                	<input class="modal-row-input required password" type="password" name="new_pwd_again"/>
+                </div>
+            </div>
+            <a href="#" class="btn-submit form-submit">Submit<span class="arrow-right"></span></a>
+          </form>
+        </div>
+    <!-- modal complete task -->
+        <div class="modal js_modal_completeTask">
+        	<form action="/link">
+	            <p class="modal-title">Submit you link.</p>
+	            <div class="modal-row">
+	                <p class="modal-row-title">Link</p>
+	                <div class="input-wrap">
+	                	<input class="modal-row-input required url" type="text" name="link"/>
+	                </div>
+	                <input type="hidden" name="taskId"/>
+	            </div>
+	            <a href="#" class="btn-submit  form-submit" >Submit<span class="arrow-right"></span></a>
+            </form>
+        </div>
+        <div class="modal js_modal_link">
+        	<div class="modal-row">
+        		<p class="modal-row-title">Give the following invitation code to your friends：</p>        		
+        	</div>
+        	<p class="modal-row-title">https://candy.lots.org/register?inviteCode=${user.inviteCode}</p>
+        </div>
+        <div class="modal  modal-rules js_modal_rules">
+            <p class="modal-title">Rules</p>
+            <div class="modal-row">
+                <p class="modal-row-title">&nbsp;</p>
+                <div class="modal-row-content">&nbsp;</div>
+            </div>
+            <div class="btn-submit ">Close<span class="icon-close"></span></div>
+        </div>
+    <div class="overlay-mask js_mask"></div>
+    <div class="overlay-mask modal-mask js_modal_mask"></div>
+    <div id="js_hidden_rule" style="display:none;">
+    	<div class="task-1">Please bind your Twitter with us.</div>
+    	<div class="task-2">Please use your binded Twitter account follow our offical <a href="https://twitter.com/LotsOrg">Twitter</a>.</div>
+    	<div class="task-3">
+    		<p>1. LOTS's team will raise a trendy topic in our official Twitter account on the same day as every bounty period begins .</p> 
+    		<p>2. To participate, you only need to retweet our original tweet and includes LotsPlatform, LOTS's name or logo.</p> 
+    		<p>3. LOTS's team will review every participant's retweets to compute your points.</p> 
+    		<p>4. Please ensure the link is submitted by the same Twitter account which was binded with us. If not, unfortunately , we may not able to compute your points</p> 
+    	</div>
+    	<div class="task-4"></div>
+    	<div class="task-5">
+    		<p>1. Write an original post about LOTS and post it to the following social media platforms: Medium, FACEBOOK,weibo，Steemit，BitcoinTalk ，weixin moments or your own blog. </p> 
+    		<p>2. ALL posts must be current! Posting about past news will not be approved.</p> 
+    		<p>3. Post must be at least 50 words,For a post to be counted, it needs to be tagged with relevant categories such as Blockchain, Ethereum, Technology, crypto, etc.</p> 
+    		<p>4. Post with a link of LOTS official website, or a current picture from LOTS official social media platforms , or with a picture with LOTS logo and “LOTS PLATFORM” will gain a big plus for you.</p> 
+    		<p>5. Please submit the valid link of your content. We'll allocate rewards to you proportionally based on the content's quality, page views, comments, and influence, to name just a few. </p> 
+    	</div>
+    	<div class="task-6">
+    		<p>1. Post an interesting and informative video on your Youtube channel about LOTS: advantage, features and functionality of LOTS, etc. </p> 
+    		<p>2. Videos should contain human voice and clear “LOTS” text or LOTS logo，LOTS LAB or LOTS PLATFORM is allowed as well.</p> 
+    		<p>3. Video must be at least 1:00 minute long.</p> 
+    		<p>4. Video description must contain link to http://www.lots.org.</p> 
+    		<p>5. Designs must be original. If your work is found to be a complete copy or plagiarized (creative modification based on others is allowed), your account will be disqualified.</p> 
+    	</div>
+    	<div class="task-7">Please bind your Facebook with us.</div>
+    	<div class="task-8">Please bind your Telegram with us.</div>
+    	<div class="task-9">Please invite you friends to Telegram group. We will annouce different types of events and news in our telegram group.</div>
+    	<div class="task-10">We'll organize five quizzes every day in our LOTS global Telegram group everyday during Lots Bounty Program phase 1. The quiz begins when admin publishes a series of questions in the Telegram group, which members can answer. The time limit for answering is 5 minute. The first 50 members who answer correctly will receive rewards. </div>
+    	<div class="task-11">Please submit bug report to support@lots.org.Please infer you username , register email.  </div>
+    	<div class="task-12">
+    		<p>1. Please make interesting Meme & Emoji and sticker for us.</p>
+    		<p>2. Please create JPEGs or GIFs that can be used for Twitter, Telegram, and forums. </p>
+    		<p>3. Participants should upload their creative works by the link. We will review your submitted work. File Max size is 1m</p>
+    	</div>
+    	<div class="task-13">Please apply various filter effects and decorations to make LOTS logo unique! After completion, please upload your creative work with the link. We will review your submitted work.</div>
+    	<div class="task-14">Pls upload a Chinese name for Lots over here.</div>
+    	<div class="task-15">Please give your the invitation code to your friend. Ask your friend to use this code when signing up our bounty program.	</div>
+	</div>
+	<div class="modal  modal-rules modal-dis-rule">
+            <p class="modal-title">Rules</p>
+            <div class="modal-row">
+                <p class="modal-row-title">In order to encourage greater user participation, each qualified individual can be guaranteed to receive reward within each round of evaluation. In each round of bounty program, total prize pool is a set number of LOTS tokens. Participants who are before rank top 100 with the total points in each round will receive the corresponding bonus.</p>
+                <p class="modal-row-title">The remaining Participants will share all the remaining LOTS tokens which left in the prize pool according to the total points earned by each person in the round. The top 100 competitors will not participate in the equalization.</p>
+                <table class="modal-row-tb">
+                        <tr>
+                            <td>
+                                Rank
+                            </td>
+                            <td>
+                                Identity
+                            </td>
+                            <td>
+                                Rewards
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                1st Place
+                            </td>
+                            <td>
+                                LOTS ROYAL Ambassador
+                            </td>
+                            <td>
+                                100,000 LOTS Tokens
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                2nd-4th
+                            </td>
+                            <td>
+                                LOTS SPIRE Masters
+                            </td>
+                            <td>
+                                40,000 LOTS Tokens
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                5th-10th
+                            </td>
+                            <td>
+                                LOTS Masters
+                            </td>
+                            <td>
+                                20,000 LOTS Tokens
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                11th-20th
+                            </td>
+                            <td>
+                                LOTS Masters
+                            </td>
+                            <td>
+                                20,000 LOTS Tokens
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                21th-40th
+                            </td>
+                            <td>
+                                LOTS Elites
+                            </td>
+                            <td>
+                                4,000 LOTS Tokens
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                41th -100th
+                            </td>
+                            <td>
+                                LOTS Supporters
+                            </td>
+                            <td>
+                                2,000 LOTS Tokens
+                            </td>
+                        </tr>
+                        
+                    </table>
+            </div>
+            <div class="btn-submit ">Close<span class="icon-close"></span></div>
+        </div>
+    
+</body>
+<script src="js/sea.js"></script>
+<script src="js/seaconfig.js"></script>
+
+<!-- 
+<script src="js/widget-frame.js?17"></script>
+<script type="text/javascript">
+TWidgetLogin.init('widget_login', 573152760, {"origin":"https:\/\/candy.lots.org","request_access":"write"}, false); 
+</script>-->
+<script type="text/javascript">
+	seajs.use(['jquery', 'index'], function($, main){
+		$(document).ready(function() {
+			main.init();
+		  });
+	});
+</script>
+
 </html>

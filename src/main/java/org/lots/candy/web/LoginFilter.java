@@ -44,9 +44,12 @@ public class LoginFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) res;
 		String path = request.getRequestURI().substring(request.getContextPath().length())	.replaceAll("[/]+$", "");
 		HttpSession session = request.getSession(true);
-		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
 
-		if (userId!=null&&!userId.equals("")) {
+		Object userId = session.getAttribute(Constant.USER_SESSION_NAME);
+		
+
+		if (userId!=null) {
+
 			chain.doFilter(req, res);
 		} else if(ALLOWED_PATHS.matcher(path).matches()){
 			chain.doFilter(req, res);

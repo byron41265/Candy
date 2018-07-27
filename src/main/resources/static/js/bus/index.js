@@ -35,6 +35,19 @@ define(function(require, exports, module) {
 		    self._initWallet();
 		    self._initRule();
 		    self._initHighLight();
+		    self._initDisRule();
+		    
+//		    setInterval(self, "_leftTimer", 20000,2018,8,14,0,0,0); 
+		    var sto = setInterval;
+		    window.setInterval = function(callback,timeout,param){
+		        var args = Array.prototype.slice.call(arguments,2);
+		        var _cb = function(){
+		            callback.apply(self,args);
+		        };
+		        sto(_cb,timeout);
+		    };
+		    setInterval(self._leftTimer,1000,2018,8,14,0,0,0);
+		    
 		},		
 		_closeModal: function(){
 			$(".modal").hide();
@@ -142,7 +155,49 @@ define(function(require, exports, module) {
 			$(".credit_table .taskitem").removeClass("highlight");
 			$(".credit_table .taskitem.taskType-"+type).addClass("highlight");
 			
-		}
+		},
+		_initDisRule: function(){
+			var self = this;
+			$(".point-container .bg4").click(function(){
+				
+				$('.modal-dis-rule').toggle();
+				$('.js_modal_mask').toggle();
+			});
+			
+			 $(".modal-dis-rule .btn-submit ").click(function(){
+			    	self._closeModal();
+			 });
+		},
+		_leftTimer: function (year,month,day,hour,minute,second){ 
+			var leftTime = (new Date(year,month-1,day,hour,minute,second)) - (new Date()); //计算剩余的毫秒数 
+			var self = this;
+			if(leftTime <= 0){
+				$('.js_days').html('00');
+				$('.js_hours').html('00');
+				$('.js_mins').html('00');
+				$('.js_secs').html('00');
+				return;
+			}
+			var days = parseInt(leftTime / 1000 / 60 / 60 / 24 , 10); //计算剩余的天数 
+			var hours = parseInt(leftTime / 1000 / 60 / 60 % 24 , 10); //计算剩余的小时 
+			var minutes = parseInt(leftTime / 1000 / 60 % 60, 10);//计算剩余的分钟 
+			var seconds = parseInt(leftTime / 1000 % 60, 10);//计算剩余的秒数 
+			days = self.checkTime(days); 
+			hours = self.checkTime(hours); 
+			minutes = self.checkTime(minutes); 
+			seconds = self.checkTime(seconds); 
+			$('.js_days').html(days || '00');
+			$('.js_hours').html(hours || '00');
+			$('.js_mins').html(minutes || '00');
+			$('.js_secs').html(seconds || '00');
+		},
+		checkTime: function (i){ //将0-9的数字前面加上0，例1变为01 
+			if(i<10) 
+			{ 
+				i = "0" + i; 
+			} 
+			return i; 
+		} 
 	}
 
 });

@@ -53,7 +53,7 @@ public class UserController {
 	@RequestMapping(value="/login" , method=RequestMethod.GET)
 	public String initlogin(HttpSession session){
 		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
-		if (userId != null&&!userId.equals("")){
+		if (userId != null && !"".equals(userId)){
 			return "redirect:/";
 		}
 		return "login";

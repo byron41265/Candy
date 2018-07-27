@@ -1,55 +1,123 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <link rel="icon" href="img/favicon.ico">
-    <title>LOTS</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/rule.css">
+    <title>一个布局</title>
 </head>
+<style>
+/* To hide the overflow */
+.table-wrapper{
+    position: relative;
+    overflow: hidden;
+}
+
+tr{
+    position: relative;
+}
+
+/* Making the background with :before pseudo-element */
+
+tr:before
+{
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 20px;
+    z-index: -1;
+    background: -webkit-linear-gradient(left, rgba(255,0,0,0), rgba(255,0,0,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, rgba(255,0,0,0), rgba(255,0,0,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, rgba(255,0,0,0), rgba(255,0,0,1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); /* Standard syntax (must be last) */
+}
+
+tr:hover:before
+{
+    
+}
+</style>
 
 <body>
-    <div class="container">
-        <div class="navbar">
-            <div class="navbar-logo"></div>
-        </div>
-        <div class="title">LOTS-Bounty Token Distribution Rules</div>
-        <div class="content">
-            <div class="content-head">
-                <p>**LOTS-Bounty PROGRAM Terms and Conditions** IMPORTANT ANNOUNCEMENT!
-                </p>
-                <p>*** No member of LOTS team will ever, in any way, to any individual or institution, ask to receive the crypto address of said individual or institution, or ask to see identification or any other personal information, and will not, under any circumstances, ask anyone for the private key of their wallet***
-                </p>
-                <p>Phase 1 : From 12:00 (GMT+8) 2018. 07. 31 to 12:00 (GMT+8) 2018. 08. 06.</p>
-                <p>Age Restriction: 18 years of age or older</p>
-                <p>Citizens and long-term residents of the U.S., Syria, Sudan, Iran, Democratic People's Republic of Korea cannot participate in this event.</p>
-                <p>Only qualified LOTS members can then apply for the current bounty program. All LOTS-Bounty procedures must be completed according to the LOTS-Bounty guidelines.</p>
-            </div>
-            <ul class="content-body">
-                <p>User Agreement and guidelines</p>
-                <li>1. This Bounty is divided into three phases, each round lasts 7 days， following the completion of each phase, your points will be recorded, and reset to zero. In the following phase, each individual will begin from the same starting point, we hope that any user who did not win a prize in the previous phase will not be disappointed, but continue to try their best. When voting on the final prize, we will tally up the total points earned throughout each phase. This final score will be used to determine the winner of the final prize.</li>
-                <li>2. In order to encourage greater user participation, each qualified individual can be guaranteed to receive reward within each round of evaluation. In each round of bounty program, total prize pool is a set number of LOTS tokens. Participants who are before rank top 100 with the total points in each round will receive the corresponding bonus （see Ranking Bounty Rewards Distribution）.</li>
-                <li>3. The remaining Participants will share all the remaining LOTS tokens which left in the prize pool according to the total points earned by each person in the round. The top 100 competitors will not participate in the equalization.</li>
-                <li>4. We use a standardized means of tabulation. After the results are announced, you may, within three (3) days following the reveal, request a formal recount. After three (3) days, we will no longer accept requests for a recount.</li>
-                <li>5. If the content uploaded contains links, please make sure that all links are functioning before the end of the whole LOTS-Bounty Program.</li>
-                <li>6. If you for any reason voluntarily give up, or are unable to, by the time of the deadline, submit a prize application or upload relevant materials that abide(s) by the LOTS-Bounty guidelines, you will not receive the LOTS reward.</li>
-                <li>7. If you use any illegal means or maliciously submit a large amount of repetitious, unqualified links in order to receive a reward, the LOTS team reserves the right to strip you of your right to participate in events, current and future, and review all previous rewards you may have earned.</li>
-                <li>8. Any content submitted cannot contain Ether addresses or request that other members transfer you money. If it does, you will no longer be qualified to enter this program.</li>
-                <li>9. If you disseminate false information regarding LOTS, you will no longer be qualified to participate in this LOTS-Bounty Program.</li>
-                <li>10. Any social media account such as Facebook, Twitter, etc., that was signed up later than 1st. July, or who has less than 5 friends or followers will not be qualified to participate in the LOTS-Bounty Program.</li>
-                <li>11. Your earned LOTS tokens will, within three (3) weeks following the conclusion of the third phase of this program, be transferred to the Ether address that you have provided.</li>
-                <li>12. The LOTS team maintains the right to final decision and interpretation, and will, at the appropriate time, interpret the conditions of the event. If you have any questions or concerns regarding the LOTS-Bounty Program, please contact the administrator over Telegram, or send us an email at support@lots.org</li>
-                <li>13. We will appreciate and review all uploaded contents, likes and comments.Thank you for your time and consideration. Good luck!</li>
-            </ul>
-            <div class="btn-close" onclick="window.close();">Close<span class="icon-close"></span></div>
-        </div>
-    </div>
+    <table class="table-wrapper">
+                        <tr>
+                            <td>
+                                Rank
+                            </td>
+                            <td>
+                                Identity
+                            </td>
+                            <td>
+                                Rewards
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                1st Place
+                            </td>
+                            <td>
+                                LOTS ROYAL Ambassador
+                            </td>
+                            <td>
+                                100,000 LOTS Tokens
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                2nd-4th
+                            </td>
+                            <td>
+                                LOTS SPIRE Masters
+                            </td>
+                            <td>
+                                40,000 LOTS Tokens
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                5th-10th
+                            </td>
+                            <td>
+                                LOTS Masters
+                            </td>
+                            <td>
+                                20,000 LOTS Tokens
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                11th-20th
+                            </td>
+                            <td>
+                                LOTS Masters
+                            </td>
+                            <td>
+                                20,000 LOTS Tokens
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                21th-40th
+                            </td>
+                            <td>
+                                LOTS Elites
+                            </td>
+                            <td>
+                                4,000 LOTS Tokens
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                41th -100th
+                            </td>
+                            <td>
+                                LOTS Supporters
+                            </td>
+                            <td>
+                                2,000 LOTS Tokens
+                            </td>
+                        </tr>
+                        
+                    </table>
 </body>
 
 </html>

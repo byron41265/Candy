@@ -53,6 +53,7 @@
     height: 38px;
     display: inline-block;
 }
+
 .navbar-link .link-item .icon.icon-ins {
     background-image: url('../img/icon-ins.png');
     background-size: 100%;
@@ -90,6 +91,7 @@
     background-size: 100%;
     background-repeat: no-repeat;
 }
+
 
 
 
@@ -372,6 +374,26 @@
     right: 12px;
 }
 
+.point-container .point-item .point-item-rule {
+    color: #fff;
+    font-size: 12px;
+    line-height: 13px;
+    position: absolute;
+    top: 18px;
+    left: 17px;
+    transform-origin-x: 0;
+    -ms-transform-origin-x: 0;
+    -moz-transform-origin-x: 0;
+    -webkit-transform-origin-x: 0;
+    -o-transform-origin-x: 0;
+    transform: scale(0.75);
+    -ms-transform: scale(0.75);
+    -moz-transform: scale(0.75);
+    -webkit-transform: scale(0.75);
+    -o-transform: scale(0.75);
+    cursor: pointer;
+}
+
 .point-container .point-item .point-txt1 {
     color: #FFFFFF;
     font-size: 28px;
@@ -485,6 +507,7 @@
     padding-left: 13px;
     box-sizing: border-box;
     position: relative;
+    cursor: pointer;
 }
 
 .game-container .game-item:nth-child(3n) {
@@ -520,14 +543,14 @@
     background-repeat: no-repeat;
     background-position: right 10px top -14px;
     border-left: 5px solid;
-    border-image: -webkit-linear-gradient(right, #5959FB, #2D9AFD) 30 30;
+    border-image: -webkit-linear-gradient(right, #5959FB, #2D9AFD) 0 0 0 30;
     /* Safari 5.1 - 6.0 */
-    border-image: -o-linear-gradient(right, #5959FB, #2D9AFD) 30 30;
+    border-image: -o-linear-gradient(right, #5959FB, #2D9AFD) 0 0 0 30;
     /* Opera 11.1 - 12.0 */
-    border-image: -moz-linear-gradient(right, #5959FB, #2D9AFD) 30 30;
+    border-image: -moz-linear-gradient(right, #5959FB, #2D9AFD) 0 0 0 30;
     /* Firefox 3.6 - 15 */
-    border-image: linear-gradient(to right, #5959FB, #2D9AFD) 30 30;
-    /* 标准的语法 */
+    border-image: linear-gradient(to right, #5959FB, #2D9AFD) 0 0 0 30;
+    /* 鏍囧噯鐨勮娉� */
 }
 
 .game-container .game-item.item-b {
@@ -536,14 +559,14 @@
     background-repeat: no-repeat;
     background-position: right 10px top -14px;
     border-left: 5px solid;
-    border-image: -webkit-linear-gradient(#FB83CB, #FE95AD) 30 30;
+    border-image: -webkit-linear-gradient(#FB83CB, #FE95AD) 0 0 0 30;
     /* Safari 5.1 - 6.0 */
-    border-image: -o-linear-gradient(#FB83CB, #FE95AD) 30 30;
+    border-image: -o-linear-gradient(#FB83CB, #FE95AD) 0 0 0 30;
     /* Opera 11.1 - 12.0 */
-    border-image: -moz-linear-gradient(#FB83CB, #FE95AD) 30 30;
+    border-image: -moz-linear-gradient(#FB83CB, #FE95AD) 0 0 0 30;
     /* Firefox 3.6 - 15 */
-    border-image: linear-gradient(#FB83CB, #FE95AD) 30 30;
-    /* 标准的语法 */
+    border-image: linear-gradient(#FB83CB, #FE95AD) 0 0 0 30;
+    /* 鏍囧噯鐨勮娉� */
 }
 
 .game-container .game-item.item-c {
@@ -552,14 +575,14 @@
     background-repeat: no-repeat;
     background-position: right 10px top -14px;
     border-left: 5px solid;
-    border-image: -webkit-linear-gradient(#F6C59A, #F9968B) 30 30;
+    border-image: -webkit-linear-gradient(#F6C59A, #F9968B) 0 0 0 30;
     /* Safari 5.1 - 6.0 */
-    border-image: -o-linear-gradient(#F6C59A, #F9968B) 30 30;
+    border-image: -o-linear-gradient(#F6C59A, #F9968B) 0 0 0 30;
     /* Opera 11.1 - 12.0 */
-    border-image: -moz-linear-gradient(#F6C59A, #F9968B) 30 30;
+    border-image: -moz-linear-gradient(#F6C59A, #F9968B) 0 0 0 30;
     /* Firefox 3.6 - 15 */
-    border-image: linear-gradient(#F6C59A, #F9968B) 30 30;
-    /* 标准的语法 */
+    border-image: linear-gradient(#F6C59A, #F9968B) 0 0 0 30;
+    /* 鏍囧噯鐨勮娉� */
 }
 
 .game-container .game-item.item-d {
@@ -568,14 +591,14 @@
     background-repeat: no-repeat;
     background-position: right 10px top -14px;
     border-left: 5px solid;
-    border-image: -webkit-linear-gradient(#7A74FF, #D7B4FE) 30 30;
+    border-image: -webkit-linear-gradient(#7A74FF, #D7B4FE) 0 0 0 30;
     /* Safari 5.1 - 6.0 */
-    border-image: -o-linear-gradient(#7A74FF, #D7B4FE) 30 30;
+    border-image: -o-linear-gradient(#7A74FF, #D7B4FE) 0 0 0 30;
     /* Opera 11.1 - 12.0 */
-    border-image: -moz-linear-gradient(#7A74FF, #D7B4FE) 30 30;
+    border-image: -moz-linear-gradient(#7A74FF, #D7B4FE) 0 0 0 30;
     /* Firefox 3.6 - 15 */
-    border-image: linear-gradient(#7A74FF, #D7B4FE) 30 30;
-    /* 标准的语法 */
+    border-image: linear-gradient(#7A74FF, #D7B4FE) 0 0 0 30;
+    /* 鏍囧噯鐨勮娉� */
 }
 
 .game-container .game-item.item-e {
@@ -631,6 +654,8 @@
     width: 100%;
     background-color: #fff;
     text-align: left;
+    position: relative;
+    z-index: 5;
 }
 
 .detail-container .detail-table thead th {
@@ -686,17 +711,28 @@
 .detail-container .detail-table tbody td.red {
     color: #EA5454;
 }
-
-.detail-container .detail-table tbody tr.highlight {
+.detail-container .detail-table tr:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 87px;
+    z-index: -1;
+}
+.detail-container .detail-table tr.highlight {
     color: #FFFFFF !important;
+    position: relative;
+}
+
+.detail-container .detail-table tr.highlight:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 87px;
+    z-index: -1;
     background: -webkit-linear-gradient(left, rgba(89, 89, 251, 0.6), rgba(45, 154, 253, 0.6)) !important;
-    /* Safari 5.1 - 6.0 */
     background: -o-linear-gradient(right, rgba(89, 89, 251, 0.6), rgba(45, 154, 253, 0.6)) !important;
-    /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient(right, rgba(89, 89, 251, 0.6), rgba(45, 154, 253, 0.6)) !important;
-    /* Firefox 3.6 - 15 */
     background: linear-gradient(to right, rgba(89, 89, 251, 0.6), rgba(45, 154, 253, 0.6)) !important;
-    /* 标准的语法 */
 }
 
 .detail-container .detail-table tbody tr.highlight td .row-rules {
@@ -725,11 +761,11 @@
     margin-right: 5px;
 }
 
-.detail-container .detail-table tbody tr:nth-child(even) {
+.detail-container .detail-table tbody tr:nth-child(even):not(.highlight) {
     background: #fff;
 }
 
-.detail-container .detail-table tbody tr:nth-child(odd) {
+.detail-container .detail-table tbody tr:nth-child(odd):not(.highlight) {
     background: #F3F6F8;
 }
 
@@ -820,6 +856,28 @@
     padding: 18px;
 }
 
+.modal.modal-rules.modal-dis-rule .modal-row .modal-row-title {
+    text-align: center;
+}
+
+.modal.modal-rules.modal-dis-rule .modal-row .modal-row-tb {
+    font-size: 14px;
+    color: #363D48;
+    width: 100%;
+}
+
+.modal.modal-rules.modal-dis-rule .modal-row .modal-row-tb,
+.modal.modal-rules.modal-dis-rule .modal-row .modal-row-tb tr th,
+.modal.modal-rules.modal-dis-rule .modal-row .modal-row-tb tr td {
+    border: 1px solid #979797;
+}
+
+.modal.modal-rules.modal-dis-rule .modal-row .modal-row-tb tr td {
+    padding: 0 10px;
+    min-height: 66px;
+    height: 66px;
+}
+
 .modal .icon-close {
     background-image: url('../img/icon-close.png');
     background-size: 100%;
@@ -840,7 +898,8 @@
 
 
 
-/* modified by xsm5202  Ôö¼ÓÐ£Ñé´íÎóÌáÊ¾ÐÅÏ¢,Óëlogin ÖØÓÃ*/
+
+/* modified by xsm5202  脭枚录脫脨拢脩茅麓铆脦贸脤谩脢戮脨脜脧垄,脫毛login 脰脴脫脙*/
 
 .input-wrap {
     position: relative;
@@ -1030,14 +1089,14 @@
         line-height: 45px;
     }
     .point-container .point-item.bg4 .point-txt1 {
-    font-size: 16px;
-    line-height: 22px;
-    margin-top: 15px;
-}
+        font-size: 16px;
+        line-height: 22px;
+        margin-top: 15px;
+    }
     .point-container .point-item.bg4 .point-txt2 {
-    font-size: 12px;
-    height: 22px;
-}
+        font-size: 12px;
+        height: 22px;
+    }
 
     .point-container .point-item+.point-item {
         margin-left: 0;
@@ -1154,5 +1213,32 @@
     }
     .modal.modal-rules .btn-submit {
         margin: 24px auto 0 auto;
+    }
+    .modal.modal-rules.modal-dis-rule .modal-row .modal-row-title {
+    font-size: 12px;
+}
+    .modal.modal-rules.modal-dis-rule .modal-row .modal-row-tb {
+        font-size: 9px;
+        transform-origin-x: 0;
+        -ms-transform-origin-x: 0;
+        -moz-transform-origin-x: 0;
+        -webkit-transform-origin-x: 0;
+        -o-transform-origin-x: 0;
+        transform: scale(1);
+        -ms-transform: scale(1);
+        -moz-transform: scale(1);
+        -webkit-transform: scale(1);
+        -o-transform: scale(1);
+    }
+    .modal.modal-rules.modal-dis-rule .modal-row .modal-row-tb tr td {
+        padding: 0 10px;
+        min-height: 66px;
+        height: 66px;
+    }
+}
+@media screen and (max-height:959px) {
+    .modal.modal-rules.modal-dis-rule .modal-row {
+        overflow-y: scroll;
+        height: 360px;
     }
 }
