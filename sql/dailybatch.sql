@@ -7,8 +7,8 @@ replace into user_task (userId, taskId, earnedPoint)
 select p.userId, t.taskId, t.eachPoint from twitter_follower f join twitter_profile p on f.providerUserId = p.providerUserId join task t on t.taskId ='2';
 
 -- 转发任务
-replace into action (`userId`,`taskId`,`earned_point`,`submitUrl`,`submitTime`,`if_effective`,`if_handled`)
-select p.userId, t.taskId, t.eachPoint, r.tweetId submitUrl, r.retweetdate ,'Y' ,'Y'   from twitter_retweet r join twitter_profile p on r.providerUserId = p.providerUserId join task t on t.taskId = '3';
+-- replace into action (`userId`,`taskId`,`earned_point`,`submitUrl`,`submitTime`,`if_effective`,`if_handled`)
+-- select p.userId, t.taskId, t.eachPoint, r.tweetId submitUrl, r.retweetdate ,'Y' ,'Y'   from twitter_retweet r join twitter_profile p on r.providerUserId = p.providerUserId join task t on t.taskId = '3';
 
 -- telegram 拉群
 replace into action (`userId`,`taskId`,`earned_point`,`submitUrl`,`submitTime`,`if_effective`,`if_handled`)

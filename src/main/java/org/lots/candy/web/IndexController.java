@@ -53,6 +53,8 @@ public class IndexController {
 	@RequestMapping("/")
 	public String init(Model model, HttpSession session){
 		
+		//session.setAttribute(Constant.USER_SESSION_NAME,"2fad339a599c46479bd7f24d2f3e7119");
+		
 		// 正文开始
 		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
 		User user = userMapper.findUserByElement("userId", userId);

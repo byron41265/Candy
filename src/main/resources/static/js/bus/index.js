@@ -35,7 +35,7 @@ define(function(require, exports, module) {
 		    self._initWallet();
 		    self._initRule();
 		    self._initHighLight();
-		    self._initDisRule();
+		    //self._initDisRule();
 		    
 //		    setInterval(self, "_leftTimer", 20000,2018,8,14,0,0,0); 
 		    var sto = setInterval;
@@ -130,6 +130,7 @@ define(function(require, exports, module) {
 					processResult: function(result){
 						if("success" == result){
 							self._closeModal();
+							return true;
 						}
 					}
 				}
@@ -146,6 +147,16 @@ define(function(require, exports, module) {
 					}
 				});
 			});
+			$(".detail-table tbody tr").click(function(e){
+				var classes = $(this).attr("class");
+				classes && $.each(classes.split(' '), function() {
+					if (this.startsWith("taskType-")){
+						var type = this.substring("taskType-".length);
+						self.highLight(type);
+					}
+				});
+			});
+			
 		},
 		highLight: function(type){
 			//清理样式
@@ -154,6 +165,14 @@ define(function(require, exports, module) {
 			
 			$(".credit_table .taskitem").removeClass("highlight");
 			$(".credit_table .taskitem.taskType-"+type).addClass("highlight");
+			
+			var dom = $('.highlight:eq(0)').offset();
+	        if(dom) {
+	            var top = dom.top;
+	            var clientHeight = $(window).height();
+	            var halfClientHeight = (clientHeight / 2).toFixed(0);
+	            window.scrollTo(0, top + 99 - halfClientHeight);
+	        }
 			
 		},
 		_initDisRule: function(){

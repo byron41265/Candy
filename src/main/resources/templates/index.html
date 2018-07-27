@@ -132,18 +132,18 @@
             <div class="point-container">
                 <div class="point-item bg1">
                     <p class="point-txt1">${earned_point}</p>
-                    <p class="point-txt2">Earned point</p>
+                    <p class="point-txt2">Earned Point</p>
                 </div>
                 <div class="point-item bg2">
                     <p class="point-txt1">No. ${user.rank}</p>
-                    <p class="point-txt2">Point ranks</p>
+                    <p class="point-txt2">Point Ranking</p>
                 </div>
                 <div class="point-item bg3">
                     <p class="point-txt1">${expected_reward}</p>
-                    <p class="point-txt2">Expected reward</p>
+                    <p class="point-txt2">Expected Reward</p>
                 </div>
                 <div class="point-item bg4">
-                	<p class="point-item-rule">Ranking Reward Distribution rule</p>
+                	<!-- <p class="point-item-rule">Ranking Reward Distribution rule</p> -->
                     <p class="point-txt1">2,000,000 Lots</p>
                     <p class="point-txt2">Total Amout of Phase One</p>
                 </div>
@@ -210,8 +210,8 @@
 							[#if taskList?? ]
 								[#list taskList as task]
 			                        <tr class="taskitem taskType-${task.typeId?lower_case}">
-										<td><p>${task.name}</p><a class="row-rules js_showRules"  href="#"  data-id="${task.taskId}" data-name="${task.name}">Rules</a></td>
-										<td>${task.eachPoint}</td>
+										<td><p>${task.name}</p><a class="row-rules js_showRules"  href="javascript:;"  data-id="${task.taskId}" data-name="${task.name}">Rules</a></td>
+										<td>${task.eachPoint} [#if task.eachPoint1??]- ${task.eachPoint1}[/#if]</td>
 										<td>${task.dailyPointLimit}</td>
 										<td>${task.pointLimit}</td>
 										<td>${task.earnedPoint}</td>
@@ -226,22 +226,23 @@
 												${task.instruction}
 											[#elseif task.taskId == '2']	
 												[#if user.twitterAccount??]
-													Go to <a href="https://twitter.com/LotsOrg"  target="_blank"  style="color:#0E5ACE;">Follow us</a>. We will confirm it later.
+													You have not followed our <a href="https://twitter.com/LotsOrg"  target="_blank"  style="color:#0E5ACE;">Twitter</a>, please follow up the rules. We will check it later.
 												[#else]
-													Please bind twitter first.
+													You have not associated your Twitter username with us yet, please click the icon of Twitter on the menubar to associate with it.
 												[/#if]
 											[#elseif task.taskId == '3']
 												[#if user.twitterAccount??]
 													[#if retweetId??]
-														Please retweet <a href="https://twitter.com/intent/retweet?tweet_id=${retweetId}"  target="_blank" style="color:#0E5ACE;">LOTS tweet</a>. We will confirm it later.
+														<span class="btn-complete js_showCmpleteTask" data-task="${task.taskId}">Submit Link</span>
+														<p>Please submit the link by the same Twitter account. We will check it later.	</p>
 													[#else]
 														Well done，you have finish this part. 
 													[/#if]
 												[#else]
-													Please bind twitter first.
+													You have not associated your Twitter username with us yet, please click the icon of Twitter on the menubar to associate with it.
 												[/#if]
 											[#elseif task.taskId == '5' || task.taskId == '6' || task.taskId == '12' || task.taskId == '13' || task.taskId == '14']
-												<span class="btn-complete js_showCmpleteTask" data-task="${task.taskId}">Submit Link</span>. We will confirm it later.	
+												<span class="btn-complete js_showCmpleteTask" data-task="${task.taskId}">Submit Link</span><p>Please submit Link(s) here. We will check and review it later.	</p>
 											[#elseif task.taskId == '9']
 												[#if user.telegramAccount??]
 													Invite you friend to
@@ -250,18 +251,23 @@
 													 		<a href="${group.value}"  target="_blank"  style="color:#0E5ACE;">${group.desc}</a>
 													 	[/#list]
 													 [/#if]
-													 . We will confirm it later.
+													 . We will check and review it later.
 												[#else]
-													Please bind telegram first.
+													You have not associated your Telegram username with us yet, please click the icon of Telegram on the menubar to associate with it.
 												[/#if]
 											[#elseif task.taskId == '10']
 												[#if user.telegramAccount??]
 													${task.instruction}
 												[#else]
-													Please bind telegram first.
+													You have not associated your Telegram username with us yet, please click the icon of Telegram on the menubar to associate with it.
+												[/#if]
+											[#elseif task.taskId == '16']	
+												[#if user.telegramAccount??]
+													You have not followed our telegam group, please follow up the rules.
+												[#else]
+													You have not associated your Telegram username with us yet, please click the icon of Telegram on the menubar to associate with it.
 												[/#if]
 											[/#if]
-												
 										[/#if]
 										</td>
 									</tr>
@@ -341,42 +347,91 @@
     <div class="overlay-mask js_mask"></div>
     <div class="overlay-mask modal-mask js_modal_mask"></div>
     <div id="js_hidden_rule" style="display:none;">
-    	<div class="task-1">Please bind your Twitter with us.</div>
-    	<div class="task-2">Please use your binded Twitter account follow our offical <a href="https://twitter.com/LotsOrg">Twitter</a>.</div>
+    	<div class="task-1">Please associate your Twitter username with your bounty membership to earn 50 points.</div>
+    	<div class="task-2">
+    		<ul>
+    			<li>Please associate your Twitter username with your bounty membership.</li>
+    			<li>Follow LOTS’s official Twitter(<a href="https://twitter.com/LotsOrg" style="color:#0E5ACE;">@LotsOrg</a>).</li>
+    			<li>Followers will receive 150 points.</li>
+    		</ul>
+    	</div>
     	<div class="task-3">
-    		<p>1. LOTS's team will raise a trendy topic in our official Twitter account on the same day as every bounty period begins .</p> 
-    		<p>2. To participate, you only need to retweet our original tweet and includes LotsPlatform, LOTS's name or logo.</p> 
-    		<p>3. LOTS's team will review every participant's retweets to compute your points.</p> 
-    		<p>4. Please ensure the link is submitted by the same Twitter account which was binded with us. If not, unfortunately , we may not able to compute your points</p> 
+    		<ul>
+    			<li>We will raise a trendy topic (like #LOTS Bounty Program) in our official twitter account.</li> 
+	    		<li>To participate, you only need to publish an original tweet and include @LotsOrg.</li> 
+	    		<li>What you can tweet includes but isn’t limited to one sentence, a short paragraph, a selfie, or a video related to our topic.</li> 
+	    		<li>We will identify you as‘super celebrity’ or ‘supporter’.</li> 
+	    		<li>For super celebrity, requirements are 100 retweets, 100 replies, and 100 likes. If you satisfy 2 of 3 requirements, you will be rewarded with 1000 points.（Maximum 5000 points)</li> 
+	    		<li>For supporter, requirements are 5 retweets, 5 replies and 10 likes. If you satisfy 2 of 3 requirements, you will be rewarded with 200 points.(Maximum 2000 points)</li> 
+    		</ul>
     	</div>
     	<div class="task-4"></div>
     	<div class="task-5">
-    		<p>1. Write an original post about LOTS and post it to the following social media platforms: Medium, FACEBOOK,weibo，Steemit，BitcoinTalk ，weixin moments or your own blog. </p> 
-    		<p>2. ALL posts must be current! Posting about past news will not be approved.</p> 
-    		<p>3. Post must be at least 50 words,For a post to be counted, it needs to be tagged with relevant categories such as Blockchain, Ethereum, Technology, crypto, etc.</p> 
-    		<p>4. Post with a link of LOTS official website, or a current picture from LOTS official social media platforms , or with a picture with LOTS logo and “LOTS PLATFORM” will gain a big plus for you.</p> 
-    		<p>5. Please submit the valid link of your content. We'll allocate rewards to you proportionally based on the content's quality, page views, comments, and influence, to name just a few. </p> 
+    		<ul>
+				<li>We will raise Content Creation Bounty Project.</li>
+				<li>Please create, publish and manage content related to the topic released in self-media channel accordingly (including but not limited to Twitter, Medium, Steemit, BitcoinTalk, Facebook or Weibo etc.) </li>
+				<li>We will allocate points based on the content’s quality, page views, comments and influence, to name just a few.</li>
+				<li>You will be rewarded with 1000 points per content (maximum 5000 points)</li>
+    		</ul>
     	</div>
     	<div class="task-6">
-    		<p>1. Post an interesting and informative video on your Youtube channel about LOTS: advantage, features and functionality of LOTS, etc. </p> 
-    		<p>2. Videos should contain human voice and clear “LOTS” text or LOTS logo，LOTS LAB or LOTS PLATFORM is allowed as well.</p> 
-    		<p>3. Video must be at least 1:00 minute long.</p> 
-    		<p>4. Video description must contain link to http://www.lots.org.</p> 
-    		<p>5. Designs must be original. If your work is found to be a complete copy or plagiarized (creative modification based on others is allowed), your account will be disqualified.</p> 
+    		<ul>
+    			<li>We will raise Video Creation Bounty Project.</li>
+				<li>Please create, post and manage video related to the topic on your Youtube channel.</li>
+				<li>Video description must contain link to www.lots.org</li>
+				<li>Your channel must be at least 3 months old.</li>
+				<li>Video must be at least 1:00 minute long.</li>
+				<li>We will allocate points based on the video’s quality, page views, comments and influence, to name just a few.</li>
+				<li>You will be rewarded with 1000 points per video (maximum 5000 points)</li>
+				<li>Videos that do not contain human voiceover will only receive 50% of the points.</li>
+    		</ul>
     	</div>
-    	<div class="task-7">Please bind your Facebook with us.</div>
-    	<div class="task-8">Please bind your Telegram with us.</div>
+    	<div class="task-7">Please associate your Facebook username with your bounty membership to earn 50 points.</div>
+    	<div class="task-8">Please associate your Telegram username with your bounty membership to earn 50 points.</div>
     	<div class="task-9">Please invite you friends to Telegram group. We will annouce different types of events and news in our telegram group.</div>
-    	<div class="task-10">We'll organize five quizzes every day in our LOTS global Telegram group everyday during Lots Bounty Program phase 1. The quiz begins when admin publishes a series of questions in the Telegram group, which members can answer. The time limit for answering is 5 minute. The first 50 members who answer correctly will receive rewards. </div>
+    	<div class="task-10">
+    		<ul>
+    			<li>We'll organize two quizzes every day in our English and Chinese Telegram group at the beginning of this project. </li>
+				<li>Admin publishes a series of questions which members can answer.</li>
+				<li>The time limit for answering is 2 minutes. The first 20 members who answer correctly will receive 100 points.</li>
+				<li>Maximum 1,000 points for each member in total.</li>
+    		</ul>
+    	</div>
     	<div class="task-11">Please submit bug report to support@lots.org.Please infer you username , register email.  </div>
     	<div class="task-12">
-    		<p>1. Please make interesting Meme & Emoji and sticker for us.</p>
-    		<p>2. Please create JPEGs or GIFs that can be used for Twitter, Telegram, and forums. </p>
-    		<p>3. Participants should upload their creative works by the link. We will review your submitted work. File Max size is 1m</p>
+    		<ul>
+    			<li>We will initiate a hashtag called #LOTSMEME on our official Twitter.</li>
+				<li>You can create JPEGs or GIFs that can be used for Twitter, Telegram and forums. </li>
+				<li>You should tweet your creative works to @LotsOrg and join #LOTSMEME. </li>
+				<li>We will allocate points based on your creations’ quality, views, comments and influence, to name just a few.</li>
+				<li>You will be rewarded with 600 points (maximum 1800 points)</li>
+    		</ul>
     	</div>
-    	<div class="task-13">Please apply various filter effects and decorations to make LOTS logo unique! After completion, please upload your creative work with the link. We will review your submitted work.</div>
+    	<div class="task-13">
+    		<ul>
+    			<li>We will initiate a hashtag called #LOTSART on our official Twitter.</li>
+				<li>Please download our logo image and then apply various filter effects and decorations to make it unique. </li>
+				<li>You could post your creative work on your twitter or instagram. Direct message the work to @LotsOrg and use #LOTSART hashtag. </li>
+				<li>We will review and allocate points based on your creations’ quality, views, comments and influence, to name just a few.</li>
+				<li>You will be rewarded with 600 points (maximum 1800 points)</li>
+    		</ul>
+		</div>
     	<div class="task-14">Pls upload a Chinese name for Lots over here.</div>
-    	<div class="task-15">Please give your the invitation code to your friend. Ask your friend to use this code when signing up our bounty program.	</div>
+    	<div class="task-15">
+    		<ul>
+    			<li>Please click the <a class="icon icon-link"  href="javascript:;">&nbsp;</a> icon on the menubar and get an URL to invite friends.</li>
+				<li>You will earn points from your direct invite and indirect invite based on the number of invited participants, and socpe of influence. (Indirect invitation refers to the invitation of the participants from your invitation).</li>
+				<li>You will be rewarded with up to 1000 points.</li>
+    			
+    		</ul>
+    	</div>
+    	<div class="task-16">
+    		<ul>
+    			<li>Please associate your Telegram username with your bounty membership.</li>
+				<li>Join LOTS’s official Telegram group (<a href="https://t.me/lotsorg"  style="color:#0E5ACE;">@Lotsorg</a>) or LOTS’s official Telegram Chinese group(<a href="https://t.me/LOTS_cn"  style="color:#0E5ACE;">@LOTS_cn</a>).</li>
+				<li>Followers will received 150 points.</li>
+    		</ul>
+    	</div>
 	</div>
 	<div class="modal  modal-rules modal-dis-rule">
             <p class="modal-title">Rules</p>
