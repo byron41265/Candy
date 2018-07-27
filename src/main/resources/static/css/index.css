@@ -378,26 +378,6 @@
     right: 12px;
 }
 
-.point-container .point-item .point-item-rule {
-    color: #fff;
-    font-size: 12px;
-    line-height: 13px;
-    position: absolute;
-    top: 18px;
-    left: 17px;
-    transform-origin-x: 0;
-    -ms-transform-origin-x: 0;
-    -moz-transform-origin-x: 0;
-    -webkit-transform-origin-x: 0;
-    -o-transform-origin-x: 0;
-    transform: scale(0.75);
-    -ms-transform: scale(0.75);
-    -moz-transform: scale(0.75);
-    -webkit-transform: scale(0.75);
-    -o-transform: scale(0.75);
-    cursor: pointer;
-}
-
 .point-container .point-item .point-txt1 {
     color: #FFFFFF;
     font-size: 28px;
@@ -415,13 +395,8 @@
 }
 
 .greeting-container {
-    margin-top: 60px;
+    margin-top: 50px;
     width: 929px;
-    background-color: #fff;
-    padding-top: 30px;
-    padding-bottom: 40px;
-    padding-left: 50px;
-    padding-right: 30px;
     box-sizing: border-box;
 }
 
@@ -434,16 +409,32 @@
 }
 
 .greeting-container .greeting-content {
-    color: #888888;
-    font-size: 16px;
-    line-height: 22px;
+    color: #FFFFFF;
+    font-size: 20px;
     text-align: center;
-    margin-bottom: 30px;
+    background-color: #4575E6;
+    height: 74px;
+    line-height: 74px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.greeting-container .greeting-content .icon-arrow {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background-image: url(../img/icon-arrow.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    top: 1px;
+    margin-left: 24px;
 }
 
 .greeting-container .count {
     margin-top: 22px;
     text-align: center;
+    margin-bottom: 44px;
 }
 
 .greeting-container .box {
@@ -500,7 +491,7 @@
 }
 
 .game-container .game-item {
-    width: 281px;
+    width: 285px;
     height: 160px;
     border-radius: 5px;
     background-color: #fff;
@@ -1123,8 +1114,6 @@
     .greeting-container {
         margin-top: 16px;
         width: 100%;
-        padding-top: 32px;
-        padding-left: 36px;
     }
 
     .greeting-container .greeting-tl {
@@ -1137,12 +1126,23 @@
         font-size: 14px;
         line-height: 20px;
         text-align: left;
-        margin-bottom: 25px;
+        padding: 15px 70px 0 20px;
+        height: 70px;
+        box-sizing: border-box;
+        position: relative;
+    }
+    .greeting-container .greeting-content .icon-arrow {
+        width: 8px;
+        height: 15px;
+        position: absolute;
+        top: 27px;
+        right: 16px;
     }
 
     .greeting-container .count {
         margin-top: 16px;
         text-align: left;
+        margin-bottom: 35px;
     }
 
     .greeting-container .box {
