@@ -127,8 +127,8 @@ public class UserController {
 	public String register(HttpServletRequest request) throws IOException{
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-//		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-//		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 		String email = request.getParameter("email");
 		String superInviteCode = request.getParameter("inviteCode");
 		int count = userMapper.findCodeTotalNum("superInviteCode");
@@ -151,9 +151,9 @@ public class UserController {
 			message = "Email has been registered";
 		}else if(!"".equals(superInviteCode)&&superInviteCode!=null&&userMapper.findInviteCode(superInviteCode)==0){
 			message = "The invitation code does not exist";
-		}/*else if(!verify){
+		}else if(!verify){
 			message = "Verification code error";
-		}*/else{
+		}else{
 			userMapper.save(userId, username, password, email, inviteCode, superInviteCode, status);
 			sendEmailUtils.sendRegisterUrl(username, email, emailUrl+parameter);
 			logUserIpInfo(userId, "register", request);
@@ -168,7 +168,7 @@ public class UserController {
 		String userId = parameter.substring(0, parameter.length()-4);
 		userMapper.updateUserStatus(userId);
 		userMapper.initUserTask(userId);
-		model.addAttribute("msg", "You complete email verification.");
+		model.addAttribute("msg", "Well done! You complete email verification.");
 		return "msg";
 	}
 	

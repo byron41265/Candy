@@ -163,13 +163,13 @@ create table action (
 	userId varchar(100) not null,
 	taskId varchar(100) not null,
 	earned_point int DEFAULT 0,
-	submitUrl varchar(512),
+	submitUrl varchar(512) not null,
 	submitTime datetime default NOW(),
 	if_effective varchar(2),
 	if_handled varchar(2)
 ) ENGINE=MYISAM;
 
-ALTER TABLE action add primary key (userId, taskId, submitTime); 
+ALTER TABLE action add primary key (userId, taskId, submitUrl); 
 
 drop table dic_item;
 

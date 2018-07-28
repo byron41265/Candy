@@ -28,10 +28,16 @@ public class TelegramHelper {
 		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
 		String tgId = request.getParameter("id");
 		String providerId = "telegram";
-		userMapper.updateAccount(userId, providerId, tgId);
-		taskMapper.insertOnceTask(userId, TaskEnum.BINDTELEGRAM.toString());
+		if (tgId!=null && tgId.length()>0){
+			userMapper.updateAccount(userId, providerId, tgId);
+			taskMapper.insertOnceTask(userId, TaskEnum.BINDTELEGRAM.toString());
+			
+			model.addAttribute("flag", true);
+		}else{
+			model.addAttribute("flag", false);
+		}
+		
 		model.addAttribute("providerId", providerId);
-		model.addAttribute("bindmsg", providerId +" Bind Success");
 		
 		return "connect/connectAll";
 	}

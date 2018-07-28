@@ -29,7 +29,7 @@ public interface TaskMapper {
 	@Update("replace into user_task (userId, taskId, earnedPoint) values(#{userId}, #{taskId}, #{earnedPoint})")
 	public void insertTask(@Param("userId") String userId, @Param("taskId") String taskId, @Param("earnedPoint") int earnedPoint);
 	
-	@Insert("INSERT INTO `action`(`userId`,`taskId`,`submitUrl`,`if_effective`,`if_handled`) VALUES(#{userId},  #{taskId} , #{link} , 'N' , 'N')")
+	@Insert("replace INTO `action`(`userId`,`taskId`,`submitUrl`,`if_effective`,`if_handled`) VALUES(#{userId},  #{taskId} , #{link} , 'N' , 'N')")
 	public void insertLinkAction(@Param("userId")String userId, @Param("link")String link,@Param("taskId")String taskId);
 
 }
