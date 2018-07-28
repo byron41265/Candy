@@ -23,7 +23,7 @@ define(function(require, exports, module) {
 					},
 					processResult: function(result){
 						if("success" == result){
-							alert("Please finish check you email to finish registration.");
+							alert("Please check you email to finish registration.");
 							window.location ="/login";
 						}else{
 							$.message('danger',result);
