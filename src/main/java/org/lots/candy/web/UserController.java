@@ -149,7 +149,7 @@ public class UserController {
 			message = "Username already exists";
 		}else if(userMapper.findUserByElement("email", email)!=null){
 			message = "Email has been registered";
-		}else if(superInviteCode!=null&&!superInviteCode.equals("")&&userMapper.findInviteCode(superInviteCode)==0){
+		}else if(superInviteCode==null||superInviteCode.equals("")||userMapper.findInviteCode(superInviteCode)==0){
 			message = "The invitation code does not exist";
 		}else if(!verify){
 			message = "Verification code error";

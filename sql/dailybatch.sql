@@ -28,6 +28,10 @@ from action a where a.if_effective ='Y' group by a.userId, a.taskId, DATE_FORMAT
 
 
 -- 更新排名
-update user us,(select @rownum:=@rownum+1 rownum, ifnull(sum(t.earnedPoint),0) sumPoint, t.userId from (select @rownum:=0) r, user_task t group by t.userId order by sumPoint desc) tm
-	set us.rank=tm.rownum where us.userId=tm.userId;
-
+update user us, (select @rownum := @rownum+1 as rownum,
+A.userId,
+if(@total=sumPoint,@rank,@rank:=@rownum) as r,
+@total:=sumPoint from
+(select ifnull(sum(t.earnedPoint),0) sumPoint, t.userId from user_task t group by t.userId order by sumPoint desc) A
+,(select @rank:=0,@rownum:=0,@total:=null) B) tm
+set us.rank = tm.r where us.userId = tm.userId;

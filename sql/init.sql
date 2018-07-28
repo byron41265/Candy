@@ -90,7 +90,7 @@ create table task (
 	checkMethod varchar(32) COMMENT '1 自动校验  2 手工校验 ',
 	startDate date,
 	endDate date,
-    rank int,
+    `rank` int,
     `phase` int,
     `typeId` varchar(20)
 ) ENGINE=MYISAM;
@@ -264,8 +264,8 @@ create table user_ip(
 
 drop table rankTokens;
 create table rankTokens(
-	scoreLevel	int,	
-	tokens  int
+	`scoreLevel`	int,	
+	`tokens`		int
 ) ENGINE=MYISAM;
 insert into rankTokens values(0,0);
 insert into rankTokens values(1,100000);
