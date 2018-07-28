@@ -127,8 +127,8 @@ public class UserController {
 	public String register(HttpServletRequest request) throws IOException{
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+//		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+//		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 		String email = request.getParameter("email");
 		String superInviteCode = request.getParameter("inviteCode");
 		int count = userMapper.findCodeTotalNum("superInviteCode");
@@ -136,9 +136,9 @@ public class UserController {
 		if(count>=20){
 			message = "The invitation code has been used more than 20 times and can no longer be used";
 		}
-		if(superInviteCode==null){
-			superInviteCode="";
-		}
+//		if(superInviteCode==null){
+//			superInviteCode="";
+//		}
 		String userId = UUID.randomUUID().toString().replace("-", "");
 		Integer a = (int)((Math.random()*9+1)*1000);
 		String b = a.toString();
@@ -149,11 +149,11 @@ public class UserController {
 			message = "Username already exists";
 		}else if(userMapper.findUserByElement("email", email)!=null){
 			message = "Email has been registered";
-		}else if(superInviteCode==null||superInviteCode.equals("")||userMapper.findInviteCode(superInviteCode)==0){
+		}else if((!"".equals(superInviteCode)||superInviteCode==null)&&userMapper.findInviteCode(superInviteCode)==0){
 			message = "The invitation code does not exist";
-		}else if(!verify){
+		}/*else if(!verify){
 			message = "Verification code error";
-		}else{
+		}*/else{
 			userMapper.save(userId, username, password, email, inviteCode, superInviteCode, status);
 			sendEmailUtils.sendRegisterUrl(username, email, emailUrl+parameter);
 			logUserIpInfo(userId, "register", request);
