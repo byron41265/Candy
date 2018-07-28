@@ -35,9 +35,8 @@ define(function(require, exports, module) {
 		    self._initWallet();
 		    self._initRule();
 		    self._initHighLight();
-		    //self._initDisRule();
+		    self._initDisRule();
 		    
-//		    setInterval(self, "_leftTimer", 20000,2018,8,14,0,0,0); 
 		    var sto = setInterval;
 		    window.setInterval = function(callback,timeout,param){
 		        var args = Array.prototype.slice.call(arguments,2);
@@ -177,13 +176,13 @@ define(function(require, exports, module) {
 		},
 		_initDisRule: function(){
 			var self = this;
-			$(".point-container .bg4").click(function(){
+			$(".js_showDisRules").click(function(){
 				
-				$('.modal-dis-rule').toggle();
+				$('.js_modal_dis_rules').toggle();
 				$('.js_modal_mask').toggle();
 			});
 			
-			 $(".modal-dis-rule .btn-submit ").click(function(){
+			 $(".js_modal_dis_rules .btn-submit ").click(function(){
 			    	self._closeModal();
 			 });
 		},
