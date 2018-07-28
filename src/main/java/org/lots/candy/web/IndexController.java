@@ -60,7 +60,8 @@ public class IndexController {
 		User user = userMapper.findUserByElement("userId", userId);
 		// 获取邀请得分
 		int influencedPeople = userMapper.findCodeTotalNum(user.getInviteCode());
-		int influencedPoint = 5*influencedPeople;
+		int eachPoint = taskMapper.getEachInvitePoint();
+		int influencedPoint = eachPoint*influencedPeople;
 		taskMapper.insertTask(userId, "15", influencedPoint);
 //		List<HashMap> pointList = this.getNextUserCount(user);
 //		model.addAttribute("pointList", pointList);

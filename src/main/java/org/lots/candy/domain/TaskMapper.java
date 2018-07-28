@@ -31,5 +31,7 @@ public interface TaskMapper {
 	
 	@Insert("INSERT INTO `action`(`userId`,`taskId`,`submitUrl`,`if_effective`,`if_handled`) VALUES(#{userId},  #{taskId} , #{link} , 'N' , 'N')")
 	public void insertLinkAction(@Param("userId")String userId, @Param("link")String link,@Param("taskId")String taskId);
-
+	
+	@Select("select eachPoint from task where taskId = '15'")
+	public int getEachInvitePoint();
 }
