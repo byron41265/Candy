@@ -21,9 +21,9 @@ use candy;
 drop table userconnection;
 
 create table userconnection (
-	userId varchar(100) not null,
+	userId varchar(50) not null,
 	providerId varchar(50) not null,
-	providerUserId varchar(100) not null,
+	provideruserId varchar(50) not null,
 	rank int not null,
 	displayName varchar(255),
 	profileUrl varchar(512),
@@ -39,7 +39,7 @@ ALTER TABLE userconnection add primary key (userId, providerId, providerUserId);
 drop table user;
 
 create table user (
-	userId varchar(100) not null,
+	userId varchar(50) not null,
     userName varchar(100) not null,
 	`password` varchar(100) not null,
 	wallet varchar(1000),
@@ -78,7 +78,7 @@ commit;
 drop table task;
 
 create table task (
-	taskId varchar(100) not null,
+	taskId varchar(5) not null,
     `name` varchar(100) not null, 
 	eachPoint int not null,
     eachPoint1 int,
@@ -150,8 +150,8 @@ INSERT INTO `task` (`taskId`, `name`, `eachPoint`, `pointLimit`, `dailyPointLimi
 drop table user_task;
 
 create table user_task (
-	userId varchar(100) not null,
-	taskId varchar(100) not null,
+	userId varchar(50) not null,
+	taskId varchar(5) not null,
     earnedPoint int DEFAULT 0
 ) ENGINE=MYISAM;
  
@@ -160,10 +160,10 @@ ALTER TABLE user_task add primary key (userId, taskId);
 
 drop table action;
 create table action (
-	userId varchar(100) not null,
-	taskId varchar(100) not null,
+	userId varchar(50) not null,
+	taskId varchar(5) not null,
 	earned_point int DEFAULT 0,
-	submitUrl varchar(512) not null,
+	submitUrl varchar(256) not null,
 	submitTime datetime default NOW(),
 	if_effective varchar(2),
 	if_handled varchar(2)
@@ -193,8 +193,8 @@ INSERT INTO `dic_item` (`dicId`, `dicTypeId`, `value`, `desc`) VALUES ('social.t
 drop table twitter_profile;
 
 create table twitter_profile(
-	userId varchar(100) not null,
-	providerUserId varchar(100) not null,
+	userId varchar(50) not null,
+	provideruserId varchar(50) not null,
     `name` varchar(100),
     screenName varchar(100),
     friendCount int,
@@ -206,7 +206,7 @@ ALTER TABLE twitter_profile add primary key (userId, providerUserId);
 drop table twitter_follower;
 
 create table twitter_follower(
-	providerUserId varchar(100) not null
+	provideruserId varchar(50) not null
 ) ENGINE=MYISAM;
 
 ALTER TABLE twitter_follower add primary key (providerUserId);
@@ -215,7 +215,7 @@ drop table twitter_retweet;
 
 create table twitter_retweet(
 	tweetId varchar(100) not null,
-    providerUserId varchar(100) not null,
+    provideruserId varchar(50) not null,
     retweetdate datetime default NOW()
 ) ENGINE=MYISAM;
 
@@ -254,7 +254,7 @@ commit;
 drop table user_ip;
 
 create table user_ip(
-	userId varchar(100),
+	userId varchar(50),
     ip varchar(100),
     `port` int,
     `host`  varchar(100),
