@@ -19,9 +19,9 @@ public interface TaskMapper {
 	
 	@Select("SELECT tt.`typeId`, tt.`fullname`, tt.`shortname` , IFNULL(sum(a.earnedPoint),0) earnedPoint "
 			+ "FROM `task_type` tt left join  task t on tt.typeId  = t.typeId "
-			+ "left join user_task a on a.taskId = t.taskId and a.userId ='xsm' "
+			+ "left join user_task a on a.taskId = t.taskId and a.userId =#{userId} "
 			+ "group by tt.`typeId`, tt.`fullname`, tt.`shortname`")
-	public List<TaskType> queryUserTaskType();
+	public List<TaskType> queryUserTaskType(@Param("userId")String userId );
 	
 	@Update("replace into user_task (userId, taskId, earnedPoint) select #{userId},  taskId, eachPoint from task where taskId = #{taskId}")
 	public void insertOnceTask(@Param("userId")String userId, @Param("taskId")String taskId);
@@ -29,7 +29,7 @@ public interface TaskMapper {
 	@Update("replace into user_task (userId, taskId, earnedPoint) values(#{userId}, #{taskId}, #{earnedPoint})")
 	public void insertTask(@Param("userId") String userId, @Param("taskId") String taskId, @Param("earnedPoint") int earnedPoint);
 	
-	@Insert("INSERT INTO `action`(`userId`,`taskId`,`submitUrl`,`if_effective`,`if_handled`) VALUES(#{userId},  #{taskId} , #{link} , 'N' , 'N')")
+	@Insert("replace INTO `action`(`userId`,`taskId`,`submitUrl`,`if_effective`,`if_handled`) VALUES(#{userId},  #{taskId} , #{link} , 'N' , 'N')")
 	public void insertLinkAction(@Param("userId")String userId, @Param("link")String link,@Param("taskId")String taskId);
 	
 	@Select("select eachPoint from task where taskId = '15'")

@@ -60,8 +60,10 @@ public class IndexController {
 		User user = userMapper.findUserByElement("userId", userId);
 		// 获取邀请得分
 		int influencedPeople = userMapper.findCodeTotalNum(user.getInviteCode());
+
 		int eachPoint = taskMapper.getEachInvitePoint();
 		int influencedPoint = eachPoint*influencedPeople;
+//		int influencedPoint = 50*influencedPeople;
 		taskMapper.insertTask(userId, "15", influencedPoint);
 //		List<HashMap> pointList = this.getNextUserCount(user);
 //		model.addAttribute("pointList", pointList);
@@ -92,7 +94,7 @@ public class IndexController {
 		List<Task> taskList = taskMapper.queryUserTask(userId);
 		model.addAttribute("taskList", taskList);
 		
-		List<TaskType> taskTypeList = taskMapper.queryUserTaskType();
+		List<TaskType> taskTypeList = taskMapper.queryUserTaskType(userId);
 		model.addAttribute("taskTypeList", taskTypeList);
 			
 		// 尚未转发的Tweet
