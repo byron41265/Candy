@@ -93,10 +93,6 @@
 }
 
 
-
-
-
-
 /* added by xsm */
 
 .link-item button {
@@ -271,8 +267,8 @@
     cursor: pointer;
 }
 
-.sidebar-section li.active{
-	color:#0E5ACE;
+.sidebar-section li.active {
+    color: #0E5ACE;
 }
 
 .left-sidebar.mobile {
@@ -395,8 +391,13 @@
 }
 
 .greeting-container {
-    margin-top: 50px;
+    margin-top: 60px;
     width: 929px;
+    background-color: #fff;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    padding-left: 50px;
+    padding-right: 30px;
     box-sizing: border-box;
 }
 
@@ -409,32 +410,37 @@
 }
 
 .greeting-container .greeting-content {
-    color: #FFFFFF;
-    font-size: 20px;
+    color: #888888;
+    font-size: 16px;
+    line-height: 22px;
     text-align: center;
-    background-color: #4575E6;
-    height: 74px;
-    line-height: 74px;
-    border-radius: 5px;
-    cursor: pointer;
+    margin-bottom: 30px;
 }
-.greeting-container .greeting-content .icon-arrow {
+
+.greeting-container .greeting-content .greeting-rule-btn {
+    color: #4575E6;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.greeting-container .greeting-content .greeting-rule-btn:after {
     content: '';
-    display: inline-block;
-    width: 8px;
-    height: 15px;
-    background-image: url(../img/icon-arrow.png);
-    background-size: 100%;
-    background-repeat: no-repeat;
+    font-size: 0;
+    line-height: 0;
+    border-width: 6px;
+    border-color: #4575E6;
+    border-right-width: 0;
+    border-style: dashed;
+    border-left-style: solid;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
     position: relative;
-    top: 1px;
-    margin-left: 24px;
+    top: -5px;
+    margin-left: 5px;
 }
 
 .greeting-container .count {
     margin-top: 22px;
     text-align: center;
-    margin-bottom: 44px;
 }
 
 .greeting-container .box {
@@ -664,6 +670,7 @@
 .detail-container .detail-table tbody td {
     height: 87px;
     padding-left: 30px;
+    box-sizing: border-box;
 }
 
 .detail-container .detail-table tbody td .row-rules {
@@ -706,6 +713,7 @@
 .detail-container .detail-table tbody td.red {
     color: #EA5454;
 }
+
 .detail-container .detail-table tr:before {
     position: absolute;
     content: "";
@@ -713,9 +721,11 @@
     height: 87px;
     z-index: -1;
 }
+
 .detail-container .detail-table tr.highlight {
     color: #FFFFFF !important;
     position: relative;
+    border-bottom: 1px solid #fff;
 }
 
 .detail-container .detail-table tr.highlight:before {
@@ -852,25 +862,33 @@
 }
 
 .modal.modal-rules .modal-row .modal-row-content ul li {
-	list-style: disc inside none;
+    list-style: disc inside none;
 }
-.modal.modal-rules .modal-row  .icon.icon-link {
+
+.modal.modal-rules .modal-row .icon.icon-link {
     background-image: url('../img/link.png');
     background-size: 100%;
     background-repeat: no-repeat;
     width: 14px;
-	height: 14px;
-	display: inline-block;
+    height: 14px;
+    display: inline-block;
 }
-
+.modal.modal-rules.modal-dis-rule {
+    padding: 22px 36px 35px 36px;
+    width: 636px;
+}
 .modal.modal-rules.modal-dis-rule .modal-row .modal-row-title {
-    text-align: center;
+    text-align: left;
+}
+.modal.modal-rules.modal-dis-rule .modal-row .modal-row-title.cl-1 {
+    color: rgba(54,61,72,0.5);
 }
 
 .modal.modal-rules.modal-dis-rule .modal-row .modal-row-tb {
     font-size: 14px;
     color: #363D48;
     width: 100%;
+    margin-bottom: 39px;
 }
 
 .modal.modal-rules.modal-dis-rule .modal-row .modal-row-tb,
@@ -900,10 +918,6 @@
 .modal.modal-rules .btn-submit {
     margin: 32px auto 0 auto;
 }
-
-
-
-
 
 
 /* modified by xsm5202  脭枚录脫脨拢脩茅麓铆脦贸脤谩脢戮脨脜脧垄,脫毛login 脰脴脫脙*/
@@ -1104,7 +1118,6 @@
         font-size: 12px;
         height: 22px;
     }
-
     .point-container .point-item+.point-item {
         margin-left: 0;
     }
@@ -1114,37 +1127,24 @@
     .greeting-container {
         margin-top: 16px;
         width: 100%;
+        padding-top: 32px;
+        padding-left: 36px;
     }
-
     .greeting-container .greeting-tl {
         font-size: 16px;
         line-height: 22px;
         text-align: left;
     }
-
     .greeting-container .greeting-content {
         font-size: 14px;
         line-height: 20px;
         text-align: left;
-        padding: 15px 70px 0 20px;
-        height: 70px;
-        box-sizing: border-box;
-        position: relative;
+        margin-bottom: 25px;
     }
-    .greeting-container .greeting-content .icon-arrow {
-        width: 8px;
-        height: 15px;
-        position: absolute;
-        top: 27px;
-        right: 16px;
-    }
-
     .greeting-container .count {
         margin-top: 16px;
         text-align: left;
-        margin-bottom: 35px;
     }
-
     .greeting-container .box {
         width: 30px;
         height: 30px;
@@ -1152,7 +1152,6 @@
         line-height: 30px;
         margin-right: 15px;
     }
-
     .greeting-container .box.sel:after {
         font-size: 24px;
         right: -11px;
@@ -1195,6 +1194,9 @@
     .detail-container .detail-table tbody td {
         height: 44px;
     }
+    .detail-container .detail-table tr.highlight:before {
+        height: 44px;
+    }
     .modal {
         width: auto;
         margin: 0 34px;
@@ -1230,9 +1232,13 @@
     .modal.modal-rules .btn-submit {
         margin: 24px auto 0 auto;
     }
-    .modal.modal-rules.modal-dis-rule .modal-row .modal-row-title {
-    font-size: 12px;
+    .modal.modal-rules.modal-dis-rule {
+    padding: 22px 13px 35px 13px;
+    width: auto;
 }
+    .modal.modal-rules.modal-dis-rule .modal-row .modal-row-title {
+        font-size: 12px;
+    }
     .modal.modal-rules.modal-dis-rule .modal-row .modal-row-tb {
         font-size: 9px;
         transform-origin-x: 0;
@@ -1252,9 +1258,10 @@
         height: 66px;
     }
 }
+
 @media screen and (max-height:959px) {
     .modal.modal-rules.modal-dis-rule .modal-row {
         overflow-y: scroll;
-        height: 360px;
+        height: 520px;
     }
 }
