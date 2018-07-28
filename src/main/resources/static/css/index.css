@@ -670,6 +670,7 @@
 .detail-container .detail-table tbody td {
     height: 87px;
     padding-left: 30px;
+    box-sizing: border-box;
 }
 
 .detail-container .detail-table tbody td .row-rules {
@@ -724,6 +725,7 @@
 .detail-container .detail-table tr.highlight {
     color: #FFFFFF !important;
     position: relative;
+    border-bottom: 1px solid #fff;
 }
 
 .detail-container .detail-table tr.highlight:before {
@@ -1190,6 +1192,9 @@
         height: 52px;
     }
     .detail-container .detail-table tbody td {
+        height: 44px;
+    }
+    .detail-container .detail-table tr.highlight:before {
         height: 44px;
     }
     .modal {
