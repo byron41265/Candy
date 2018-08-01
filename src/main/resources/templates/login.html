@@ -41,7 +41,11 @@
 	                    </div>
 	                </div>
 	                <div class="wrap">
-	                	<div class="g-recaptcha" data-sitekey="6Lf5aWQUAAAAAIRrpVuxU0Ecc6l7zJe7tYWcZVdE"></div>
+	                	<p class="title">VerifyCode</p>
+	                	<div class="input-wrap">
+	                		<input class="input required" type="text" id="verifyCode" name="verifyCode" />
+	                	</div>
+	                	<img alt="验证码" onclick = "this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />
 	                </div>
 	                <div class="forget-section">
 	                    <!-- 不选中去掉checked，选中加上checked样式 -->
@@ -73,5 +77,9 @@
 		  });
 	});
 </script>
-
+<script type="text/javascript">
+function getVerify(obj){
+    obj.src = httpurl + "/getVerify?"+Math.random();
+}
+</script>
 </html>

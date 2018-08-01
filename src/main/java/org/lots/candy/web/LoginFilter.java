@@ -28,7 +28,7 @@ import org.springframework.core.annotation.Order;
 public class LoginFilter implements Filter {
 
 	
-	static final Pattern ALLOWED_PATHS = Pattern.compile("(^/js/.*)|(^/css/.*)|(^/img/.*)|(^/fonts/.*)|(/favicon.ico)|(/index.html)|(/rule.html)|(/login)|(/register)|(/activeUser)|(/forgetPwd)|(/resetPwd)|(/resetPage)|(/sendForgetEmail)");
+	static final Pattern ALLOWED_PATHS = Pattern.compile("(^/js/.*)|(^/css/.*)|(^/img/.*)|(^/fonts/.*)|(/favicon.ico)|(/index.html)|(/rule.html)|(/login)|(/register)|(/activeUser)|(/forgetPwd)|(/resetPwd)|(/resetPage)|(/sendForgetEmail)|(/defaultKaptcha)");
 
 	@Override
 	public void destroy() {

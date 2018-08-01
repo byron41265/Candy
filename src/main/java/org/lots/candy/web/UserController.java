@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.google.code.kaptcha.impl.DefaultKaptcha;
+
+import sun.misc.BASE64Encoder;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +22,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
@@ -41,6 +50,9 @@ public class UserController {
 	@Autowired
 	private SendEmailUtils sendEmailUtils;
 	
+	@Autowired
+	DefaultKaptcha defaultKaptcha;
+	
 	@Value("${spring.mail.url}")
 	private String emailUrl;
 	
@@ -64,27 +76,21 @@ public class UserController {
 	public String login(HttpServletRequest request, HttpSession session) throws IOException,ParseException{
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-//		Date now = new Date();
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		Date dt = sdf.parse(dateLimit);
-//		if(now.before(dt)){
-//			return "";
-//		}
-		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+		String verifyCode = request.getParameter("verifyCode");
+		String captcha = (String)request.getSession().getAttribute("verifyCode");
 		if((email==null||email.isEmpty())||(password==null||password.isEmpty())){
 			return "Please enter your username and password";
 		}
 		User user = userMapper.findUserByEmailAndPwd(email, password);
 		
-		if(user!=null&&user.getStatus().equals("1")){
+		if(user!=null&&user.getStatus().equals("1")&&verifyCode.equals(captcha)){
 			session.setAttribute(Constant.USER_SESSION_NAME, user.getUserId());
 			
 			logUserIpInfo(user.getUserId(), "login", request);
 			return "success";
 		}else if(user!=null&&user.getStatus().equals("0")){
 			return "This user has not activated";
-		}else if(!verify){
+		}else if(!verifyCode.equals(captcha)){
 			return "Verification code error";
 		}else{
 			return  "Email or password is error";
@@ -127,8 +133,10 @@ public class UserController {
 	public String register(HttpServletRequest request) throws IOException{
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+		String verifyCode = request.getParameter("verifycode");
+		String captcha = (String)request.getSession().getAttribute("verifyCode");
+		//String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+		//boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 		String email = request.getParameter("email");
 		String superInviteCode = request.getParameter("inviteCode");
 		int count = userMapper.findCodeTotalNum("superInviteCode");
@@ -151,7 +159,7 @@ public class UserController {
 			message = "Email has been registered";
 		}else if(!"".equals(superInviteCode)&&superInviteCode!=null&&userMapper.findInviteCode(superInviteCode)==0){
 			message = "The invitation code does not exist";
-		}else if(!verify){
+		}else if(!verifyCode.equals(captcha)){
 			message = "Verification code error";
 		}else{
 			userMapper.save(userId, username, password, email, inviteCode, superInviteCode, status);
@@ -251,4 +259,33 @@ public class UserController {
 		session.removeAttribute(Constant.USER_SESSION_NAME);
 		return "redirect:/login";
 	}
+	//生成验证码
+	@RequestMapping(value="/defaultKaptcha",method=RequestMethod.GET)
+	@ResponseBody
+	 public void defaultKaptcha(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws Exception{ 
+	   byte[] captchaChallengeAsJpeg = null; 
+	    ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream(); 
+	    try { 
+	    //生产验证码字符串并保存到session中 
+	    String createText = defaultKaptcha.createText(); 
+	    httpServletRequest.getSession().setAttribute("verifyCode", createText); 
+	    BufferedImage challenge = defaultKaptcha.createImage(createText); 
+	    ImageIO.write(challenge, "jpg", jpegOutputStream); 
+	    } catch (IllegalArgumentException e) { 
+	     httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND); 
+	     return; 
+	    } 
+	    captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
+//	    BASE64Encoder encoder = new BASE64Encoder();
+	    httpServletResponse.setHeader("Cache-Control", "no-store"); 
+	    httpServletResponse.setHeader("Pragma", "no-cache"); 
+	    httpServletResponse.setDateHeader("Expires", 0); 
+	    httpServletResponse.setContentType("image/jpeg"); 
+	    ServletOutputStream responseOutputStream = 
+	      httpServletResponse.getOutputStream(); 
+	    responseOutputStream.write(captchaChallengeAsJpeg); 
+	    responseOutputStream.flush(); 
+	    responseOutputStream.close(); 
+	 }
+	
 }
