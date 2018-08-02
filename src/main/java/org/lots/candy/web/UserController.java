@@ -90,7 +90,7 @@ public class UserController {
 			return "success";
 		}else if(user!=null&&user.getStatus().equals("0")){
 			return "This user has not activated";
-		}else if(!verifyCode.equals(captcha)){
+		}else if(!verifyCode.toUpperCase().equals(captcha.toUpperCase())){
 			return "Verification code error";
 		}else{
 			return  "Email or password is error";
@@ -159,7 +159,7 @@ public class UserController {
 			message = "Email has been registered";
 		}else if(!"".equals(superInviteCode)&&superInviteCode!=null&&userMapper.findInviteCode(superInviteCode)==0){
 			message = "The invitation code does not exist";
-		}else if(!verifyCode.equals(captcha)){
+		}else if(!verifyCode.toUpperCase().equals(captcha.toUpperCase())){
 			message = "Verification code error";
 		}else{
 			userMapper.save(userId, username, password, email, inviteCode, superInviteCode, status);
