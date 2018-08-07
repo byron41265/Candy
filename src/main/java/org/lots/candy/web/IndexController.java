@@ -57,6 +57,10 @@ public class IndexController {
 		
 		// 正文开始
 		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
+		if (Constant.ADMIN.equals(userId)) {
+			return "redirect:/admin/";
+		}
+		
 		User user = userMapper.findUserByElement("userId", userId);
 		// 获取邀请得分
 		int influencedPeople = userMapper.findCodeTotalNum(user.getInviteCode());

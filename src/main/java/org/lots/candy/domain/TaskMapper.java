@@ -7,8 +7,11 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.lots.candy.entity.Action;
 import org.lots.candy.entity.Task;
 import org.lots.candy.entity.TaskType;
+
+import com.github.pagehelper.Page;
 
 @Mapper
 public interface TaskMapper {
@@ -34,4 +37,13 @@ public interface TaskMapper {
 	
 	@Select("select eachPoint from task where taskId = '15'")
 	public int getEachInvitePoint();
+	
+	@Select("<script>select a.`userId`, u.userName, a.`taskId`, t.`name` taskName, t.eachPoint taskEachPoint, t.eachPoint1 taskEachPoint1, a.`earned_point`, a.`submitUrl`, DATE_FORMAT(a.`submitTime`,'%Y-%m-%d %H:%i:%s') submitTime, a.`if_effective` ifEffective, a.`if_handled` ifHandled "
+			+ "from `action` a join `user` u on a.userId = u.userId join task t on a.taskId = t.taskId "
+			+ "where a.`if_handled` = #{ifHandled} "
+			+ "<if test=\"userName!=null and userName!=''\"> and u.userName like '%'||#{userName}||'%'</if>"
+			+ "<if test=\"taskId!=null and taskId!=''\"> and a.taskId = #{taskId}</if>"
+			+ "order by a.`if_handled`,  a.`taskId`, a.`userId` , a.`submitTime` desc</script>")
+	public Page<Action> queryActions(@Param("userName")String userName,@Param("taskId")String taskId, @Param("ifHandled")String ifHandled);
+	
 }

@@ -83,7 +83,7 @@ public class UserController {
 		}
 		User user = userMapper.findUserByEmailAndPwd(email, password);
 		
-		if(user!=null&&user.getStatus().equals("1")&&verifyCode.equals(captcha)){
+		if(user!=null&&user.getStatus().equals("1")&&verifyCode.toUpperCase().equals(captcha.toUpperCase())){
 			session.setAttribute(Constant.USER_SESSION_NAME, user.getUserId());
 			
 			logUserIpInfo(user.getUserId(), "login", request);
