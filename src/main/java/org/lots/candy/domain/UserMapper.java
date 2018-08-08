@@ -55,9 +55,17 @@ public interface UserMapper {
 	
 	@Insert("insert into user_task(userId, taskId)  select t1.userId, t2.taskId from user t1, task t2 where userId=#{userId}")
 	public void initUserTask(@Param("userId") String userId);
+	//获取在100名内用户应该获得的tokens
+	@Select("select tokens from rankTokens where minrank<=#{userrank} and maxrank>=#{userrank}")
+	public int getRankTokens(@Param("userrank") int userrank);
+	//获取得分超过1000且排名在100开外的人数
+	@Select("select count(*) from (select ifnull(sum(t2.earnedPoint),0) sum from user t1, user_task t2 where t1.userId = t2.userId and t1.rank>100) a where a.sum>1000")
+	public int getPeopleNum();
+	//获取被前100名用户瓜分掉的tokens
+	@Select("select sum(t2.tokens) from user t1, rankTokens t2 where t1.rank>=t2.minrank and t1.rank<=t2.maxrank")
+	public int getUsedReward();
 	
-	@Select("select tokens from rankTokens where scoreLevel=#{scoreLevel}")
-	public int getRankTokens(@Param("scoreLevel") int scoreLevel);
+	
 	
 	@Select("select count(distinct a.user1) as num1, count(distinct a.user2) as num2, "
 			+ " count(distinct a.user3) as num3, count(distinct a.user4) as num4,"

@@ -264,13 +264,14 @@ create table user_ip(
 
 drop table rankTokens;
 create table rankTokens(
-	`scoreLevel`	int,	
-	`tokens`		int
+	`minrank` int,
+	`maxrank` int,	
+	`tokens`  int
 ) ENGINE=MYISAM;
-insert into rankTokens values(0,0);
-insert into rankTokens values(1,100000);
-insert into rankTokens values(2,40000);
-insert into rankTokens values(3,20000);
-insert into rankTokens values(4,10000);
-insert into rankTokens values(5,4000);
-insert into rankTokens values(6,2000);
+
+insert into rankTokens values(1,1,100000);
+insert into rankTokens values(2,4,40000);
+insert into rankTokens values(5,10,20000);
+insert into rankTokens values(11,20,10000);
+insert into rankTokens values(21,40,4000);
+insert into rankTokens values(41,100,2000);

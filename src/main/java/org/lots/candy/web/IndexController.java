@@ -78,21 +78,16 @@ public class IndexController {
 		model.addAttribute("earned_point",earned_point);
 		// 获取个人期望得分
 		int rank = user.getRank();
-		int scoreLevel =0;
-		if(rank==1){
-			scoreLevel = 1;
-		}else if(rank>=2&&rank<=4){
-			scoreLevel = 2;
-		}else if(rank>=5&&rank<=10){
-			scoreLevel = 3;
-		}else if(rank>=11&&rank<=20){
-			scoreLevel = 4;
-		}else if(rank>=21&&rank<=40){
-			scoreLevel = 5;
-		}else if(rank>=41&&rank<=100){
-			scoreLevel = 6;
+		int expected_reward;
+		if(rank<=100){
+			expected_reward = userMapper.getRankTokens(rank);
+		}else if(rank>100&&earned_point<1000){
+			expected_reward = 0;
+		}else{
+			int usedReward = userMapper.getUsedReward();
+			int peopleNum = userMapper.getPeopleNum();
+			expected_reward = (2000000-usedReward)/peopleNum;
 		}
-		int expected_reward = userMapper.getRankTokens(scoreLevel);
 		model.addAttribute("expected_reward", expected_reward);
 		// 获取列表
 		List<Task> taskList = taskMapper.queryUserTask(userId);
