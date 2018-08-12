@@ -11,7 +11,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 
-import sun.misc.BASE64Encoder;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;

@@ -1,76 +1,158 @@
 [#ftl]
-<html>
-	<head>
-		<title>Hello Twitter</title>
-		<style type="text/css">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="icon" href="img/favicon.ico">
+    <title>LOTS</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/noty.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
 
-		</style>
-	</head>
-	<body>
-		<!--social menu bar -->
-		<div id="social">
-			<form action="/connect/twitter" method="POST">
-				<input type="submit" value="twitter"/>
-			</form>
-			<form action="/connect/facebook" method="POST">
-				<input type="submit" value="facebook"/>
-			</form>
-		</div>
-		
-		
-		<div id="taskTable" >
-			<table>
-				<thead>
-					<th>Task Information</th>
-					<th>Points</th>
-					<th>Daily Point Limit</th>
-					<th>Total Point Limit</th>
-					<th>Earned Point</th>
-					<th>Instruction</th>
-				</thead>
-				<tbody>
-					[#if taskList?? ]
-						[#list taskList as task]
-							<tr>
-								<td>${task.name}</td>
-								<td>${task.eachPoint}</td>
-								<td>${task.dailyPointLimit}</td>
-								<td>${task.pointLimit}</td>
-								<td>${task.earnedPoint}</td>
-								<td>
-								[#if task.ifClosed == 'Y']
-									Task is closed.
-								[#elseif  task.earnedPoint == task.pointLimit]
-									Task is finished.
-								[#else]
-									[#-- Bind Twitter --]
-									[#if task.taskId == '1' ]
-										${task.instruction}
-									[#elseif task.taskId == '2']	
-										Got to <a href="https://twitter.com/LotsOrg"  target="_blank">Follow us</a>. We will check it later.
-									[/#if]
-								
-								[/#if]
-								</td>
-							</tr>
-						[/#list]
-					[/#if]
-				</tbody>
-			</table>
-		
-		</div>
-		
-		
-		
-		
-		
-		<script type="text/javascript"  src="js/jquery.min.js"></script>
-		<script  type="text/javascript"  src="js/twitter.js"></script>
-		<script type="text/javascript">
-			$( document ).ready(function() {
-				
-			});
-			
-		</script>
-	</body>
-</html>
+<body>
+    <div class="container">
+    	<div class="navbar">
+            <div class="navbar-mobile-nav js_showNav"></div>
+            <div class="navbar-logo"></div>
+            <div class="navbar-link">
+                <ul>
+                    <li class="link-item">
+                    	<form action="/connect/facebook" method="POST">
+                        	<button type="submit"  class="icon icon-facebook"></button>
+                        </form>
+                    </li>
+                    <li class="link-item">
+                    	<form action="/connect/twitter" method="POST">
+                        	<button type="submit"  class="icon icon-twitter"></button>
+                        </form>
+                    </li>
+                    <!-- 
+                    <li class="link-item">
+                        <a href="javascript:;" onclick="return TWidgetLogin.auth();" class="icon icon-tme"></a>
+                    </li> -->
+                    <li class="link-item">
+                        <script async src="https://telegram.org/js/telegram-widget.js?4" data-telegram-login="lotsglobal_bot" data-auth-url="/tgauth" data-userpic="false"  data-request-access="write"></script>
+                    </li>
+                    <!-- 
+                    <li class="link-item">
+                        <form action="/connect/linkedin" method="POST">
+                        	<button type="submit"  class="icon icon-ins"></button>
+                        </form>
+                    </li> -->
+                    <li class="link-item">
+                        <a href="javascript:;" class="icon icon-link"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-user js_showUserFloat">
+                <span class="name">${user.email}</span>
+                <span class="arrow-down"></span>
+                <div class="user-float js_userFloat">
+                    <p class="icon-change js_showChangePwd">Change password</p>
+                 <!--    <p class="icon-bind js_showBindWallet">Bind wallet</p> -->
+                    <p class="icon-logout js_logout">Logout</p>
+                </div>
+            </div>
+        </div>
+        <div class="left-sidebar">
+            <div class="sidebar-section active">
+                <p class="tl">Phase 1</p>
+                	<ul>
+		                    <li class="sidebar-item">Task Validation</li>
+                	</ul>
+            </div>
+            <div class="sidebar-section disabled">
+                <p class="tl">Phase 2 (coming soon)</p>
+            </div>
+            <div class="sidebar-section disabled">
+                <p class="tl">Phase 3 (coming soon)</p>
+            </div>
+        </div>
+        <div class="content">
+        	<div class="task-container">
+        		<form class="col-md-12 form-inline">
+        			<fieldset>
+						<div class="form-group">
+							<label readonly>UserName: </label>
+							<input type="text" class="form-control" placeholder="" name="userName">
+						</div>
+						<div class="form-group">
+							<label readonly>Task Name: </label>
+							<select  class="form-control" placeholder="" name="task">
+								[#if taskList?? ]
+			                		[#list taskList as task]
+					                    <option value="${task.taskId}">${task.name}</option>
+			                    	[/#list]
+				                [/#if]
+			                </select>
+						</div>
+						<div class="form-group">
+							<label readonly>If Handled: </label>
+							<select  class="form-control" placeholder="" name="ifHandled">
+								<option value="N">N</option>
+								<option value="Y">Y</option>
+			                </select>
+						</div>
+						<!-- 
+						<div class="form-group">
+							<label readonly>If Effective: </label>
+							<select  class="form-control" placeholder="" name="task">
+								<option value="">All</option>
+								<option value="N">N</option>
+								<option value="Y">Y</option>
+			                </select>
+						</div> -->
+						<div class="ui-datagrid-buttons">
+						</div>
+        			</fieldset>
+        		</form>
+        		
+        		<table class="table dataTable">
+					<thead>
+			        	<tr>
+							<th class="check"><input type="checkbox" class="icheckbox"></th>
+							<th>UserName</th>
+							<th>taskName</th>
+							<th>submitUrl</th>
+							<th>submitTime</th>
+							<th>ifHandled</th>
+							<th>ifEffective</th>
+			        	</tr>
+					</thead>
+					<tbody>
+				        
+				        
+
+					</tbody>
+			    </table>
+        	</div>
+        </div>
+        
+    </div>
+    <div class="overlay-mask js_mask"></div>
+    <div class="overlay-mask modal-mask js_modal_mask"></div>
+</body>
+<script src="js/sea.js"></script>
+<script src="js/seaconfig.js"></script>
+
+<!-- 
+<script src="js/widget-frame.js?17"></script>
+<script type="text/javascript">
+TWidgetLogin.init('widget_login', 573152760, {"origin":"https:\/\/candy.lots.org","request_access":"write"}, false); 
+</script>-->
+<script type="text/javascript">
+	seajs.use(['jquery', 'admin'], function($, main){
+		$(document).ready(function() {
+			main.init();
+		  });
+	});
+</script>
+
+</html>    

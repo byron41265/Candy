@@ -46,4 +46,7 @@ public interface TaskMapper {
 			+ "order by a.`if_handled`,  a.`taskId`, a.`userId` , a.`submitTime` desc</script>")
 	public Page<Action> queryActions(@Param("userName")String userName,@Param("taskId")String taskId, @Param("ifHandled")String ifHandled);
 	
+	@Select("select taskId, name,eachPoint,eachPoint1 from task where phase = 1 and ifEffective ='Y' and checkMethod='2'")
+	public List<Task> queryValidateTask();
+	
 }

@@ -1,0 +1,82 @@
+.task-container{
+	font-size: 16px;
+	color: #121F3E;	
+}
+
+
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 28px;
+  padding: 4px 10px;
+  font-size: 16px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+form.form-inline{
+	margin-bottom:30px;
+}
+
+.form-inline .form-group {
+  	display: inline-block;
+	margin-bottom: 0;
+	vertical-align: middle;
+}
+
+.form-inline  .form-control {
+	display: inline-block;
+	width: auto;
+	vertical-align: middle;
+}
+.form-inline  select.form-control {
+	height:36px;
+}
+
+
+.dataTable{
+    font-size: 14px;
+    color: #363D48;
+    width: 95%;
+    background-color: #fff;
+    text-align: left;
+    position: relative;
+    z-index: 5;
+}
+
+.dataTable thead th {
+    font-size: 16px;
+    font-weight: 600;
+    height: 113px;
+    border-bottom: 1px solid #F3F6F8;
+    padding-left: 30px;
+}
+
+.dataTable tbody td {
+    height: 87px;
+    padding-left: 30px;
+    box-sizing: border-box;
+}

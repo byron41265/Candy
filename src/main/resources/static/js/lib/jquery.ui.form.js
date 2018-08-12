@@ -1020,30 +1020,6 @@ $.widget( "ui.page",{
 			previousAnchorText : "上一页",
 			nextAnchorText : "下一页",
 			lastAnchorText : "末页"
-		},
-		beforeShowPage : function(){
-			var winWidth = $(window).width();
-			$(".maincontent").width(winWidth - 240);
-			$(".header").width(winWidth);
-
-			var winSize = $(window).height();
-			$('.rightpanel').height(winSize-110);
-		},
-		afterShowPage : function(){
-			//目前仅修复右边panel的高度，与功能无关
-			var winWidth = $(window).width();
-			var tableWidth = $(this).width();
-			if( winWidth - 280 < tableWidth){
-				$(".maincontent").width(tableWidth + 40);
-				$(".header").width(tableWidth + 280);
-			}
-
-			var winSize = $(window).height();
-			if($('.maincontent').height() < winSize - 110) {
-				$('.rightpanel').height(winSize-110); //rightpanel = window高度 - header高度
-			}else {
-				$('.rightpanel').height($('.maincontent').height());
-			}
 		}
 	},
 	_create : function () {
@@ -1147,7 +1123,7 @@ $.widget( "ui.page",{
 			rtmpl = page.rowTemplate;
 		}
 
-		self._trigger("beforeShowPage");
+		//self._trigger("beforeShowPage");
 
 		if(page.result.length==0){						//add by wangaq 2015年11月25日9:45:47 增加如果没有记录则显示 查询无结果
 			body.append("<tr><td colspan='"+colspanSize+"'>查询无结果</td></tr>");
@@ -1182,7 +1158,7 @@ $.widget( "ui.page",{
 		}
 		generatePagination.call(self);
 
-		self._trigger("afterShowPage");
+		//self._trigger("afterShowPage");
 
 	},
 	getChecked : function(){

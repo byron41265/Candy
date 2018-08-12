@@ -55,6 +55,10 @@ create table user (
 
 ALTER TABLE user add primary key (userId);
 
+insert into user(userId,userName,`password`,email,status) values('admin','admin',md5('Lots666666'),'admin@lots.org',1);
+
+commit;
+
 drop table task_type;
 
 create table task_type (
@@ -275,3 +279,5 @@ insert into rankTokens values(5,10,20000);
 insert into rankTokens values(11,20,10000);
 insert into rankTokens values(21,40,4000);
 insert into rankTokens values(41,100,2000);
+
+commit;
