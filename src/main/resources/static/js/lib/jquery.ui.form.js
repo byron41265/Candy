@@ -40,6 +40,10 @@ $.extend($.fn,{
 	}
 });
 
+function preHandleResult(){
+	return false;
+}
+
 var iconClass = {
 	query : "fa fa-search",
 	add : "fa fa-plus",
@@ -1086,21 +1090,21 @@ $.widget( "ui.page",{
 					alert("获取数据请求失败!");
 				}
 			}).responseText;
+			try{
+				pageData= $.parseJSON(pageData);
+			}catch(e){
+				alert("数据解析错误!");
+				return ;
+			}
+			
 		}
 
 		if(pageData) {
 
-			if(preHandleResult(pageData))
-				return ;
-
-			try {
-				page = $.parseJSON(pageData);
-				//将page对象放到option中,添加对查询结果为空的验证
-				o.page = page;
-			}catch(e) {
-				alert("数据解析失败!");
-				return ;
-			}
+			page = pageData;
+			//将page对象放到option中,添加对查询结果为空的验证
+			o.page = page;
+			
 		}else {
 			return ;
 		}
@@ -1314,7 +1318,7 @@ $.widget( "ui.datagrid",{
 			}
 
 			$icon = $("<span>").addClass(iconClass[action.name] ? iconClass[action.name] : "fa fa-search" );
-			$anchor = $("<a>").addClass("btn btn-primary btn-small").css({"margin-right":"10px"}).append($icon).append(action.label).appendTo($buttonGroup);
+			$anchor = $("<a>").addClass("btn btn-primary btn-small "+action.name).css({"margin-right":"10px"}).append($icon).append(action.label).appendTo($buttonGroup);
 
 			if (action.type == "page"){
 				$anchor.bind("click.datagrid",function(e){

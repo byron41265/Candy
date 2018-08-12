@@ -164,6 +164,7 @@ ALTER TABLE user_task add primary key (userId, taskId);
 
 drop table action;
 create table action (
+	id int not null auto_increment primary key,
 	userId varchar(50) not null,
 	taskId varchar(5) not null,
 	earned_point int DEFAULT 0,
@@ -173,7 +174,6 @@ create table action (
 	if_handled varchar(2)
 ) ENGINE=MYISAM;
 
-ALTER TABLE action add primary key (userId, taskId, submitUrl); 
 
 drop table dic_item;
 

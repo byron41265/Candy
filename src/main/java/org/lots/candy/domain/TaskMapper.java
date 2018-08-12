@@ -11,7 +11,6 @@ import org.lots.candy.entity.Action;
 import org.lots.candy.entity.Task;
 import org.lots.candy.entity.TaskType;
 
-import com.github.pagehelper.Page;
 
 @Mapper
 public interface TaskMapper {
@@ -38,15 +37,26 @@ public interface TaskMapper {
 	@Select("select eachPoint from task where taskId = '15'")
 	public int getEachInvitePoint();
 	
-	@Select("<script>select a.`userId`, u.userName, a.`taskId`, t.`name` taskName, t.eachPoint taskEachPoint, t.eachPoint1 taskEachPoint1, a.`earned_point`, a.`submitUrl`, DATE_FORMAT(a.`submitTime`,'%Y-%m-%d %H:%i:%s') submitTime, a.`if_effective` ifEffective, a.`if_handled` ifHandled "
+	@Select("<script>select a.`id`, a.`userId`, u.userName, a.`taskId`, t.`name` taskName, t.eachPoint taskEachPoint, t.eachPoint1 taskEachPoint1, a.`earned_point`, a.`submitUrl`, DATE_FORMAT(a.`submitTime`,'%Y-%m-%d %H:%i:%s') submitTime, a.`if_effective` ifEffective, a.`if_handled` ifHandled "
 			+ "from `action` a join `user` u on a.userId = u.userId join task t on a.taskId = t.taskId "
 			+ "where a.`if_handled` = #{ifHandled} "
-			+ "<if test=\"userName!=null and userName!=''\"> and u.userName like '%'||#{userName}||'%'</if>"
+			+ "<if test=\"userName!=null and userName!=''\"> and u.userName like concat('%',#{userName},'%') </if>"
 			+ "<if test=\"taskId!=null and taskId!=''\"> and a.taskId = #{taskId}</if>"
-			+ "order by a.`if_handled`,  a.`taskId`, a.`userId` , a.`submitTime` desc</script>")
-	public Page<Action> queryActions(@Param("userName")String userName,@Param("taskId")String taskId, @Param("ifHandled")String ifHandled);
+			+ "order by a.`if_handled`,  a.`taskId`, a.`userId` , a.`submitTime` desc limit #{start}, #{size}</script>")
+	public List<Action> queryActions(@Param("userName")String userName,@Param("taskId")String taskId, @Param("ifHandled")String ifHandled,@Param("start") int start,@Param("size") int pageSize);
+	
+	@Select("<script>select count(1) "
+			+ "from `action` a join `user` u on a.userId = u.userId join task t on a.taskId = t.taskId "
+			+ "where a.`if_handled` = #{ifHandled} "
+			+ "<if test=\"userName!=null and userName!=''\"> and u.userName like concat('%',#{userName},'%') </if>"
+			+ "<if test=\"taskId!=null and taskId!=''\"> and a.taskId = #{taskId}</if>"
+			+ "order by a.`if_handled`,  a.`taskId`, a.`userId` , a.`submitTime` desc </script>")
+	public int queryActionsCount(@Param("userName")String userName,@Param("taskId")String taskId, @Param("ifHandled")String ifHandled);
 	
 	@Select("select taskId, name,eachPoint,eachPoint1 from task where phase = 1 and ifEffective ='Y' and checkMethod='2'")
 	public List<Task> queryValidateTask();
+	
+	@Update("<script>update action set earned_point = #{point}, if_effective = #{ifEffective} , if_handled ='Y' where id in ( <foreach item='item' collection='idList'  separator=',' >#{item} </foreach>)</script>")
+	public void updateAction(@Param("idList")List<String> idList,@Param("point")String  point,@Param("ifEffective")String  ifEffective);
 	
 }

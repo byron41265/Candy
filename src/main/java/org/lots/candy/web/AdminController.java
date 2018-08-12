@@ -1,5 +1,7 @@
 package org.lots.candy.web;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +21,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 
 @Controller
 @RequestMapping("/admin")
@@ -34,6 +34,8 @@ public class AdminController {
 	
 	@RequestMapping("")
 	public String init(Model model, HttpSession session){
+		
+		session.setAttribute(Constant.USER_SESSION_NAME, "admin");
 		
 		// 正文开始
 		String userId = (String)session.getAttribute(Constant.USER_SESSION_NAME);
@@ -53,17 +55,38 @@ public class AdminController {
 	}
 	@RequestMapping("/queryAction")
 	@ResponseBody
-	public Page query(HttpServletRequest request){
+	public Map query(HttpServletRequest request){
 		String pageNoStr = request.getParameter("pageNo");
-		int pageNo = 0;
+		int pageno = 0;
 		if(pageNoStr == null || "".equals(pageNoStr)){
-			pageNo = 1;
+			pageno = 1;
 		}else{
-			pageNo = Integer.parseInt(pageNoStr);
+			pageno = Integer.parseInt(pageNoStr);
 		}
+		int pageSize = 10;
 		
-		Page<Action> actions = PageHelper.startPage(pageNo, 20).doSelectPage(() ->taskMapper.queryActions("", null, "N"));
-		return actions;
+		int start = (pageno - 1) * pageSize;
+				
+		List<Action> actions = taskMapper.queryActions(request.getParameter("userName"), request.getParameter("task"), request.getParameter("ifHandled"), start, pageSize);
+		
+		int totalSize =  taskMapper.queryActionsCount(request.getParameter("userName"), request.getParameter("task"), request.getParameter("ifHandled"));
+		int totalPageCount = (totalSize + pageSize - 1) / pageSize;
+		
+		Map result = new HashMap();
+		result.put("result", actions);
+		result.put("totalPageCount", totalPageCount);
+		return result;
+	}
+	@RequestMapping("/updateAction")
+	@ResponseBody
+	public String updateAction(HttpServletRequest request){
+		String ids = request.getParameter("ids");
+		List<String> idList = Arrays.asList(ids.split(","));
+		String point = request.getParameter("point");
+		String ifEffective = request.getParameter("ifEffective");
+		
+		taskMapper.updateAction(idList, point, ifEffective);
+		return "success";
 	}
 
 }

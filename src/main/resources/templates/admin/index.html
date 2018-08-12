@@ -136,17 +136,36 @@
         </div>
         
     </div>
+    <div class="modal js_modal_completeTask">
+       	<form action="/admin/updateAction">
+            <div class="modal-row">
+                <p class="modal-row-title">If Effective</p>
+                <div class="input-wrap">
+                	<select class="modal-row-input required "  name="ifEffective">
+                		<option value="Y">Y</option>
+                		<option value="N">N</option>
+                	</select>
+                </div>
+			</div>
+			<div class="modal-row">
+                <p class="modal-row-title">Point</p>                
+                <div class="input-wrap">
+                	<select class="modal-row-input required "  name="point">
+                	</select>
+                </div>
+                <input type="hidden" name="ids"/>
+            </div>
+            <a href="#" class="btn-submit  form-submit" >Submit<span class="arrow-right"></span></a>
+        </form>
+    </div>
+    
     <div class="overlay-mask js_mask"></div>
     <div class="overlay-mask modal-mask js_modal_mask"></div>
 </body>
+
 <script src="js/sea.js"></script>
 <script src="js/seaconfig.js"></script>
 
-<!-- 
-<script src="js/widget-frame.js?17"></script>
-<script type="text/javascript">
-TWidgetLogin.init('widget_login', 573152760, {"origin":"https:\/\/candy.lots.org","request_access":"write"}, false); 
-</script>-->
 <script type="text/javascript">
 	seajs.use(['jquery', 'admin'], function($, main){
 		$(document).ready(function() {
