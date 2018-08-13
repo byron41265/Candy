@@ -79,7 +79,9 @@ public class IndexController {
 		// 获取个人期望得分
 		int rank = user.getRank();
 		int expected_reward;
-		if(rank<=100){
+		if(rank==0){
+			expected_reward = 0;
+		}else if(rank>0&&rank<=100){
 			expected_reward = userMapper.getRankTokens(rank);
 		}else if(rank>100&&earned_point<1000){
 			expected_reward = 0;
