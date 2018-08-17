@@ -95,6 +95,23 @@
     width: 20px;
     height: 20px;
 }
+.login-section .wrap .input-wrap .icon-right-pass {
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 20px;
+    height: 13px;
+    cursor: pointer;
+    background-image: url('../img/password-open.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.login-section .wrap .input-wrap .icon-right-pass.close {
+    background-image: url('../img/password-close.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
 
 .login-section .wrap .input-wrap.icon-error .input {
     border: 1px solid #EA5454;
@@ -116,6 +133,30 @@
 .login-section .wrap .input-wrap.icon-error .error-msg {
     color: #EA5454;
     margin-top: 9px;
+    margin-left: 20px;
+}
+.login-section .wrap .verify-code {
+    width: 128px;
+    height: 48px;
+}
+.login-section .wrap .verify-btn {
+    color: #4A4A4A;
+    font-size: 14px;
+    line-height: 48px;
+    vertical-align: top;
+    cursor: pointer;
+}
+.login-section .wrap .verify-btn:before {
+    content: '';
+    display: inline-block;
+    position: relative;
+    margin-right: 10px;
+    background-image: url('../img/verify-change.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 24px;
+    top: -12px;
     margin-left: 20px;
 }
 

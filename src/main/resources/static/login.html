@@ -21,7 +21,7 @@
             <img class="mobile-logo" src="img/mobile-banner.png">
         </div>
         <!-- ========================= login begin ======================= -->
-        <div class="right-container js_loginPage">
+        <div class="right-container hide js_loginPage">
         <div class="login-section">
             <h1 class="txt-1">Hello！</h1>
             <h1 class="txt-2">Login to your account</h1>
@@ -36,6 +36,7 @@
                 <div class="wrap">
                     <p class="title">Password</p>
                     <div class="input-wrap">
+                        <span class="icon-right-pass js_togglePwd"></span>
                         <input class="input" type="password" name="" value="" maxlength="30" />
                     </div>
                 </div>
@@ -50,7 +51,7 @@
         </div>
         <!-- ========================= login end ======================= -->
         <!-- ========================= register begin ======================= -->
-        <div class="right-container hide js_registerPage">
+        <div class="right-container js_registerPage">
         <div class="login-section">
             <h1 class="txt-1">Hello！</h1>
             <h1 class="txt-2">Open an account</h1>
@@ -76,6 +77,16 @@
                         <input class="input" type="password" name="" value="" maxlength="30" />
                     </div>
                 </div>
+                <div class="wrap">
+                        <p class="title">VerifyCode</p>
+                        <div class="input-wrap">
+                            <input class="input required" type="text" id="verifyCode" name="verifyCode">
+                        </div>
+                    </div>
+                    <div class="wrap">
+                        <img class="verify-code" alt="verifycode" src="https://candy.lots.org/defaultKaptcha">
+                        <span class="verify-btn" onclick="this.src='/defaultKaptcha?d='+new Date()*1">Change ID</span>
+                    </div>
                 <div class="forget-section">
                     <div class="remember"> <span class="icon-check js_checkRem"></span>I have read and agree to the <a href="javascript:" class="read-link">Terms and Conditions</a></div>
                 </div>
@@ -154,6 +165,16 @@ $(document).ready(function() {
      $(".js_checkRem").click(function() {
         $(this).toggleClass('checked');
     })
+     $(".js_togglePwd").click(function(){
+
+        if ($(this).siblings("input").attr("type") == "text") {
+            $(this).siblings("input")[0].type = "password";  
+            $(this).removeClass("close");   
+        }else{
+            $(this).siblings("input")[0].type = "text"; 
+            $(this).addClass("close");   
+        }   
+    });
 })
 </script>
 
